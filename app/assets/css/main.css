@@ -1,6 +1,107 @@
 @import "tailwindcss" theme(static);
 @import "@nuxt/ui";
 
+/* ============================================
+   REVEAL ANIMATION SYSTEM - Use on any component
+   ============================================ */
+
+/* Base reveal - fade up */
+.reveal {
+  opacity: 0 !important;
+  transform: translateY(10px);
+  transition:
+    opacity 0.4s ease-out,
+    transform 0.4s ease-out;
+}
+
+.reveal.active {
+  opacity: 1 !important;
+  transform: translateY(0);
+}
+
+/* Reveal variants */
+.reveal-fade {
+  opacity: 0 !important;
+  transition: opacity 0.4s ease-out;
+}
+
+.reveal-fade.active {
+  opacity: 1 !important;
+}
+
+.reveal-zoom {
+  opacity: 0 !important;
+  transform: scale(0.95);
+  transition:
+    opacity 0.4s ease-out,
+    transform 0.4s ease-out;
+}
+
+.reveal-zoom.active {
+  opacity: 1 !important;
+  transform: scale(1);
+}
+
+.reveal-slide-left {
+  opacity: 0 !important;
+  transform: translateX(-20px);
+  transition:
+    opacity 0.4s ease-out,
+    transform 0.4s ease-out;
+}
+
+.reveal-slide-left.active {
+  opacity: 1 !important;
+  transform: translateX(0);
+}
+
+.reveal-slide-right {
+  opacity: 0 !important;
+  transform: translateX(20px);
+  transition:
+    opacity 0.4s ease-out,
+    transform 0.4s ease-out;
+}
+
+.reveal-slide-right.active {
+  opacity: 1 !important;
+  transform: translateX(0);
+}
+
+/* Speed variants - add to any reveal class */
+.reveal-fast {
+  transition-duration: 0.25s;
+}
+
+.reveal-slow {
+  transition-duration: 0.8s;
+}
+
+/* Delay variants for staggered animations */
+.reveal-delay-100 {
+  transition-delay: 0.1s;
+}
+
+.reveal-delay-200 {
+  transition-delay: 0.2s;
+}
+
+.reveal-delay-300 {
+  transition-delay: 0.3s;
+}
+
+.reveal-delay-400 {
+  transition-delay: 0.4s;
+}
+
+.reveal-delay-500 {
+  transition-delay: 0.5s;
+}
+
+/* ============================================
+   Typography Defaults
+   ============================================ */
+
 h1 {
   font-size: theme(fontSize.4xl);
   line-height: theme(lineHeight.tight);

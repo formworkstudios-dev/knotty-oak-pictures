@@ -2,9 +2,11 @@
   setup
   lang="ts"
 >
-const InfoText = ref("Our Information")
-const quote = ref("The only thing that counts is truth, emotion, and humanity.")
-const author = ref("Pierre-Auguste Renoir")
+const quote = ref("Great films linger in memory long after the credits roll.")
+const author = ref("François Truffaut")
+
+// Enable scroll-reveal animation
+const { reveal } = useScrollReveal()
 </script>
 
 <template>
@@ -14,10 +16,16 @@ const author = ref("Pierre-Auguste Renoir")
   >
     <div class="flex items-center justify-center min-h-screen">
       <div class="text-center max-w-3xl px-8">
-        <blockquote class="text-5xl font-light italic mb-6">
+        <blockquote
+          :ref="reveal"
+          class="text-5xl font-light italic mb-6 reveal reveal-slow"
+        >
           "{{ quote }}"
         </blockquote>
-        <p class="text-xl">
+        <p
+          :ref="reveal"
+          class="text-xl reveal reveal-delay-200"
+        >
           — {{ author }}
         </p>
       </div>

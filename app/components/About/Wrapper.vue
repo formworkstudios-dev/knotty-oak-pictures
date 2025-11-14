@@ -10,7 +10,7 @@ defineProps<{
 
 <template>
   <div
-    class="sticky top-0 min-h-screen border-b overflow-hidden"
+    class="sticky top-0 min-h-screen border-b"
     :class="bgColor"
     :style="{ zIndex }"
   >

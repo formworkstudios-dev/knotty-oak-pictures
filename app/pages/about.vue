@@ -9,8 +9,9 @@
     <AboutInfo />
     <AboutText />
     <AboutText2 />
-    <AboutUs />
     <AboutContent />
+    <AboutUs />
+
   </div>
 </template>
 

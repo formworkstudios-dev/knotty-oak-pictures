@@ -19,7 +19,7 @@ const closeMenu = () => {
 
 <template>
   <div
-    class="fixed top-0 left-0 right-0 flex justify-center items-center border-b p-3 bg-white/80 backdrop-blur-md z-[120]"
+    class="fixed top-0 left-0 right-0 flex justify-center items-center border-b p-3 bg-amber-50/80 backdrop-blur-md z-[120]"
   >
     <div class="absolute left-1/2 transform -translate-x-1/2 z-[130]">
       <NuxtLink

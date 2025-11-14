@@ -4,7 +4,7 @@
 ></script>
 
 <template>
-  <div class="border-t p-4 text-sm text-muted flex justify-center w-full">
+  <div class="bg-amber-50 border-t p-4 text-sm text-muted flex justify-center w-full">
     <a
       href="https://github.com/Formwork-Studios/nuxt4-template"
       target="_blank"
