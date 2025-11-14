@@ -1,5 +1,5 @@
 export default defineAppConfig({
-  siteName: "Nuxt 4 Template",
+  siteName: "Knotty Oak Pictures",
   ui: {
     colors: {
       primary: "blue",

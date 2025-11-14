@@ -1,11 +1,17 @@
-<script setup lang="ts"></script>
+<script
+  setup
+  lang="ts"
+></script>
 
 <template>
-  <UContainer>
-
-    Page: about
-
-  </UContainer>
+  <div>
+    <AboutHero />
+    <AboutInfo />
+    <AboutText />
+    <AboutText2 />
+    <AboutUs />
+    <AboutContent />
+  </div>
 </template>
 
 <style scoped></style>
