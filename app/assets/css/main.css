@@ -1,0 +1,48 @@
+@import "tailwindcss" theme(static);
+@import "@nuxt/ui";
+
+h1 {
+  font-size: theme(fontSize.4xl);
+  line-height: theme(lineHeight.tight);
+  font-weight: theme(fontWeight.bold);
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-size: theme(fontSize.3xl);
+  line-height: theme(lineHeight.snug);
+  font-weight: theme(fontWeight.bold);
+  margin-bottom: 0.75rem;
+}
+
+h3 {
+  font-size: theme(fontSize.2xl);
+  line-height: theme(lineHeight.snug);
+  font-weight: theme(fontWeight.semibold);
+  margin-bottom: 0.5rem;
+}
+
+h4 {
+  font-size: theme(fontSize.xl);
+  line-height: theme(lineHeight.normal);
+  font-weight: theme(fontWeight.semibold);
+  margin-bottom: 0.25rem;
+}
+
+h5 {
+  font-size: theme(fontSize.lg);
+  line-height: theme(lineHeight.normal);
+  font-weight: theme(fontWeight.medium);
+}
+
+h6 {
+  font-size: theme(fontSize.base);
+  line-height: theme(lineHeight.normal);
+  font-weight: theme(fontWeight.medium);
+}
+
+p {
+  font-size: theme(fontSize.base);
+  line-height: theme(lineHeight.relaxed);
+  font-weight: theme(fontWeight.normal);
+}
