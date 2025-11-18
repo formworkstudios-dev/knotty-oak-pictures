@@ -31,9 +31,9 @@ onUnmounted(() => {
 <template>
   <AboutWrapper
     bg-color="bg-yellow-600"
-    :z-index="50"
+    :z-index="40"
   >
-    <div class="relative min-h-screen overflow-hidden">
+    <div class="relative min-h-screen overflow-hidden snap-y snap-mandatory overflow-y-auto">
       <!-- Transitioning Background Images -->
       <TransitionGroup name="fade">
         <div
@@ -46,8 +46,8 @@ onUnmounted(() => {
       </TransitionGroup>
 
       <!-- Content Overlay -->
-      <div class="relative z-10 flex items-center justify-center min-h-screen">
-        <h1 class="text-6xl font-bold text-white drop-shadow-lg">
+      <div class="relative z-10 flex items-center justify-center min-h-screen snap-start">
+        <h1 class="text-6xl font-bold text-white drop-shadow-lg intersect">
           {{ ContentText }}
         </h1>
       </div>

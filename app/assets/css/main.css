@@ -1,6 +1,20 @@
 @import "tailwindcss" theme(static);
 @import "@nuxt/ui";
 
+@theme {
+  --font-sans: "Public Sans", sans-serif;
+  --font-display: "Playfair Display", serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+}
+
 /* ============================================
    REVEAL ANIMATION SYSTEM - Use on any component
    ============================================ */
@@ -109,11 +123,25 @@ h1 {
   margin-bottom: 1rem;
 }
 
+@media (max-width: 640px) {
+  h1 {
+    font-size: theme(fontSize.2xl);
+    margin-bottom: 0.75rem;
+  }
+}
+
 h2 {
   font-size: theme(fontSize.3xl);
   line-height: theme(lineHeight.snug);
   font-weight: theme(fontWeight.bold);
   margin-bottom: 0.75rem;
+}
+
+@media (max-width: 640px) {
+  h2 {
+    font-size: theme(fontSize.xl);
+    margin-bottom: 0.5rem;
+  }
 }
 
 h3 {

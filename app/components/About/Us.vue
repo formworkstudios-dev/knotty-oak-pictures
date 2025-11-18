@@ -2,19 +2,17 @@
   setup
   lang="ts"
 >
-const { reveal } = useScrollReveal()
-
 const team = [
   {
-    name: 'Tom',
-    role: 'Director & Cinematographer',
-    description: 'Passionate storyteller with an eye for capturing authentic moments and emotions.',
+    name: 'Tom Currà',
+    role: 'President & Executive Producer',
+    description: 'Tom is a storyteller and executive producer who enjoys delivering exceptional documentary, television, and film projects through creative vision, careful management, and collaboration.',
     image: 'https://placehold.co/400x400/1e293b/white?text=Tom\'s+Headshot'
   },
   {
-    name: 'Greg',
-    role: 'Producer & Editor',
-    description: 'Creative producer bringing stories to life through innovative editing and production.',
+    name: 'Greg Matkosky',
+    role: 'Director & Cinematographer',
+    description: 'Greg is an award-winning filmmaker with nearly 40 years of global experience directing and shooting commercial, documentary, Giant-Screen, and corporate film productions.',
     image: 'https://placehold.co/400x400/1e293b/white?text=Greg\'s+Headshot'
   }
 ]
@@ -22,49 +20,47 @@ const team = [
 
 <template>
   <AboutWrapper
-    bg-color="bg-orange-600"
-    :z-index="40"
+    bg-color="bg-stone-900"
+    :z-index="50"
   >
     <div class="flex items-center justify-center min-h-screen py-20">
-      <div class="max-w-6xl px-8 w-full">
-        <h1
-          :ref="reveal"
-          class="text-5xl font-bold text-center !mb-24 reveal"
-        >
+      <div class="max-w-6xl px-8 w-full text-white">
+        <h1 class="text-5xl font-bold text-center !mb-18">
           Founders
         </h1>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-3xl mx-auto">
           <div
             v-for="(person, index) in team"
             :key="person.name"
-            :ref="reveal"
-            :class="['reveal', index === 1 ? 'reveal-delay-200' : '']"
             class="text-center"
           >
             <!-- Photo -->
-            <div class="mb-4">
+            <div class="mb-4 flex-shrink-0">
               <img
                 :src="person.image"
                 :alt="person.name"
-                class="w-64 h-64 mx-auto object-cover"
+                class="w-72 h-[200px] md:h-[400px] mx-auto object-cover shadow-lg"
               />
             </div>
 
-            <!-- Name -->
-            <h2 class="text-3xl font-bold mb-2">
-              {{ person.name }}
-            </h2>
-
-            <!-- Role -->
-            <p class="text-xl font-semibold mb-4 opacity-90">
-              {{ person.role }}
-            </p>
-
-            <!-- Description -->
-            <p class="text-lg max-w-md mx-auto opacity-80">
-              {{ person.description }}
-            </p>
+            <!-- Name & Text -->
+            <div
+              class="mx-auto flex-1 flex flex-col justify-start pt-1 md:pt-0"
+              style="max-width: 288px;"
+            >
+              <h2 class="text-3xl font-bold !mb-1">
+                {{ person.name }}
+              </h2>
+              <!-- Role -->
+              <p class="text-xl font-semibold mb-4 opacity-50">
+                {{ person.role }}
+              </p>
+              <!-- Description -->
+              <p class="text-lg opacity-80">
+                {{ person.description }}
+              </p>
+            </div>
           </div>
         </div>
       </div>

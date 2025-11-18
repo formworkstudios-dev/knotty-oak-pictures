@@ -4,16 +4,20 @@
 ></script>
 
 <template>
-  <div class="bg-amber-50 border-t p-4 text-sm text-muted flex justify-center w-full">
-    <a
-      href="https://github.com/Formwork-Studios/nuxt4-template"
-      target="_blank"
-      rel="noopener"
-      class="flex items-center gap-2 text-sm mx-auto"
-    >
-      <UIcon name="i-mdi-github" />
-      <span>Star on GitHub</span>
-    </a>
+  <div
+    class="bg-black border-t border-stone-800 p-4 text-sm text-white flex flex-col md:flex-row items-center justify-center w-full gap-4"
+  >
+    <span class="text-sm text-stone-300">&copy; Knotty Oak Pictures {{ new Date().getFullYear() }}</span>
+    <span class="hidden md:inline-block text-sm">|</span>
+    <NuxtLink
+      to="/privacy"
+      class="text-sm text-white hover:text-stone-300 transition-colors"
+    >Privacy</NuxtLink>
+    <span class="hidden md:inline-block text-sm">|</span>
+    <NuxtLink
+      to="/tos"
+      class="text-sm text-white hover:text-stone-300 transition-colors"
+    >Terms</NuxtLink>
   </div>
 </template>
 

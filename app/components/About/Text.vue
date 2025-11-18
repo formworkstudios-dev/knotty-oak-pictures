@@ -2,30 +2,44 @@
   setup
   lang="ts"
 >
-const TextContent = ref("Our Story")
-const description = ref("We are a creative studio dedicated to bringing your vision to life through stunning visuals and compelling narratives.")
+const { reveal } = useScrollReveal()
+
 </script>
 
 <template>
   <AboutWrapper
-    bg-color="bg-green-600"
+    bg-color="bg-amber-950"
     :z-index="30"
   >
-    <div class="flex flex-row min-h-screen">
+    <div class="flex flex-col md:flex-row min-h-screen snap-y snap-mandatory overflow-y-auto">
       <!-- Left Column - Text -->
-      <div class="w-1/2 flex flex-col justify-center px-16">
-        <div>
-          <h1 class="text-4xl font-bold mb-4">
-            {{ TextContent }}
-          </h1>
-          <p class="text-lg">
-            {{ description }}
-          </p>
+      <div
+        class="w-full md:w-1/2 flex flex-col justify-center px-6 md:px-16 py-10 md:py-0 h-[50vh] md:h-auto snap-start"
+      >
+        <div class="flex flex-col">
+          <h2
+            :ref="reveal"
+            class="text-2xl md:text-4xl reveal block !m-0 text-stone-50/80"
+          >
+            Every great story is a journey – they move you,
+          </h2>
+          <h2
+            :ref="reveal"
+            class="text-2xl md:text-4xl reveal reveal-delay-200 block !m-0 text-stone-50/80"
+          >
+            guiding you through places and possibilities
+          </h2>
+          <h2
+            :ref="reveal"
+            class="text-2xl md:text-4xl reveal reveal-delay-400 block !m-0 text-stone-50/80"
+          >
+            you have never explored.
+          </h2>
         </div>
       </div>
 
       <!-- Right Column - Fixed Background Image -->
-      <div class="w-1/2 h-screen sticky top-0">
+      <div class="w-full md:w-1/2 h-[50vh] md:h-screen sticky top-0 snap-start">
         <div
           class="w-full h-full bg-cover bg-center bg-fixed"
           style="background-image: url('https://picsum.photos/1920/1080')"

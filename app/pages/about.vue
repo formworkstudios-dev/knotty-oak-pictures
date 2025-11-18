@@ -1,16 +1,19 @@
 <script
   setup
   lang="ts"
-></script>
+>
+
+</script>
 
 <template>
   <div>
     <AboutHero />
-    <AboutInfo />
+    <!-- <AboutInfo /> -->
     <AboutText />
     <AboutText2 />
     <AboutContent />
     <AboutUs />
+
 
   </div>
 </template>
