@@ -61,12 +61,12 @@ onUnmounted(() => {
       <!-- Full background image with transparency, matching Text.vue -->
       <div
         class="absolute inset-0 w-full h-full bg-cover bg-center bg-fixed opacity-40 z-0 pointer-events-none"
-        style="background-image: url('https://picsum.photos/seed/hero/1920/1080')"
+        style="background-image: url('/bg.webp')"
       ></div>
 
       <h1
         class="text-6xl text-left self-end relative z-10"
-        :style="`background: linear-gradient(45deg, #fff 0%, #d6ad60 ${gradientCenter}% , #fff 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; opacity: 0.85;`"
+        :style="`background: linear-gradient(45deg, #FFFBEB 0%, #d6ad60 ${gradientCenter}% , #FFFBEB 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; opacity: 0.85;`"
       >
         <span class="block reveal-instant">Knotty Oak Pictures began as a dream</span>
         <span class="block reveal-instant-delayed-1">shared by two people who believe that authenticity</span>

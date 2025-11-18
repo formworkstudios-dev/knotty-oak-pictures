@@ -57,7 +57,7 @@ onUnmounted(() => {
   >
     <h1
       class="text-5xl font-bold reveal-instant"
-      :style="`background: linear-gradient(45deg, #fff 0%, #d6ad60 ${gradientCenter}% , #d6ad60 ${gradientCenter + 15}%, #fff 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; opacity: 0.85;`"
+      :style="`background: linear-gradient(45deg, #FFFBEB 0%, #d6ad60 ${gradientCenter}% , #d6ad60 ${gradientCenter + 15}%, #FFFBEB 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; opacity: 0.85;`"
     >
       Welcome to Knotty Oak Pictures
     </h1>

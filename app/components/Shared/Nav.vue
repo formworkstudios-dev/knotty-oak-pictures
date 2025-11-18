@@ -24,7 +24,7 @@ const closeMenu = () => {
     <div class="absolute left-1/2 transform -translate-x-1/2 z-[130]">
       <NuxtLink
         to="/"
-        class="text-lg font-semibold !text-white"
+        class="text-lg font-semibold !text-[#FFFBEB]"
       >
         {{ siteLogo ? siteLogo : siteName }}
       </NuxtLink>
@@ -58,15 +58,15 @@ const closeMenu = () => {
       class="fixed inset-0 bg-stone-950 z-[100]"
       @click="closeMenu"
     >
-  <div class="h-full flex flex-col items-end justify-center pr-6 md:pr-16">
-  <nav class="flex flex-col gap-6 text-right max-w-xs w-full ml-auto">
+      <div class="h-full flex flex-col items-end justify-center pr-6 md:pr-16">
+        <nav class="flex flex-col gap-6 text-right max-w-xs w-full ml-auto">
           <NuxtLink
             to="/"
             @click="closeMenu"
             class="text-white"
           >
             <span
-              class="inline-block text-4xl md:text-5xl font-light hover:font-normal transition-all cursor-pointer relative pl-4 before:content-[''] before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-2 before:h-2 before:rounded-full before:bg-white before:opacity-0 before:transition-all hover:before:opacity-100 hover:before:-translate-x-2"
+              class="inline-block text-4xl md:text-5xl font-light hover:font-normal transition-all cursor-pointer relative pl-4 before:content-[''] before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-2 before:h-2 before:rounded-full before:bg-[#FFFBEB] before:opacity-0 before:transition-all hover:before:opacity-100 hover:before:-translate-x-2"
             >
               Home
             </span>
@@ -78,7 +78,7 @@ const closeMenu = () => {
             class="text-white"
           >
             <span
-              class="inline-block text-4xl md:text-5xl font-light hover:font-normal transition-all cursor-pointer relative pl-4 before:content-[''] before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-2 before:h-2 before:rounded-full before:bg-white before:opacity-0 before:transition-all hover:before:opacity-100 hover:before:-translate-x-2"
+              class="inline-block text-4xl md:text-5xl font-light hover:font-normal transition-all cursor-pointer relative pl-4 before:content-[''] before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-2 before:h-2 before:rounded-full before:bg-[#FFFBEB] before:opacity-0 before:transition-all hover:before:opacity-100 hover:before:-translate-x-2"
             >
               About
             </span>
@@ -90,33 +90,29 @@ const closeMenu = () => {
             class="text-white"
           >
             <span
-              class="inline-block text-4xl md:text-5xl font-light hover:font-normal transition-all cursor-pointer relative pl-4 before:content-[''] before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-2 before:h-2 before:rounded-full before:bg-white before:opacity-0 before:transition-all hover:before:opacity-100 hover:before:-translate-x-2"
+              class="inline-block text-4xl md:text-5xl font-light hover:font-normal transition-all cursor-pointer relative pl-4 before:content-[''] before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-2 before:h-2 before:rounded-full before:bg-[#FFFBEB] before:opacity-0 before:transition-all hover:before:opacity-100 hover:before:-translate-x-2"
             >
               Content
             </span>
           </NuxtLink>
         </nav>
         <div
-          class="flex flex-col border-t border-stone-700 pt-6 mt-6 text-xs text-stone-300 space-y-1.5 max-w-content text-right"
+          class="flex flex-col border-t border-stone-700 pt-6 mt-6 text-sm text-mono text-stone-300 space-y-1.5 max-w-content text-right font-mono"
         >
-          <div>Email: <a
+          <div class=""> <a
               href="mailto:info@knottyoakpictures.com"
               class="underline"
             >info@knottyoakpictures.com</a></div>
-          <div>Phone: <a
+          <div> <a
               href="tel:+1234567890"
               class="underline"
             >(123) 456-7890</a></div>
-          <div>Instagram: <a
+          <div> <a
               href="https://instagram.com/knottyoakpictures"
               target="_blank"
               class="underline"
             >@knottyoakpictures</a></div>
-          <div>Twitter: <a
-              href="https://twitter.com/knottyoakpics"
-              target="_blank"
-              class="underline"
-            >@knottyoakpics</a></div>
+
         </div>
       </div>
       <div

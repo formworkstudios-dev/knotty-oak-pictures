@@ -2,6 +2,7 @@
   setup
   lang="ts"
 >
+
 const { reveal } = useScrollReveal()
 
 </script>
@@ -36,16 +37,45 @@ const { reveal } = useScrollReveal()
             you have never explored.
           </h2>
         </div>
+        <svg
+          class="absolute inset-0 w-full h-full pointer-events-none"
+          viewBox="0 0 200 200"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          style="opacity:0.04;"
+        >
+          <defs>
+            <pattern
+              id="grid-tight"
+              width="4"
+              height="4"
+              patternUnits="userSpaceOnUse"
+            >
+              <path
+                d="M 4 0 L 0 0 0 4"
+                fill="none"
+                stroke="#fff"
+                stroke-width="0.2"
+              />
+            </pattern>
+          </defs>
+          <rect
+            width="200"
+            height="200"
+            fill="url(#grid-tight)"
+          />
+        </svg>
       </div>
 
       <!-- Right Column - Fixed Background Image -->
       <div class="w-full md:w-1/2 h-[50vh] md:h-screen sticky top-0 snap-start">
         <div
           class="w-full h-full bg-cover bg-center bg-fixed"
-          style="background-image: url('https://picsum.photos/1920/1080')"
+          style="background-image: url('https://picsum.photos/seed/text/1920/1080')"
         ></div>
       </div>
     </div>
+
   </AboutWrapper>
 </template>
 

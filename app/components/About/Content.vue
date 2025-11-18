@@ -30,7 +30,7 @@ onUnmounted(() => {
 
 <template>
   <AboutWrapper
-    bg-color="bg-yellow-600"
+    bg-color="bg-stone-900"
     :z-index="40"
   >
     <div class="relative min-h-screen overflow-hidden snap-y snap-mandatory overflow-y-auto">
@@ -47,34 +47,12 @@ onUnmounted(() => {
 
       <!-- Content Overlay -->
       <div class="relative z-10 flex items-center justify-center min-h-screen snap-start">
-        <h1 class="text-6xl font-bold text-white drop-shadow-lg intersect">
-          {{ ContentText }}
+        <h1 class="text-6xl font-bold text-white intersect">
+          Our Work
         </h1>
       </div>
     </div>
   </AboutWrapper>
 </template>
 
-<style scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 2s ease;
-}
-
-.fade-enter-from {
-  opacity: 0;
-}
-
-.fade-leave-to {
-  opacity: 0;
-}
-
-.fade-enter-to,
-.fade-leave-from {
-  opacity: 1;
-}
-
-.bg-fixed {
-  background-attachment: fixed;
-}
-</style>
+<style scoped></style>

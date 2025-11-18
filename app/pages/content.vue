@@ -4,7 +4,7 @@
 ></script>
 
 <template>
-  <div class="min-h-screen bg-stone-900 text-stone-50 flex flex-col items-center justify-center py-10">
+  <div class="min-h-screen bg-stone-900 text-stone-50 flex flex-col items-center justify-center py-32 md:py-10 px-6">
     <h1 class="text-4xl font-bold mb-10 !mb-10">Our Work</h1>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl">
       <div
