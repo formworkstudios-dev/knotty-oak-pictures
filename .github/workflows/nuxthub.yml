@@ -30,4 +30,4 @@ jobs:
       - name: Build & Deploy to NuxtHub
         uses: nuxt-hub/action@v2
         with:
-          project-key: nuxt4-minimal-t-ywo9
+          project-key: knotty-oak-pict-amqi
