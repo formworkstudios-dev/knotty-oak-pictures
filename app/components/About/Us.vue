@@ -23,7 +23,7 @@ const team = [
     bg-color="bg-stone-900"
     :z-index="50"
   >
-    <div class="flex items-center justify-center min-h-screen py-20">
+    <div class="flex items-center justify-center min-h-screen py-20 pt-36">
       <div class="max-w-6xl px-8 w-full text-white">
         <h1 class="text-5xl font-bold text-center !mb-18">
           Founders
