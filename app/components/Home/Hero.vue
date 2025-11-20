@@ -4,85 +4,227 @@
 >
 import { ref, onMounted, onUnmounted } from 'vue'
 
-
-const gradientCenter = ref(35)
-let targetCenter = 35
-let heroDiv: HTMLElement | null = null
-let mouseHandler: ((e: MouseEvent) => void) | null = null
-let animationFrame: number | null = null
-let lastMouseTime = Date.now()
-let ambientDirection = 1
-
-function animateGradient() {
-  // If mouse hasn't moved for 2 seconds, animate ambient motion
-  if (Date.now() - lastMouseTime > 1200) {
-    targetCenter += ambientDirection * 1.2
-    if (targetCenter > 60) ambientDirection = -1
-    if (targetCenter < 10) ambientDirection = 1
+const slides = [
+  {
+    lines: [
+      'Knotty Oak Pictures began as a dream',
+      'shared by two people who believe that authenticity',
+      'and imagination are at the heart of every great story.'
+    ],
+    bg: 'bg-stone-950'
+  },
+  {
+    lines: [
+      'Every great story is a journey – they move you,',
+      'guiding you through places and possibilities',
+      'you have never explored.'
+    ],
+    bg: 'bg-amber-950'
+  },
+  {
+    lines: [
+      'Knotty Oak crafts stories to stir the heart,',
+      'ignite thought, and create',
+      'lasting cinematic experiences.'
+    ],
+    bg: 'bg-red-950'
   }
-  gradientCenter.value += (targetCenter - gradientCenter.value) * 0.35
-  if (Math.abs(targetCenter - gradientCenter.value) > 0.1 || Date.now() - lastMouseTime > 1200) {
-    animationFrame = requestAnimationFrame(animateGradient)
-  } else {
-    gradientCenter.value = targetCenter
-    animationFrame = null
-  }
+]
+
+const currentSlide = ref(0)
+const animating = ref(false)
+let slideTimeout: number | null = null
+
+function nextSlide() {
+  animating.value = true
+  setTimeout(() => {
+    animating.value = false
+    currentSlide.value = (currentSlide.value + 1) % slides.length
+    slideTimeout = window.setTimeout(nextSlide, 3200)
+  }, 600)
 }
 
 onMounted(() => {
-  heroDiv = document.getElementById('home-hero-bg')
-  mouseHandler = (e: MouseEvent) => {
-    lastMouseTime = Date.now()
-    if (!heroDiv) return
-    const rect = heroDiv.getBoundingClientRect()
-    const x = e.clientX - rect.left
-    const percent = Math.max(0, Math.min(100, Math.round((x / rect.width) * 100)))
-    targetCenter = percent
-    if (!animationFrame) animateGradient()
-  }
-  window.addEventListener('mousemove', mouseHandler)
-  if (!animationFrame) animateGradient()
+  slideTimeout = window.setTimeout(nextSlide, 4000)
 })
 
 onUnmounted(() => {
-  if (mouseHandler) window.removeEventListener('mousemove', mouseHandler)
-  if (animationFrame) cancelAnimationFrame(animationFrame)
+  if (slideTimeout) window.clearTimeout(slideTimeout)
 })
 </script>
 
 <template>
   <div
     id="home-hero-bg"
-    class="min-h-screen flex flex-col items-center justify-center gap-6 bg-stone-900 w-full"
+    :class="`min-h-screen flex flex-col items-center justify-center gap-6 w-full transition-colors duration-700 ${slides[currentSlide].bg}`"
   >
-    <h1
-      class="text-5xl font-bold reveal-instant"
-      :style="`background: linear-gradient(45deg, #FFFBEB 0%, #d6ad60 ${gradientCenter}% , #d6ad60 ${gradientCenter + 15}%, #FFFBEB 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; opacity: 0.85;`"
-    >
-      Welcome to Knotty Oak Pictures
-    </h1>
+    <div class="w-full max-w-3xl flex flex-col items-center justify-center py-16">
+      <div class="hero-line-container">
+        <transition
+          name="hero-line-left"
+          mode="out-in"
+        >
+          <div
+            v-if="!animating"
+            :key="`slide-top-${currentSlide}`"
+            class="hero-line hero-line-top hero-fixed-line hero-absolute"
+          >
+            {{ slides[currentSlide].lines[0] }}
+          </div>
+        </transition>
+      </div>
+      <div class="hero-line-container">
+        <transition
+          name="hero-line-fade"
+          mode="out-in"
+        >
+          <div
+            v-if="!animating"
+            :key="`slide-mid-${currentSlide}`"
+            class="hero-line hero-line-mid hero-fixed-line hero-absolute"
+          >
+            {{ slides[currentSlide].lines[1] }}
+          </div>
+        </transition>
+      </div>
+      <div class="hero-line-container">
+        <transition
+          name="hero-line-right"
+          mode="out-in"
+        >
+          <div
+            v-if="!animating"
+            :key="`slide-bot-${currentSlide}`"
+            class="hero-line hero-line-bot hero-fixed-line hero-absolute"
+          >
+            {{ slides[currentSlide].lines[2] }}
+          </div>
+        </transition>
+      </div>
+    </div>
   </div>
 </template>
 
 <style scoped>
-.reveal-instant {
-  animation: fadeUpIn 0.4s ease-out forwards;
+.hero-line-container {
+  position: relative;
+  height: 3.5rem;
+  width: 100vw;
+  max-width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
 
-.reveal-instant-delayed {
-  animation: fadeUpIn 0.4s ease-out 0.2s forwards;
+.hero-absolute {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 100vw;
+  max-width: 100vw;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* All hero lines: fixed height and font size */
+.hero-fixed-line {
+  height: 3.5rem;
+  line-height: 3.5rem;
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+/* Top line: slide in/out from left */
+/* Top line: slide in/out from left */
+/* .hero-line-top {
+  opacity: 0.85;
+} */
+
+.hero-line-left-enter-active,
+.hero-line-left-leave-active {
+  transition: all 0.7s cubic-bezier(.77, .2, .32, 1);
+}
+
+.hero-line-left-enter-from {
+  opacity: 0;
+  transform: translateX(-80px);
+}
+
+.hero-line-left-enter-to {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.hero-line-left-enter-from {
+  opacity: 0;
+  transform: translateX(-200px);
+}
+
+.hero-line-left-leave-to {
+  opacity: 0;
+  transform: translateX(-200px);
+}
+
+.hero-line-right-enter-from {
+  opacity: 0;
+  transform: translateX(400px);
+}
+
+.hero-line-right-leave-to {
+  opacity: 0;
+  transform: translateX(400px);
+}
+
+.hero-line-fade-enter-active,
+.hero-line-fade-leave-active {
+  transition: opacity 0.7s cubic-bezier(.77, .2, .32, 1);
+}
+
+.hero-line-fade-enter-from,
+.hero-line-fade-leave-to {
   opacity: 0;
 }
 
-@keyframes fadeUpIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
+.hero-line-fade-enter-to,
+.hero-line-fade-leave-from {
+  opacity: 1;
+}
 
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* Bottom line: slide in/out from right */
+/* Bottom line: slide in/out from right */
+.hero-line-bot {
+  opacity: 1;
+}
+
+.hero-line-right-enter-active,
+.hero-line-right-leave-active {
+  transition: all 0.7s cubic-bezier(.77, .2, .32, 1);
+}
+
+.hero-line-right-enter-from {
+  opacity: 0;
+  transform: translateX(200px);
+}
+
+.hero-line-right-enter-to {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.hero-line-right-leave-from {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.hero-line-right-leave-to {
+  opacity: 0;
+  transform: translateX(80px);
 }
 </style>
