@@ -139,6 +139,21 @@ onUnmounted(() => {
   font-weight: 600;
   margin-bottom: 0.5rem;
   text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 640px) {
+  .hero-fixed-line {
+    height: unset;
+    line-height: 1.2rem !important;
+    font-size: 1.1rem;
+    margin-bottom: 0;
+    padding: 0.5rem 1rem;
+    white-space: normal;
+    word-break: break-word;
+  }
 }
 
 /* Top line: slide in/out from left */
