@@ -2,30 +2,17 @@
   setup
   lang="ts"
 >
-import { ref, onMounted, onUnmounted, reactive, nextTick } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 
-// Track nudge offset for each letter (unique per slide/line/index)
-const letterOffsets = reactive<Record<string, number>>({})
-
-function handleLetterMouseEnter(slideIdx: number, lineIdx: number, letterIdx: number) {
-  const key = `${slideIdx}-${lineIdx}-${letterIdx}`
-  letterOffsets[key] = 40
-  setTimeout(() => {
-    letterOffsets[key] = 0
-  }, 400)
-}
+// nudge behavior removed — keep animations to opacity + blur only
 
 function getStaggeredSpans(text: string) {
-  // Possible delays in ms
-  const delays = [100, 150, 200, 250]
-  const translates = [-5, -3, 0, 3, 5]
-  return text.split('').map((char, i) => {
-    // Render spaces as non-breaking spaces
-    const displayChar = char === ' ' ? '\u00A0' : char
-    const delay = delays[Math.floor(Math.random() * delays.length)]
-    const translate = translates[Math.floor(Math.random() * translates.length)]
-    return { char: displayChar, delay, translate, i }
-  })
+  const delays = [100, 150, 200, 250, 300, 350, 400]
+  return text.split('').map((char, i) => ({
+    char: char === ' ' ? '\u00A0' : char,
+    delay: delays[Math.floor(Math.random() * delays.length)],
+    i
+  }))
 }
 
 const slides = [
@@ -93,6 +80,7 @@ onUnmounted(() => {
     :class="`min-h-screen flex flex-col items-center justify-center gap-6 w-full transition-colors duration-700 ${slides[currentSlide]?.bg ?? 'bg-stone-950'}`"
     style="position: relative;"
   >
+    <!-- Background images -->
     <transition-group
       name="bg-fade"
       tag="div"
@@ -101,9 +89,9 @@ onUnmounted(() => {
         v-for="(slide, idx) in slides"
         v-show="idx === currentSlide"
         :key="`bg-${idx}`"
-        class="hero-bg-image absolute inset-0 w-full h-full"
+        class="hero-bg-image"
         :style="{
-          backgroundImage: `linear-gradient(rgba(30, 30, 30, 0.55), rgba(30, 30, 30, 0.55)), url('${slide.img}')`,
+          backgroundImage: `linear-gradient(rgba(30,30,30,0.55), rgba(30,30,30,0.55)), url('${slide.img}')`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
@@ -111,101 +99,66 @@ onUnmounted(() => {
         }"
       ></div>
     </transition-group>
-    <div class="hero-noise-overlay"></div>
-    <div class="w-full max-w-3xl flex flex-col items-center justify-center py-16 relative z-10">
-      <div class="hero-line-container">
+
+    <!-- Overlays -->
+    <div
+      class="hero-conical-overlay"
+      aria-hidden="true"
+    ></div>
+    <div
+      class="hero-noise-overlay"
+      aria-hidden="true"
+    ></div>
+
+    <!-- Desktop lines -->
+    <div class="w-full max-w-3xl hidden md:flex flex-col items-center justify-center py-16 relative z-10">
+      <div
+        v-for="(line, lineIdx) in 3"
+        :key="lineIdx"
+        class="hero-line-container"
+      >
+        <!-- Outgoing letters -->
         <transition-group
           v-if="isFadingOut"
           name="letter-fade"
           tag="div"
-          :key="`slide-top-out-${previousSlide}`"
-          class="hero-line hero-line-top hero-fixed-line hero-absolute"
+          :key="`slide-${lineIdx}-out-${previousSlide}`"
+          class="hero-line hero-fixed-line hero-absolute hero-outgoing"
         >
           <span
-            v-for="letter in getStaggeredSpans(slides[previousSlide]?.lines?.[0] ?? '')"
+            v-for="letter in getStaggeredSpans(slides[previousSlide]?.lines?.[lineIdx] ?? '')"
             :key="letter.i"
             class="hero-letter hero-letter-out"
-            :style="`animation-delay: ${letter.delay}ms; --letter-from-x: ${letter.translate}px; transform: translateX(calc(var(--letter-from-x, 0) + ${letterOffsets[`${previousSlide}-0-${letter.i}`] || 0}px));`"
-            @mouseenter="handleLetterMouseEnter(previousSlide, 0, letter.i)"
-          >{{ letter.char }}</span>
+            :style="`animation-delay: ${letter.delay}ms;`"
+          >
+            {{ letter.char }}
+          </span>
         </transition-group>
+
+        <!-- Incoming letters -->
         <div
-          :key="`slide-top-in-${currentSlide}`"
-          class="hero-line hero-line-top hero-fixed-line hero-absolute"
+          :key="`slide-${lineIdx}-in-${currentSlide}`"
+          class="hero-line hero-fixed-line hero-absolute"
         >
           <span
-            v-for="letter in getStaggeredSpans(slides[currentSlide]?.lines?.[0] ?? '')"
+            v-for="letter in getStaggeredSpans(slides[currentSlide]?.lines?.[lineIdx] ?? '')"
             :key="letter.i"
             class="hero-letter hero-letter-in"
-            :style="`animation-delay: ${letter.delay}ms; --letter-from-x: ${letter.translate}px; transform: translateX(calc(var(--letter-from-x, 0) + ${letterOffsets[`${currentSlide}-0-${letter.i}`] || 0}px));`"
-            @mouseenter="handleLetterMouseEnter(currentSlide, 0, letter.i)"
-          >{{ letter.char }}</span>
-        </div>
-      </div>
-      <div class="hero-line-container">
-        <transition-group
-          v-if="isFadingOut"
-          name="letter-fade"
-          tag="div"
-          :key="`slide-mid-out-${previousSlide}`"
-          class="hero-line hero-line-mid hero-fixed-line hero-absolute"
-        >
-          <span
-            v-for="letter in getStaggeredSpans(slides[previousSlide]?.lines?.[1] ?? '')"
-            :key="letter.i"
-            class="hero-letter hero-letter-out"
-            :style="`animation-delay: ${letter.delay}ms; --letter-from-x: ${letter.translate}px; transform: translateX(calc(var(--letter-from-x, 0) + ${letterOffsets[`${previousSlide}-1-${letter.i}`] || 0}px));`"
-            @mouseenter="handleLetterMouseEnter(previousSlide, 1, letter.i)"
-          >{{ letter.char }}</span>
-        </transition-group>
-        <div
-          :key="`slide-mid-in-${currentSlide}`"
-          class="hero-line hero-line-mid hero-fixed-line hero-absolute"
-        >
-          <span
-            v-for="letter in getStaggeredSpans(slides[currentSlide]?.lines?.[1] ?? '')"
-            :key="letter.i"
-            class="hero-letter hero-letter-in"
-            :style="`animation-delay: ${letter.delay}ms; --letter-from-x: ${letter.translate}px; transform: translateX(calc(var(--letter-from-x, 0) + ${letterOffsets[`${currentSlide}-1-${letter.i}`] || 0}px));`"
-            @mouseenter="handleLetterMouseEnter(currentSlide, 1, letter.i)"
-          >{{ letter.char }}</span>
-        </div>
-      </div>
-      <div class="hero-line-container">
-        <transition-group
-          v-if="isFadingOut"
-          name="letter-fade"
-          tag="div"
-          :key="`slide-bot-out-${previousSlide}`"
-          class="hero-line hero-line-bot hero-fixed-line hero-absolute"
-        >
-          <span
-            v-for="letter in getStaggeredSpans(slides[previousSlide]?.lines?.[2] ?? '')"
-            :key="letter.i"
-            class="hero-letter hero-letter-out"
-            :style="`animation-delay: ${letter.delay}ms; --letter-from-x: ${letter.translate}px; transform: translateX(calc(var(--letter-from-x, 0) + ${letterOffsets[`${previousSlide}-2-${letter.i}`] || 0}px));`"
-            @mouseenter="handleLetterMouseEnter(previousSlide, 2, letter.i)"
-          >{{ letter.char }}</span>
-        </transition-group>
-        <div
-          :key="`slide-bot-in-${currentSlide}`"
-          class="hero-line hero-line-bot hero-fixed-line hero-absolute"
-        >
-          <span
-            v-for="letter in getStaggeredSpans(slides[currentSlide]?.lines?.[2] ?? '')"
-            :key="letter.i"
-            class="hero-letter hero-letter-in"
-            :style="`animation-delay: ${letter.delay}ms; --letter-from-x: ${letter.translate}px; transform: translateX(calc(var(--letter-from-x, 0) + ${letterOffsets[`${currentSlide}-2-${letter.i}`] || 0}px));`"
-            @mouseenter="handleLetterMouseEnter(currentSlide, 2, letter.i)"
-          >{{ letter.char }}</span>
+            :style="`animation-delay: ${letter.delay}ms;`"
+          >
+            {{ letter.char }}
+          </span>
         </div>
       </div>
     </div>
+
+    <!-- Mobile -->
+    <HomeMobileHero :lines="slides[currentSlide]?.lines ?? []" />
   </div>
 </template>
 
 <style scoped>
-/* Smooth fade transition for background images */
+/* Background fade */
 .bg-fade-enter-active,
 .bg-fade-leave-active {
   transition: opacity 0.8s cubic-bezier(.77, .2, .32, 1);
@@ -229,74 +182,98 @@ onUnmounted(() => {
   pointer-events: none;
 }
 
-/* Grainy/noise overlay for hero background */
+/* Overlays */
+.hero-conical-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2;
+  opacity: 0.32;
+  background: conic-gradient(at 50% 50%,
+      rgba(16, 16, 16, 0) 0deg,
+      rgba(16, 16, 16, 0.55) 90deg,
+      rgba(16, 16, 16, 0.75) 180deg,
+      rgba(16, 16, 16, 0.55) 270deg,
+      rgba(16, 16, 16, 0));
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
 .hero-noise-overlay {
   position: absolute;
   inset: 0;
   width: 100vw;
   height: 100vh;
+  z-index: 3;
+  opacity: 0.22;
+  background-image: url('https://www.transparenttextures.com/patterns/noise.png'), url('https://assets.codepen.io/1468070/noise.svg');
+  background-repeat: repeat, repeat;
+  background-size: auto, cover;
+  mix-blend-mode: overlay;
+  filter: contrast(1.12) saturate(0.95) brightness(0.95);
   pointer-events: none;
-  z-index: 1;
-  opacity: 0.18;
-  background-image: url('https://www.transparenttextures.com/patterns/noise.png');
-  background-repeat: repeat;
 }
 
-/* Staggered letter animation and nudge */
-/* Staggered letter animation and nudge */
+/* Letter animations */
 .hero-letter {
   opacity: 0;
   filter: blur(8px);
   display: inline-block;
-  transform: translateX(var(--letter-from-x, 0));
+  /* no horizontal transform — we animate only opacity and blur */
+  transform: none;
+  color: #F8F6F0;
 }
 
 .hero-letter-in {
-  animation: letterFadeIn 0.5s cubic-bezier(.77, .2, .32, 1);
-  animation-fill-mode: forwards;
+  animation: letterFadeIn 0.5s cubic-bezier(.77, .2, .32, 1) forwards;
 }
 
 .hero-letter-out {
-  animation: letterFadeOut 0.5s cubic-bezier(.77, .2, .32, 1);
-  animation-fill-mode: forwards;
-}
-
-.letter-fade-leave-active {
-  transition: opacity 0.5s;
-}
-
-.letter-fade-leave-to {
-  opacity: 0;
+  animation: letterFadeOut 0.5s cubic-bezier(.77, .2, .32, 1) forwards;
+  opacity: 1;
 }
 
 @keyframes letterFadeIn {
-  from {
+  0% {
     opacity: 0;
     filter: blur(8px);
-    transform: translateX(var(--letter-from-x, 0));
   }
 
-  to {
+  60% {
+    opacity: 0.7;
+    filter: blur(3px);
+  }
+
+  100% {
     opacity: 1;
     filter: blur(0);
-    transform: translateX(0);
   }
 }
 
 @keyframes letterFadeOut {
-  from {
+  0% {
     opacity: 1;
     filter: blur(0);
-    transform: translateX(0);
   }
 
-  to {
+  60% {
+    opacity: 0.5;
+    filter: blur(4px);
+  }
+
+  100% {
     opacity: 0;
     filter: blur(8px);
-    transform: translateX(var(--letter-from-x, 0));
   }
 }
 
+/* ensure outgoing layer appears above incoming during fade */
+.hero-outgoing {
+  z-index: 20;
+}
+
+/* Lines */
 .hero-line-container {
   position: relative;
   height: 3.5rem;
@@ -314,30 +291,24 @@ onUnmounted(() => {
   right: 0;
   top: 0;
   bottom: 0;
-  width: 100vw;
-  max-width: 100vw;
-  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* All hero lines: fixed height and font size */
 .hero-fixed-line {
   height: 3.5rem;
   line-height: 3.5rem;
-  font-size: 2.5rem;
+  font-size: 2.7rem;
   font-weight: 600;
-  margin-bottom: 0.5rem;
   text-align: center;
-  white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
-  color: #fff;
-  opacity: 1;
+  white-space: nowrap;
+  color: #F8F6F0;
+  margin-bottom: 0.5rem;
 }
 
-@media (max-width: 640px) {
+@media (max-width:640px) {
   .hero-fixed-line {
     height: unset;
     line-height: 1.2rem !important;
@@ -347,97 +318,11 @@ onUnmounted(() => {
     white-space: normal;
     word-break: break-word;
   }
-}
 
-/* Top line: slide in/out from left */
-/* Top line: slide in/out from left */
-/* .hero-line-top {
-  opacity: 0.85;
-} */
-
-.hero-line-left-enter-active,
-.hero-line-left-leave-active {
-  transition: all 0.7s cubic-bezier(.77, .2, .32, 1);
-}
-
-.hero-line-left-enter-from {
-  opacity: 0;
-  transform: translateX(-80px);
-}
-
-.hero-line-left-enter-to {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.hero-line-left-enter-from {
-  opacity: 0;
-  transform: translateX(-200px);
-}
-
-.hero-line-left-leave-to {
-  opacity: 0;
-  transform: translateX(-200px);
-}
-
-.hero-line-right-enter-from {
-  opacity: 0;
-  transform: translateX(400px);
-}
-
-.hero-line-right-leave-to {
-  opacity: 0;
-  transform: translateX(400px);
-}
-
-.hero-line-fade-enter-active,
-.hero-line-fade-leave-active {
-  transition: opacity 0.7s cubic-bezier(.77, .2, .32, 1);
-}
-
-.hero-line-fade-enter-from,
-.hero-line-fade-leave-to {
-  opacity: 0;
-}
-
-.hero-line-fade-enter-to,
-.hero-line-fade-leave-from {
-  opacity: 1;
-}
-
-/* Bottom line: slide in/out from right */
-/* Bottom line: slide in/out from right */
-.hero-letter {
-  opacity: 0;
-  filter: blur(8px);
-  display: inline-block;
-  transform: translateX(var(--letter-from-x, 0));
-  color: #fff;
-  animation: letterFadeIn 0.5s cubic-bezier(.77, .2, .32, 1) forwards;
-}
-
-@keyframes letterFadeIn {
-  from {
-    opacity: 0;
-    filter: blur(8px);
-    transform: translateX(var(--letter-from-x, 0));
+  .hero-letter {
+    font-size: 1.35rem;
+    white-space: normal;
+    word-break: break-word;
   }
-
-  60% {
-    opacity: 0.7;
-    filter: blur(3px);
-    transform: translateX(calc(var(--letter-from-x, 0) * 0.3));
-  }
-
-  to {
-    opacity: 1;
-    filter: blur(0);
-    transform: translateX(0);
-  }
-}
-
-.hero-line-right-leave-to {
-  opacity: 0;
-  transform: translateX(80px);
 }
 </style>

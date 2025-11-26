@@ -48,7 +48,7 @@ onUnmounted(() => {
       <!-- Content Overlay -->
       <div class="relative z-10 flex items-center justify-center min-h-screen snap-start">
         <h1 class="text-6xl font-bold text-white intersect">
-          Our Work
+          Our Lens
         </h1>
       </div>
     </div>

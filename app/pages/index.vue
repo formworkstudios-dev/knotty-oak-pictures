@@ -8,8 +8,7 @@
 
     <HomeHero2 />
     <!-- <HomeHero /> -->
-    <!-- <HomeContent /> -->
-    <HomeContent2 />
+    <HomeContent />
     <HomeAbout />
 
   </div>

@@ -19,12 +19,13 @@ const closeMenu = () => {
 
 <template>
   <div
-    class="fixed top-0 left-0 right-0 flex justify-center items-center border-b p-3 bg-stone-950/50 backdrop-blur-md z-[120]"
+    class="fixed top-0 left-0 right-0 flex justify-center items-center p-2.5 z-[120] transition-colors"
+    :class="{ 'border-b border-stone-700': isMenuOpen, 'border-transparent': !isMenuOpen }"
   >
     <div class="absolute left-1/2 transform -translate-x-1/2 z-[130]">
       <NuxtLink
         to="/"
-        class="text-lg font-semibold !text-[#FFFBEB]"
+        class="text-lg tracking-wide md:text-xl font-semibold !text-[#FFFBEB]"
       >
         {{ siteLogo ? siteLogo : siteName }}
       </NuxtLink>
@@ -32,7 +33,7 @@ const closeMenu = () => {
 
     <button
       @click="toggleMenu"
-      class="ml-auto w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-stone-300 bg-stone-700 flex items-center justify-center hover:bg-stone-600 transition-colors z-[130] relative cursor-pointer p-1.5 md:p-2"
+      class="ml-auto w-8 h-8 md:w-10 md:h-10 rounded-full border-1 border-stone-300 bg-stone-700/10 flex items-center justify-center hover:bg-stone-600 transition-colors z-[130] relative cursor-pointer p-1.5 md:p-2"
       aria-label="Menu"
     >
       <span class="block w-4 h-4 md:w-5 md:h-5 relative">
