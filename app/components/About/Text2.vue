@@ -9,7 +9,7 @@ const { reveal } = useScrollReveal()
 
 <template>
   <AboutWrapper
-    bg-color="bg-orange-950"
+    bg-color="bg-amber-50"
     :z-index="30"
   >
     <div class="flex flex-col-reverse md:flex-row min-h-screen snap-y snap-mandatory overflow-y-auto">
@@ -83,19 +83,19 @@ const { reveal } = useScrollReveal()
         <div class="flex flex-col">
           <h2
             :ref="reveal"
-            class="text-2xl md:text-4xl reveal block !m-0 !pb-0 text-stone-50/80"
+            class="text-2xl md:text-4xl reveal block !m-0 !pb-0 text-stone-900"
           >
             Knotty Oak crafts stories to stir the heart,
           </h2>
           <h2
             :ref="reveal"
-            class="text-2xl md:text-4xl reveal reveal-delay-200 block !m-0 !pb-0 text-stone-50/80"
+            class="text-2xl md:text-4xl reveal reveal-delay-200 block !m-0 !pb-0 text-stone-900"
           >
             ignite thought, and create
           </h2>
           <h2
             :ref="reveal"
-            class="text-2xl md:text-4xl reveal reveal-delay-400 block !m-0 !pb-0 text-stone-50/80"
+            class="text-2xl md:text-4xl reveal reveal-delay-400 block !m-0 !pb-0 text-stone-900"
           >
             lasting cinematic experiences.
           </h2>

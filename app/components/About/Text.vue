@@ -9,7 +9,7 @@ const { reveal } = useScrollReveal()
 
 <template>
   <AboutWrapper
-    bg-color="bg-amber-950"
+    bg-color="bg-amber-50"
     :z-index="30"
   >
     <div class="flex flex-col md:flex-row min-h-screen snap-y snap-mandatory overflow-y-auto">
@@ -20,19 +20,19 @@ const { reveal } = useScrollReveal()
         <div class="flex flex-col">
           <h2
             :ref="reveal"
-            class="text-2xl md:text-4xl reveal block !m-0 text-stone-50/80"
+            class="text-2xl md:text-4xl reveal block !m-0 text-stone-900"
           >
             Every great story is a journey – they move you,
           </h2>
           <h2
             :ref="reveal"
-            class="text-2xl md:text-4xl reveal reveal-delay-200 block !m-0 text-stone-50/80"
+            class="text-2xl md:text-4xl reveal reveal-delay-200 block !m-0 text-stone-900"
           >
             guiding you through places and possibilities
           </h2>
           <h2
             :ref="reveal"
-            class="text-2xl md:text-4xl reveal reveal-delay-400 block !m-0 text-stone-50/80"
+            class="text-2xl md:text-4xl reveal reveal-delay-400 block !m-0 text-stone-900"
           >
             you have never explored.
           </h2>

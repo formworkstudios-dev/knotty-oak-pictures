@@ -11,7 +11,8 @@ const slides = [
       'shared by two people who believe that authenticity',
       'and imagination are at the heart of every great story.'
     ],
-    bg: 'bg-stone-950'
+    // bg: 'bg-stone-950',
+    img: '/agnes.png'
   },
   {
     lines: [
@@ -19,7 +20,8 @@ const slides = [
       'guiding you through places and possibilities',
       'you have never explored.'
     ],
-    bg: 'bg-amber-950'
+    // bg: 'bg-amber-950',
+    img: '/battle.png'
   },
   {
     lines: [
@@ -27,7 +29,8 @@ const slides = [
       'ignite thought, and create',
       'lasting cinematic experiences.'
     ],
-    bg: 'bg-red-950'
+    // bg: 'bg-red-950',
+    img: '/gold.jpeg'
   }
 ]
 
@@ -40,12 +43,12 @@ function nextSlide() {
   setTimeout(() => {
     animating.value = false
     currentSlide.value = (currentSlide.value + 1) % slides.length
-    slideTimeout = window.setTimeout(nextSlide, 3200)
+    slideTimeout = window.setTimeout(nextSlide, 5200)
   }, 600)
 }
 
 onMounted(() => {
-  slideTimeout = window.setTimeout(nextSlide, 4000)
+  slideTimeout = window.setTimeout(nextSlide, 5200)
 })
 
 onUnmounted(() => {
@@ -56,9 +59,17 @@ onUnmounted(() => {
 <template>
   <div
     id="home-hero-bg"
-    :class="`min-h-screen flex flex-col items-center justify-center gap-6 w-full transition-colors duration-700 ${slides[currentSlide].bg}`"
+    :class="`min-h-screen flex flex-col items-center justify-center gap-6 w-full transition-colors duration-700 ${slides[currentSlide]?.bg ?? 'bg-stone-950'}`"
+    :style="{
+      backgroundImage: `linear-gradient(rgba(30, 30, 30, 0.55), rgba(30, 30, 30, 0.55)), url('${slides[currentSlide]?.img ?? ''}')`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+      position: 'relative'
+    }"
   >
-    <div class="w-full max-w-3xl flex flex-col items-center justify-center py-16">
+    <div class="hero-noise-overlay"></div>
+    <div class="w-full max-w-3xl flex flex-col items-center justify-center py-16 relative z-10">
       <div class="hero-line-container">
         <transition
           name="hero-line-left"
@@ -69,7 +80,7 @@ onUnmounted(() => {
             :key="`slide-top-${currentSlide}`"
             class="hero-line hero-line-top hero-fixed-line hero-absolute"
           >
-            {{ slides[currentSlide].lines[0] }}
+            {{ slides[currentSlide]?.lines?.[0] ?? '' }}
           </div>
         </transition>
       </div>
@@ -83,7 +94,7 @@ onUnmounted(() => {
             :key="`slide-mid-${currentSlide}`"
             class="hero-line hero-line-mid hero-fixed-line hero-absolute"
           >
-            {{ slides[currentSlide].lines[1] }}
+            {{ slides[currentSlide]?.lines?.[1] ?? '' }}
           </div>
         </transition>
       </div>
@@ -97,7 +108,7 @@ onUnmounted(() => {
             :key="`slide-bot-${currentSlide}`"
             class="hero-line hero-line-bot hero-fixed-line hero-absolute"
           >
-            {{ slides[currentSlide].lines[2] }}
+            {{ slides[currentSlide]?.lines?.[2] ?? '' }}
           </div>
         </transition>
       </div>
@@ -106,6 +117,19 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
+/* Grainy/noise overlay for hero background */
+.hero-noise-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.18;
+  background-image: url('https://www.transparenttextures.com/patterns/noise.png');
+  background-repeat: repeat;
+}
+
 .hero-line-container {
   position: relative;
   height: 3.5rem;
@@ -136,7 +160,7 @@ onUnmounted(() => {
   height: 3.5rem;
   line-height: 3.5rem;
   font-size: 2.5rem;
-  font-weight: 600;
+  /* font-weight: 600; */
   margin-bottom: 0.5rem;
   text-align: center;
   white-space: nowrap;

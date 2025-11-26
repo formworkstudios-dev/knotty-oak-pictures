@@ -101,16 +101,16 @@ const closeMenu = () => {
         >
           <div class=""> <a
               href="mailto:info@knottyoakpictures.com"
-              class="underline"
+              class="underline hover:no-underline"
             >info@knottyoakpictures.com</a></div>
           <div> <a
               href="tel:+1234567890"
-              class="underline"
+              class="underline hover:no-underline"
             >(123) 456-7890</a></div>
           <div> <a
               href="https://instagram.com/knottyoakpictures"
               target="_blank"
-              class="underline"
+              class="underline hover:no-underline"
             >@knottyoakpictures</a></div>
 
         </div>

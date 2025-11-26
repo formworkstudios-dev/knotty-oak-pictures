@@ -7,13 +7,13 @@ const team = [
     name: 'Tom Currà',
     role: 'President & Executive Producer',
     description: 'Tom is a storyteller and executive producer who enjoys delivering exceptional documentary, television, and film projects through creative vision, careful management, and collaboration.',
-    image: 'https://placehold.co/400x400/1e293b/white?text=Tom\'s+Headshot'
+    image: '/tom.webp'
   },
   {
     name: 'Greg Matkosky',
     role: 'Director & Cinematographer',
     description: 'Greg is an award-winning filmmaker with nearly 40 years of global experience directing and shooting commercial, documentary, Giant-Screen, and corporate film productions.',
-    image: 'https://placehold.co/400x400/1e293b/white?text=Greg\'s+Headshot'
+    image: '/greg.webp'
   }
 ]
 </script>
@@ -26,7 +26,7 @@ const team = [
     <div class="flex items-center justify-center min-h-screen py-20 pt-36">
       <div class="max-w-6xl px-8 w-full text-white">
         <h1 class="text-5xl font-bold text-center !mb-18">
-          Founders
+          Our Story
         </h1>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-3xl mx-auto">

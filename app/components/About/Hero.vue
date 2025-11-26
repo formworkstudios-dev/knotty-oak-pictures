@@ -65,7 +65,7 @@ onUnmounted(() => {
       ></div>
 
       <h1
-        class="text-6xl text-left self-end relative z-10"
+        class="text-6xl text-left self-end relative z-10 cursor-default"
         :style="`background: linear-gradient(45deg, #FFFBEB 0%, #d6ad60 ${gradientCenter}% , #FFFBEB 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; opacity: 0.85;`"
       >
         <span class="block reveal-instant">Knotty Oak Pictures began as a dream</span>

@@ -6,8 +6,11 @@
 <template>
   <div>
 
-
-    <HomeHero />
+    <HomeHero2 />
+    <!-- <HomeHero /> -->
+    <!-- <HomeContent /> -->
+    <HomeContent2 />
+    <HomeAbout />
 
   </div>
 </template>
