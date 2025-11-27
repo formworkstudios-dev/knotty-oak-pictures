@@ -24,7 +24,7 @@ const { reveal } = useScrollReveal()
           viewBox="0 0 200 200"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          style="opacity:0.04;"
+          style="opacity:0.06;"
         >
           <defs>
             <pattern
@@ -36,7 +36,8 @@ const { reveal } = useScrollReveal()
               <path
                 d="M 4 0 L 0 0 0 4"
                 fill="none"
-                stroke="#fff"
+                stroke="#000"
+                stroke-opacity="0.08"
                 stroke-width="0.2"
               />
             </pattern>
@@ -57,7 +58,7 @@ const { reveal } = useScrollReveal()
           viewBox="0 0 200 200"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          style="opacity:0.04;"
+          style="opacity:0.06;"
         >
           <defs>
             <pattern
@@ -69,7 +70,8 @@ const { reveal } = useScrollReveal()
               <path
                 d="M 4 0 L 0 0 0 4"
                 fill="none"
-                stroke="#fff"
+                stroke="#000"
+                stroke-opacity="0.08"
                 stroke-width="0.2"
               />
             </pattern>
@@ -85,19 +87,19 @@ const { reveal } = useScrollReveal()
             :ref="reveal"
             class="text-2xl md:text-4xl reveal block !m-0 !pb-0 text-stone-900"
           >
-            Knotty Oak crafts stories to stir the heart,
+            We blend art and honesty to create films
           </h2>
           <h2
             :ref="reveal"
             class="text-2xl md:text-4xl reveal reveal-delay-200 block !m-0 !pb-0 text-stone-900"
           >
-            ignite thought, and create
+            that inspire reflection and remind us
           </h2>
           <h2
             :ref="reveal"
             class="text-2xl md:text-4xl reveal reveal-delay-400 block !m-0 !pb-0 text-stone-900"
           >
-            lasting cinematic experiences.
+            what it means to be human.
           </h2>
         </div>
       </div>

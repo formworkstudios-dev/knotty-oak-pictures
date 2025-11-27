@@ -30,7 +30,7 @@ onUnmounted(() => {
 
 <template>
   <div>
-    <div class="sticky-card z-40">
+    <div class="sticky-card">
       <HomeHero2 :text-opacity="textOpacity" />
       <!-- This overlay will fade in as the user scrolls down -->
       <div
@@ -38,10 +38,10 @@ onUnmounted(() => {
         :style="{ opacity: heroOverlayOpacity }"
       ></div>
     </div>
-    <div class="sticky-card bg-black z-50">
+    <div class="sticky-card bg-black">
       <HomeContent />
     </div>
-    <div class="sticky-card bg-stone-900 z-60">
+    <div class="sticky-card bg-stone-900">
       <HomeAbout />
     </div>
   </div>
@@ -49,8 +49,7 @@ onUnmounted(() => {
 
 <style scoped>
 .sticky-card {
-  position: -webkit-sticky;
-  /* For Safari */
+  position: -webkit-sticky; /* For Safari */
   position: sticky;
   top: 0;
   height: 100vh;

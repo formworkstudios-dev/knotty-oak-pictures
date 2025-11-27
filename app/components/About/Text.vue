@@ -22,19 +22,20 @@ const { reveal } = useScrollReveal()
             :ref="reveal"
             class="text-2xl md:text-4xl reveal block !m-0 text-stone-900"
           >
-            Every great story is a journey – they move you,
+            Rooted in a shared passion for authentic storytelling,
           </h2>
           <h2
             :ref="reveal"
             class="text-2xl md:text-4xl reveal reveal-delay-200 block !m-0 text-stone-900"
           >
-            guiding you through places and possibilities
+            Knotty Oak Pictures grew from two creative minds
+
           </h2>
           <h2
             :ref="reveal"
             class="text-2xl md:text-4xl reveal reveal-delay-400 block !m-0 text-stone-900"
           >
-            you have never explored.
+            chasing the same vision.
           </h2>
         </div>
         <svg
@@ -42,7 +43,7 @@ const { reveal } = useScrollReveal()
           viewBox="0 0 200 200"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          style="opacity:0.04;"
+          style="opacity:0.06;"
         >
           <defs>
             <pattern
@@ -54,7 +55,8 @@ const { reveal } = useScrollReveal()
               <path
                 d="M 4 0 L 0 0 0 4"
                 fill="none"
-                stroke="#fff"
+                stroke="#000"
+                stroke-opacity="0.08"
                 stroke-width="0.2"
               />
             </pattern>

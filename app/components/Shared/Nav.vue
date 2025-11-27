@@ -25,7 +25,8 @@ const closeMenu = () => {
     <div class="absolute left-1/2 transform -translate-x-1/2 z-[130]">
       <NuxtLink
         to="/"
-        class="text-lg tracking-wide md:text-xl font-semibold !text-[#FFFBEB]"
+        @click="closeMenu"
+        class="text-lg tracking-wide md:text-2xl font-extralight !text-[#FFFBEB]"
       >
         {{ siteLogo ? siteLogo : siteName }}
       </NuxtLink>
@@ -100,20 +101,27 @@ const closeMenu = () => {
         <div
           class="flex flex-col border-t border-stone-700 pt-6 mt-6 text-sm text-mono text-stone-300 space-y-1.5 max-w-content text-right font-mono"
         >
-          <div class=""> <a
-              href="mailto:info@knottyoakpictures.com"
+          <div class="">
+            <NuxtLink
+              to="mailto:info@knottyoakpictures.com"
               class="underline hover:no-underline"
-            >info@knottyoakpictures.com</a></div>
-          <div> <a
-              href="tel:+1234567890"
+            >info@knottyoakpictures.com</NuxtLink>
+          </div>
+          <div>
+            <NuxtLink
+              to="tel:+1234567890"
               class="underline hover:no-underline"
-            >(123) 456-7890</a></div>
-          <div> <a
-              href="https://instagram.com/knottyoakpictures"
+            >(123) 456-7890</NuxtLink>
+          </div>
+          <div>
+            <NuxtLink
+              to="https://instagram.com/knottyoakpictures"
               target="_blank"
+              rel="noopener noreferrer"
               class="underline hover:no-underline"
-            >@knottyoakpictures</a></div>
-
+            >@knottyoakpictures</NuxtLink>
+          </div>
+          <Nuxtimg src="" />
         </div>
       </div>
       <div

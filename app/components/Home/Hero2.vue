@@ -12,7 +12,7 @@ defineProps({
 })
 
 function getStaggeredSpans(text: string) {
-  const delays = [100, 150, 200, 250, 300, 350, 400]
+  const delays = [200, 250, 300, 350, 400, 450, 500, 600]
   return text.split('').map((char, i) => ({
     char: char === ' ' ? '\u00A0' : char,
     delay: delays[Math.floor(Math.random() * delays.length)],
@@ -133,17 +133,15 @@ onUnmounted(() => {
         :key="lineIdx"
         class="hero-line-container"
       >
-        <div
-          class="hero-line hero-fixed-line hero-absolute"
-        >
+        <div class="hero-line hero-fixed-line hero-absolute">
           <span
             v-for="letter in getStaggeredSpans(slides[currentSlide]?.lines?.[lineIdx] ?? '')"
             :key="`${currentSlide}-${lineIdx}-${letter.i}`"
             :class="[
               'hero-letter',
               (slideState === 'visible' || slideState === 'fading-out') && 'is-visible',
-               slideState === 'fading-in' && 'hero-letter-in',
-               slideState === 'fading-out' && 'hero-letter-out',
+              slideState === 'fading-in' && 'hero-letter-in',
+              slideState === 'fading-out' && 'hero-letter-out',
               '!font-thin',
               'hero'
             ]"
@@ -225,7 +223,7 @@ onUnmounted(() => {
 .hero-letter {
   display: inline-block;
   transform: none;
-  color: #F8F6F0;
+  /* do not set the gradient per-letter; let the line container provide a single gradient across the whole line */
   opacity: 0;
   filter: blur(8px);
 }
@@ -248,6 +246,7 @@ onUnmounted(() => {
     opacity: 0;
     filter: blur(8px);
   }
+
   to {
     opacity: 1;
     filter: blur(0);
@@ -259,6 +258,7 @@ onUnmounted(() => {
     opacity: 1;
     filter: blur(0);
   }
+
   to {
     opacity: 0;
     filter: blur(8px);
@@ -301,7 +301,11 @@ onUnmounted(() => {
   text-align: center;
   overflow: hidden;
   white-space: nowrap;
-  color: #F8F6F0;
+  /* apply the warm gradient across the entire line (one gradient spanning all letters) */
+  background: linear-gradient(45deg, #FFFBEB 0%, #d6ad60 50%, #FFFBEB 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
   margin-bottom: 0.5rem;
 }
 
