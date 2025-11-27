@@ -4,6 +4,13 @@
 >
 import { ref, onMounted, onUnmounted } from 'vue'
 
+defineProps({
+  textOpacity: {
+    type: Number,
+    default: 1
+  }
+})
+
 function getStaggeredSpans(text: string) {
   const delays = [100, 150, 200, 250, 300, 350, 400]
   return text.split('').map((char, i) => ({
@@ -117,7 +124,10 @@ onUnmounted(() => {
     ></div>
 
     <!-- Desktop lines -->
-    <div class="w-full max-w-3xl hidden md:flex flex-col items-center justify-center py-16 relative z-10">
+    <div
+      class="w-full max-w-3xl hidden md:flex flex-col items-center justify-center py-16 relative z-10"
+      :style="{ opacity: textOpacity }"
+    >
       <div
         v-for="(line, lineIdx) in 3"
         :key="lineIdx"
@@ -146,7 +156,10 @@ onUnmounted(() => {
     </div>
 
     <!-- Mobile -->
-    <HomeMobileHero :lines="slides[currentSlide]?.lines ?? []" />
+    <HomeMobileHero
+      :lines="slides[currentSlide]?.lines ?? []"
+      :text-opacity="textOpacity"
+    />
   </div>
 </template>
 
