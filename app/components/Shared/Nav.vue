@@ -33,7 +33,7 @@ const closeMenu = () => {
 
     <button
       @click="toggleMenu"
-      class="ml-auto w-8 h-8 md:w-10 md:h-10 rounded-full border-1 border-stone-300 bg-stone-700/10 flex items-center justify-center hover:bg-stone-600 transition-colors z-[130] relative cursor-pointer p-1.5 md:p-2"
+      class="ml-auto w-8 h-8 md:w-10 md:h-10 rounded-full border-1 border-stone-300 bg-stone-700/10 flex items-center justify-center hover:bg-amber-950/30 transition-colors z-[130] relative cursor-pointer p-1.5 md:p-2"
       aria-label="Menu"
     >
       <span class="block w-4 h-4 md:w-5 md:h-5 relative">

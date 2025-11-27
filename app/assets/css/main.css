@@ -7,7 +7,8 @@
 }
 
 h1,
-h2 {
+h2,
+.hero {
   font-weight: 200;
 }
 
@@ -20,9 +21,10 @@ h6 {
   font-family: var(--font-display);
 }
 
-.hero-letter {
-  font-family: var(--font-sans);
-  font-weight: 200;
+.hero-letter,
+.hero {
+  font-family: var(--font-sans) !important;
+  font-weight: 200 !important;
 }
 
 /* ============================================

@@ -75,11 +75,13 @@ onUnmounted(() => {
 </script>
 
 <template>
+
   <div
     id="home-hero-bg"
     :class="`min-h-screen flex flex-col items-center justify-center gap-6 w-full transition-colors duration-700 ${slides[currentSlide]?.bg ?? 'bg-stone-950'}`"
     style="position: relative;"
   >
+
     <!-- Background images -->
     <transition-group
       name="bg-fade"
@@ -128,7 +130,7 @@ onUnmounted(() => {
           <span
             v-for="letter in getStaggeredSpans(slides[previousSlide]?.lines?.[lineIdx] ?? '')"
             :key="letter.i"
-            class="hero-letter hero-letter-out"
+            class="hero-letter hero-letter-out font-extralight hero"
             :style="`animation-delay: ${letter.delay}ms;`"
           >
             {{ letter.char }}
@@ -143,7 +145,7 @@ onUnmounted(() => {
           <span
             v-for="letter in getStaggeredSpans(slides[currentSlide]?.lines?.[lineIdx] ?? '')"
             :key="letter.i"
-            class="hero-letter hero-letter-in"
+            class="hero-letter hero-letter-in !font-thin hero"
             :style="`animation-delay: ${letter.delay}ms;`"
           >
             {{ letter.char }}
@@ -300,7 +302,7 @@ onUnmounted(() => {
   height: 3.5rem;
   line-height: 3.5rem;
   font-size: 2.7rem;
-  font-weight: 600;
+  font-weight: 200 !important;
   text-align: center;
   overflow: hidden;
   white-space: nowrap;
