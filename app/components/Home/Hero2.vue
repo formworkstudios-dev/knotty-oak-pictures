@@ -4,8 +4,6 @@
 >
 import { ref, onMounted, onUnmounted } from 'vue'
 
-// nudge behavior removed — keep animations to opacity + blur only
-
 function getStaggeredSpans(text: string) {
   const delays = [100, 150, 200, 250, 300, 350, 400]
   return text.split('').map((char, i) => ({
@@ -46,42 +44,48 @@ const slides = [
 ]
 
 const currentSlide = ref(0)
-const previousSlide = ref(0)
-const animating = ref(false)
-const isFadingOut = ref(false)
-let slideTimeout: number | null = null
+const slideState = ref<'fading-in' | 'visible' | 'fading-out'>('fading-in')
+let cycleTimeout: number | null = null
 
-function nextSlide() {
-  isFadingOut.value = true
-  previousSlide.value = currentSlide.value
-  animating.value = true
-  setTimeout(() => {
-    isFadingOut.value = false
-    currentSlide.value = (currentSlide.value + 1) % slides.length
-    setTimeout(() => {
-      animating.value = false
-      slideTimeout = window.setTimeout(nextSlide, 5200)
-    }, 600)
-  }, 600)
+function runSlideCycle() {
+  // 1. Start by fading in
+  slideState.value = 'fading-in'
+
+  // 2. After fade-in animation (1.2s), set to 'visible' and wait
+  cycleTimeout = window.setTimeout(() => {
+    slideState.value = 'visible'
+
+    // 3. After wait period (5.2s), set to 'fading-out'
+    cycleTimeout = window.setTimeout(() => {
+      slideState.value = 'fading-out'
+
+      // 4. After fade-out animation (1.2s), change slide and restart cycle
+      cycleTimeout = window.setTimeout(() => {
+        currentSlide.value = (currentSlide.value + 1) % slides.length
+        runSlideCycle() // Loop
+      }, 1200) // Duration of fade-out
+
+    }, 5200) // Wait duration
+
+  }, 1200) // Duration of fade-in
 }
 
+
 onMounted(() => {
-  slideTimeout = window.setTimeout(nextSlide, 5200)
+  runSlideCycle()
 })
 
 onUnmounted(() => {
-  if (slideTimeout) window.clearTimeout(slideTimeout)
+  if (cycleTimeout) window.clearTimeout(cycleTimeout)
 })
 </script>
 
 <template>
-
   <div
     id="home-hero-bg"
     :class="`min-h-screen flex flex-col items-center justify-center gap-6 w-full transition-colors duration-700 ${slides[currentSlide]?.bg ?? 'bg-stone-950'}`"
     style="position: relative;"
   >
-
     <!-- Background images -->
     <transition-group
       name="bg-fade"
@@ -119,33 +123,20 @@ onUnmounted(() => {
         :key="lineIdx"
         class="hero-line-container"
       >
-        <!-- Outgoing letters -->
-        <transition-group
-          v-if="isFadingOut"
-          name="letter-fade"
-          tag="div"
-          :key="`slide-${lineIdx}-out-${previousSlide}`"
-          class="hero-line hero-fixed-line hero-absolute hero-outgoing"
-        >
-          <span
-            v-for="letter in getStaggeredSpans(slides[previousSlide]?.lines?.[lineIdx] ?? '')"
-            :key="letter.i"
-            class="hero-letter hero-letter-out font-extralight hero"
-            :style="`animation-delay: ${letter.delay}ms;`"
-          >
-            {{ letter.char }}
-          </span>
-        </transition-group>
-
-        <!-- Incoming letters -->
         <div
-          :key="`slide-${lineIdx}-in-${currentSlide}`"
           class="hero-line hero-fixed-line hero-absolute"
         >
           <span
             v-for="letter in getStaggeredSpans(slides[currentSlide]?.lines?.[lineIdx] ?? '')"
-            :key="letter.i"
-            class="hero-letter hero-letter-in !font-thin hero"
+            :key="`${currentSlide}-${lineIdx}-${letter.i}`"
+            :class="[
+              'hero-letter',
+              (slideState === 'visible' || slideState === 'fading-out') && 'is-visible',
+               slideState === 'fading-in' && 'hero-letter-in',
+               slideState === 'fading-out' && 'hero-letter-out',
+              '!font-thin',
+              'hero'
+            ]"
             :style="`animation-delay: ${letter.delay}ms;`"
           >
             {{ letter.char }}
@@ -219,12 +210,16 @@ onUnmounted(() => {
 
 /* Letter animations */
 .hero-letter {
-  opacity: 0;
-  filter: blur(8px);
   display: inline-block;
-  /* no horizontal transform — we animate only opacity and blur */
   transform: none;
   color: #F8F6F0;
+  opacity: 0;
+  filter: blur(8px);
+}
+
+.hero-letter.is-visible {
+  opacity: 1;
+  filter: blur(0);
 }
 
 .hero-letter-in {
@@ -233,38 +228,25 @@ onUnmounted(() => {
 
 .hero-letter-out {
   animation: letterFadeOut 0.5s cubic-bezier(.77, .2, .32, 1) forwards;
-  opacity: 1;
 }
 
 @keyframes letterFadeIn {
-  0% {
+  from {
     opacity: 0;
     filter: blur(8px);
   }
-
-  60% {
-    opacity: 0.7;
-    filter: blur(3px);
-  }
-
-  100% {
+  to {
     opacity: 1;
     filter: blur(0);
   }
 }
 
 @keyframes letterFadeOut {
-  0% {
+  from {
     opacity: 1;
     filter: blur(0);
   }
-
-  60% {
-    opacity: 0.5;
-    filter: blur(4px);
-  }
-
-  100% {
+  to {
     opacity: 0;
     filter: blur(8px);
   }
