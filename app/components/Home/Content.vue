@@ -4,8 +4,63 @@
 >
 import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue'
 
-const items = Array.from({ length: 8 }).map((_, i) => ({ id: i + 1, title: `Item ${i + 1}`, year: 2025 - i }))
+const items = [
+  {
+    id: 1,
+    title: 'Stories From The Mines',
+    year: 2001,
+    desc: 'Emmy-nominated, nationally distributed feature-length dramatized documentary narrated by Jason Miller. Recounts the struggle between early 20th-century immigrant coal miners and American industrialists. 143 minutes.'
+  },
+  {
+    id: 2,
+    title: 'William Warren Scranton: In A Clear Light',
+    year: 2004,
+    desc: 'Biopic on Pennsylvania’s 38th governor, Democratic presidential candidate, and U.S. Ambassador to the UN. Broadcast statewide on Pennsylvania Public Television. 58 minutes.'
+  },
+  {
+    id: 3,
+    title: 'Looking To The River',
+    year: 2005,
+    desc: 'Nationally distributed feature-length documentary chronicling Pennsylvania’s longest river and its 400-year impact on the cultural and industrial evolution of the mid-Atlantic and the Chesapeake Bay. 97 minutes.'
+  },
+  {
+    id: 4,
+    title: 'A Dying Breath',
+    year: 2006,
+    desc: 'First-person account of how Black Lung Disease followed Pennsylvania coal miners out of the pit and devastated their lives. 58 minutes.'
+  },
+  {
+    id: 5,
+    title: 'Gino Merli: The Healing Hero',
+    year: 2007,
+    desc: 'Docudrama reenacting Medal of Honor recipient Gino Merli’s WWII story. 28 minutes.'
+  },
+  {
+    id: 6,
+    title: 'Barbara Weisberger: En Pointe',
+    year: 2007,
+    desc: 'Biopic about the founder of the Pennsylvania Ballet and the company’s influence on ballet in the United States. Broadcast statewide. 58 minutes.'
+  },
+  {
+    id: 7,
+    title: 'The Extraordinary Journey',
+    year: 2007,
+    desc: 'Feature-length documentary on the one million eastern Europeans who immigrated to Pennsylvania between 1900–1914, reshaping the state’s trajectory. Broadcast statewide. 104 minutes.'
+  },
+  {
+    id: 8,
+    title: 'Knoebel’s',
+    year: 2015,
+    desc: 'Visually rich documentary on the seven-generation history of one of America’s last family-owned amusement parks in central Pennsylvania. 58 minutes.'
+  }
+]
 const colors = ['#FEF3C7', '#FEE2E2', '#E9D5FF', '#DBEAFE', '#E6FFFA', '#FEF0C7', '#FFF7ED', '#F8FAFC']
+
+function splitTitle(title: string) {
+  const idx = title.indexOf(':')
+  if (idx === -1) return { first: title, rest: '' }
+  return { first: title.slice(0, idx + 1), rest: title.slice(idx + 1).trimStart() }
+}
 
 const visibleCount = 4
 // percent width per item (responsive to container size)
@@ -346,6 +401,7 @@ onUnmounted(() => {
             :key="item.id"
             class="carousel-item"
             :style="{ '--item-basis': itemWidthPercent + '%' }"
+            tabindex="0"
           >
             <div
               class="carousel-inner h-screen flex items-center justify-center text-center relative overflow-hidden"
@@ -358,10 +414,25 @@ onUnmounted(() => {
               <!-- dark overlay sits above the image; becomes lighter on hover -->
               <div class="overlay absolute inset-0 pointer-events-none"></div>
 
-              <!-- bottom title with year (white text) -->
-              <div class="absolute left-4 top-4 text-left z-20">
-                <div class="text-2xl md:text-3xl font-bold text-white leading-tight">{{ item.title }}</div>
-                <div class="text-base md:text-lg text-white/80 mt-1">{{ item.year }}</div>
+              <!-- top header overlay: stone-950 -> transparent to improve text contrast -->
+              <div class="header-overlay absolute left-0 right-0 top-0 pointer-events-none"></div>
+
+              <!-- bottom title with year (white text); description appears on hover -->
+              <div class="absolute left-4 top-4 text-center pt-20 z-20 align-middle w-full items-center">
+                <div class="carousel-title text-xl md:text-2xl font-thin text-white leading-tight">
+                  <template v-if="splitTitle(item.title).rest">
+                    <span class="title-line-1">{{ splitTitle(item.title).first }}</span>
+                    <br />
+                    <span class="title-line-2">{{ splitTitle(item.title).rest }}</span>
+                  </template>
+                  <template v-else>
+                    {{ item.title }}
+                  </template>
+                </div>
+                <div class="text-sm md:text-base text-white/80 mt-1">{{ item.year }}</div>
+                <div class="desc mt-4 text-base md:text-md text-white/90 mx-auto px-4">
+                  {{ item.desc }}
+                </div>
               </div>
             </div>
           </div>
@@ -469,5 +540,64 @@ onUnmounted(() => {
 .pause-badge {
   font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
   pointer-events: none;
+}
+
+/* description reveal on hover: hidden by default, fades/slides up on hover */
+.desc {
+  opacity: 0;
+  transform: translateY(8px);
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 220ms ease, transform 220ms ease, max-height 280ms ease;
+  pointer-events: none;
+  max-width: 56ch;
+  /* limit description width to avoid stretching on hover */
+  width: min(92%, 56ch);
+  text-align: center;
+}
+
+.carousel-item:hover .desc {
+  opacity: 1;
+  transform: translateY(0);
+  max-height: 10rem;
+  pointer-events: auto;
+}
+
+.carousel-item:focus-within .desc {
+  opacity: 1;
+  transform: translateY(0);
+  max-height: 12rem;
+  pointer-events: auto;
+}
+
+/* constrain titles so long names wrap without pushing layout */
+.carousel-title {
+  max-width: 48ch;
+  width: min(92%, 48ch);
+  margin: 0 auto;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}
+
+/* header overlay to darken the top area behind text for better contrast */
+.header-overlay {
+  height: min(400px, 33vh);
+  background: linear-gradient(180deg, rgba(15, 23, 24, 0.96) 0%, rgba(15, 23, 24, 0.7) 30%, rgba(15, 23, 24, 0.0) 100%);
+  z-index: 12;
+  /* above image, below text (text z-20) */
+}
+
+/* title line tweaks when we split on ':' */
+.title-line-1,
+.title-line-2 {
+  display: inline-block;
+}
+
+.title-line-1 {
+  margin-bottom: 0.15rem;
+}
+
+.title-line-2 {
+  display: block;
 }
 </style>
