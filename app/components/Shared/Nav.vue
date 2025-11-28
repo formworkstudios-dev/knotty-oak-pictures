@@ -2,6 +2,8 @@
   setup
   lang="ts"
 >
+import { ref, onMounted, onUnmounted } from 'vue'
+
 const appConfig = useAppConfig()
 const siteName = appConfig.siteName
 const siteLogo = appConfig.siteLogo
@@ -15,6 +17,40 @@ const toggleMenu = () => {
 const closeMenu = () => {
   isMenuOpen.value = false
 }
+
+function isEditableFocused() {
+  const el = document.activeElement as HTMLElement | null
+  if (!el) return false
+  const tag = el.tagName
+  if (tag === 'INPUT' || tag === 'TEXTAREA' || (el as HTMLElement).isContentEditable) return true
+  return false
+}
+
+function keyHandler(e: KeyboardEvent) {
+  // Ctrl/Cmd+K or 'm' open the menu (unless typing in an input)
+  if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+    e.preventDefault()
+    toggleMenu()
+    return
+  }
+  if (e.key.toLowerCase() === 'm' && !isEditableFocused()) {
+    // toggle the menu on 'm' so pressing it again closes the menu
+    toggleMenu()
+    return
+  }
+  if (e.key === 'Escape' && isMenuOpen.value) {
+    closeMenu()
+    return
+  }
+}
+
+onMounted(() => {
+  window.addEventListener('keydown', keyHandler)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('keydown', keyHandler)
+})
 </script>
 
 <template>

@@ -33,20 +33,20 @@ const team = [
           <div
             v-for="(person, index) in team"
             :key="person.name"
-            class="text-center"
+            class="text-left md:text-center"
           >
             <!-- Photo -->
             <div class="mb-4 flex-shrink-0">
               <img
                 :src="person.image"
                 :alt="person.name"
-                class="w-72 h-[200px] md:h-[400px] mx-auto object-cover shadow-lg"
+                class="w-full md:w-72 h-[200px] md:h-[400px] mx-0 md:mx-auto object-cover shadow-lg"
               />
             </div>
 
             <!-- Name & Text -->
             <div
-              class="mx-auto flex-1 flex flex-col justify-start pt-1 md:pt-0"
+              class="mx-0 md:mx-auto flex-1 flex flex-col justify-start pt-1 md:pt-0"
               style="max-width: 288px;"
             >
               <h2 class="text-3xl font-bold !mb-1">

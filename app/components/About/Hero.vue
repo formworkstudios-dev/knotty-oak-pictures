@@ -15,6 +15,30 @@ let ambientDirection = 1
 // overlay opacity controlled by scroll (fade-to-black)
 const heroOverlayOpacity = ref(0)
 
+// per-letter entrance animation (like Home/Hero2)
+function getStaggeredSpans(text: string, seed = 0) {
+  const delays = [120, 160, 200, 240, 280, 320, 360, 420]
+  // deterministic-ish per seed by rotating delays
+  return text.split('').map((char, i) => {
+    const idx = (i + seed) % delays.length
+    const base = delays[idx] ?? delays[0]
+    const baseNum = Number(base || delays[0])
+    return {
+      char: char === ' ' ? '\u00A0' : char,
+      delay: baseNum + Math.floor((Math.random() * 60) - 30),
+      i
+    }
+  })
+}
+
+const animateEntrance = ref(false)
+
+// simple mobile detection so we can render a non-split, line-based reveal on small screens
+const isMobile = ref(false)
+function updateIsMobile() {
+  isMobile.value = (typeof window !== 'undefined') ? window.innerWidth <= 640 : false
+}
+
 const handleScroll = () => {
   if (!heroDiv) return
   const rect = heroDiv.getBoundingClientRect()
@@ -58,12 +82,18 @@ onMounted(() => {
   window.addEventListener('mousemove', mouseHandler)
   if (!animationFrame) animateGradient()
   window.addEventListener('scroll', handleScroll)
+  // trigger per-letter entrance after a short tick
+  window.setTimeout(() => { animateEntrance.value = true }, 60)
+  // set mobile state and listen for resize to toggle rendering mode
+  updateIsMobile()
+  window.addEventListener('resize', updateIsMobile)
 })
 
 onUnmounted(() => {
   if (mouseHandler) window.removeEventListener('mousemove', mouseHandler)
   if (animationFrame) cancelAnimationFrame(animationFrame)
   window.removeEventListener('scroll', handleScroll)
+  try { window.removeEventListener('resize', updateIsMobile) } catch (e) { }
 })
 </script>
 
@@ -74,7 +104,7 @@ onUnmounted(() => {
   >
     <div
       id="about-hero-bg"
-      class="relative flex items-start justify-start min-h-screen pb-10 pl-10"
+      class="relative flex items-start justify-start min-h-screen px-4 py-4 md:pb-10 md:pl-10"
     >
       <!-- fade-to-black overlay controlled by scroll -->
       <div
@@ -91,14 +121,54 @@ onUnmounted(() => {
         class="text-6xl text-left self-end relative z-10 cursor-default"
         :style="`background: linear-gradient(45deg, #FFFBEB 0%, #d6ad60 ${gradientCenter}% , #FFFBEB 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; opacity: 0.85;`"
       >
+        <template v-if="isMobile">
+          <!-- mobile: render three line-based reveals (no per-letter split) -->
+          <span class="block reveal-instant">What began as a shared love for honest, imaginative storytelling grew into
+            Knotty Oak Pictures.</span>
+          <span class="block reveal-instant-delayed-1">Every project we take on is a chance to tell something true —
+            with
+            heart, with beauty,</span>
+          <span class="block reveal-instant-delayed-2">and with purpose. Human
+            experience.</span>
+        </template>
+        <template v-else>
+          <!-- desktop: per-letter randomized entrance (existing behavior) -->
+          <span class="block">
+            <template
+              v-for="letter in getStaggeredSpans('What began as a shared love for honest, imaginative storytelling grew into Knotty Oak Pictures.', 1)"
+              :key="`l1-${letter.i}`"
+            >
+              <span
+                :class="['hero-letter', animateEntrance ? 'hero-letter-in' : '']"
+                :style="{ animationDelay: letter.delay + 'ms' }"
+              >{{ letter.char }}</span>
+            </template>
+          </span>
 
+          <span class="block">
+            <template
+              v-for="letter in getStaggeredSpans('Every project we take on is a chance to tell something true — with heart, with beauty,', 2)"
+              :key="`l2-${letter.i}`"
+            >
+              <span
+                :class="['hero-letter', animateEntrance ? 'hero-letter-in' : '']"
+                :style="{ animationDelay: letter.delay + 200 + 'ms' }"
+              >{{ letter.char }}</span>
+            </template>
+          </span>
 
-        <span class="block reveal-instant">What began as a shared love for honest, imaginative storytelling grew into
-          Knotty Oak Pictures.</span>
-        <span class="block reveal-instant-delayed-1">very project we take on is a chance to tell something true — with
-          heart, with beauty,</span>
-        <span class="block reveal-instant-delayed-2">and with purpose. Human
-          experience.</span>
+          <span class="block">
+            <template
+              v-for="letter in getStaggeredSpans('and with purpose. Human experience.', 3)"
+              :key="`l3-${letter.i}`"
+            >
+              <span
+                :class="['hero-letter', animateEntrance ? 'hero-letter-in' : '']"
+                :style="{ animationDelay: letter.delay + 420 + 'ms' }"
+              >{{ letter.char }}</span>
+            </template>
+          </span>
+        </template>
       </h1>
     </div>
   </AboutWrapper>
@@ -135,5 +205,29 @@ onUnmounted(() => {
 .about-hero-overlay {
   transition: opacity 260ms ease;
   will-change: opacity;
+}
+
+/* per-letter entrance (copied/adapted from Home/Hero2) */
+.hero-letter {
+  display: inline-block;
+  transform: none;
+  opacity: 0;
+  filter: blur(8px);
+}
+
+.hero-letter-in {
+  animation: letterFadeIn 0.5s cubic-bezier(.77, .2, .32, 1) forwards;
+}
+
+@keyframes letterFadeIn {
+  from {
+    opacity: 0;
+    filter: blur(8px);
+  }
+
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
 }
 </style>

@@ -62,10 +62,11 @@ function splitTitle(title: string) {
   return { first: title.slice(0, idx + 1), rest: title.slice(idx + 1).trimStart() }
 }
 
-const visibleCount = 4
+// visible count responsive: desktop 4, mobile 2 (will be updated on mount)
+const visibleCount = ref(4)
 // percent width per item (responsive to container size)
-const itemWidthPercent = 100 / visibleCount
-const maxIndex = Math.max(0, items.length - visibleCount)
+const itemWidthPercent = computed(() => 100 / visibleCount.value)
+const maxIndex = computed(() => Math.max(0, items.length - visibleCount.value))
 // start so the left edge of item 4 (1-based) is aligned to the left of the viewport
 const currentIndex = ref(3)
 // dragging state for pointer swipe-to-scroll
@@ -148,13 +149,13 @@ function prev() {
 }
 
 function next() {
-  currentIndex.value = Math.min(maxIndex, currentIndex.value + 1)
+  currentIndex.value = Math.min(maxIndex.value, currentIndex.value + 1)
 }
 
 // Shift the track so first visible slide is centered
 const trackStyle = computed(() => ({
   // use percent-based translate so layout changes/resizing won't cause jumps
-  transform: `translateX(-${currentIndex.value * itemWidthPercent}%)`,
+  transform: `translateX(-${currentIndex.value * itemWidthPercent.value}%)`,
   transition: (suppressTransition.value || isDragging.value) ? 'none' : 'transform 450ms cubic-bezier(.22,.9,.37,1)',
   display: 'flex',
 }))
@@ -163,7 +164,7 @@ const dragStyle = computed(() => {
   if (!isDragging.value || dragX.value === 0) return {}
   // combine the base percent translate with the current drag offset in px
   return {
-    transform: `translateX(calc(-${currentIndex.value * itemWidthPercent}% + ${dragX.value}px))`,
+    transform: `translateX(calc(-${currentIndex.value * itemWidthPercent.value}% + ${dragX.value}px))`,
     transition: 'none'
   }
 })
@@ -178,6 +179,26 @@ let resyncTimeout: number | null = null
 const pauseRemaining = ref(0)
 const PAUSE_PIXELS = 1000
 let lastTouchY = 0
+
+function updateVisibleCount() {
+  // responsive breakpoints:
+  // - <420px: 1 slide
+  // - 420px <= width < 768px: 2 slides
+  // - >=768px: 4 slides
+  const w = (typeof window !== 'undefined') ? window.innerWidth : 1024
+  let newCount = 4
+  if (w < 420) newCount = 1
+  else if (w < 768) newCount = 2
+  if (visibleCount.value !== newCount) {
+    visibleCount.value = newCount
+    // clamp currentIndex so it doesn't exceed new max
+    if (currentIndex.value > maxIndex.value) {
+      currentIndex.value = maxIndex.value
+    }
+    // ensure track snaps after layout change
+    nextTick(() => { resyncTrackSnap() })
+  }
+}
 
 function normalizeWheelDelta(e: WheelEvent) {
   // deltaMode: 0=pixel, 1=line, 2=page — convert to approximate pixels
@@ -247,7 +268,7 @@ function resyncTrackSnap() {
   // Force the track to snap to the correct pixel transform without animation.
   if (!trackRef.value || !containerRef.value) return
   const containerWidth = containerRef.value.clientWidth
-  const px = -(currentIndex.value * (itemWidthPercent / 100) * containerWidth)
+  const px = -(currentIndex.value * (itemWidthPercent.value / 100) * containerWidth)
   // apply inline styles to snap
   const el = trackRef.value
   el.style.transition = 'none'
@@ -263,6 +284,9 @@ function resyncTrackSnap() {
 }
 
 onMounted(() => {
+  // set initial responsive visible count
+  updateVisibleCount()
+  window.addEventListener('resize', updateVisibleCount)
   window.addEventListener('keydown', onKey)
   // wheel-based navigation disabled intentionally (do not attach handler)
   // ensure we catch pointerup globally in case the pointer is released outside the container
@@ -328,6 +352,7 @@ onMounted(() => {
 
 onUnmounted(() => {
   window.removeEventListener('keydown', onKey)
+  try { window.removeEventListener('resize', updateVisibleCount) } catch (e) { }
   if (containerRef.value) {
     try { containerRef.value.removeEventListener('wheel', onWheel as any) } catch (e) { }
   }
@@ -461,9 +486,7 @@ onUnmounted(() => {
   padding: 0;
 }
 
-.carousel-item:hover {
-  flex-basis: 33% !important;
-}
+
 
 .carousel-inner {
   transition: transform 220ms ease;
@@ -481,8 +504,15 @@ onUnmounted(() => {
   z-index: 10;
 }
 
-.carousel-item:hover .overlay {
-  background: rgba(0, 0, 0, 0.18);
+
+@media (min-width: 768px) {
+  .carousel-item:hover {
+    flex-basis: 33% !important;
+  }
+
+  .carousel-item:hover .overlay {
+    background: rgba(0, 0, 0, 0.18);
+  }
 }
 
 /* ensure nav buttons are circular */
