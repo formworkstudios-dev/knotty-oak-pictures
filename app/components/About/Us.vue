@@ -13,7 +13,7 @@ const team = [
     name: 'Greg Matkosky',
     role: 'Director & Cinematographer',
     description: 'Greg is an award-winning filmmaker with nearly 40 years of global experience directing and shooting commercial, documentary, Giant-Screen, and corporate film productions.',
-    image: '/greg.webp'
+    image: '/greg-bio.jpg'
   }
 ]
 </script>

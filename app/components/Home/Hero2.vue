@@ -108,7 +108,7 @@ onUnmounted(() => {
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
-          zIndex: 0
+          zIndex: -1
         }"
       ></div>
     </transition-group>
@@ -226,6 +226,7 @@ onUnmounted(() => {
   /* do not set the gradient per-letter; let the line container provide a single gradient across the whole line */
   opacity: 0;
   filter: blur(8px);
+  will-change: opacity, filter;
 }
 
 .hero-letter.is-visible {
@@ -322,6 +323,11 @@ onUnmounted(() => {
 
   .hero-letter {
     font-size: 1.35rem;
+    /* Fallback color for browsers that don't support background-clip/text-fill */
+    color: #fff;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
     white-space: normal;
     word-break: break-word;
   }

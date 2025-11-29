@@ -5,53 +5,71 @@
 import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue'
 
 const items = [
+  // previously last two items moved to the front
   {
-    id: 1,
-    title: 'Stories From The Mines',
-    year: 2001,
-    desc: 'Emmy-nominated, nationally distributed feature-length dramatized documentary narrated by Jason Miller. Recounts the struggle between early 20th-century immigrant coal miners and American industrialists. 143 minutes.'
+    id: 8,
+    title: 'The Healing Hero',
+    year: '',
+    image: '/healing.png',
+    desc: 'Docudrama that reenacts Medal of Honor recipient Gino Merli’s amazing story of one night during World War II when he killed 51 German soldiers.'
   },
   {
-    id: 2,
-    title: 'William Warren Scranton: In A Clear Light',
-    year: 2004,
-    desc: 'Biopic on Pennsylvania’s 38th governor, Democratic presidential candidate, and U.S. Ambassador to the UN. Broadcast statewide on Pennsylvania Public Television. 58 minutes.'
+    id: 9,
+    title: 'An Empty Place At The Table',
+    year: '',
+    image: '/table2.png',
+    desc: 'Susan Sarandon narrates this New York Film and Video Festival winner for Best Social Documentary about an art exhibit that memorializes women and children murdered in acts of domestic violence. Nationally distributed. 28 minutes.'
   },
+  // remaining items
   {
     id: 3,
-    title: 'Looking To The River',
-    year: 2005,
-    desc: 'Nationally distributed feature-length documentary chronicling Pennsylvania’s longest river and its 400-year impact on the cultural and industrial evolution of the mid-Atlantic and the Chesapeake Bay. 97 minutes.'
+    title: 'Hearth & Harvest',
+    year: '',
+    image: '/harvest.png',
+    desc: 'Feature-length visual tone poem that blends the story of agricultural heritage with contemporary issues that challenge farmers. Broadcast throughout Pennsylvania on the Pennsylvania Public Television network. 86 minutes.'
   },
   {
     id: 4,
-    title: 'A Dying Breath',
-    year: 2006,
-    desc: 'First-person account of how Black Lung Disease followed Pennsylvania coal miners out of the pit and devastated their lives. 58 minutes.'
+    title: 'Remembering The Sirens',
+    year: '',
+    image: '/siren.png',
+    desc: 'Emmy Award winning and nationally distributed film narrated by Leon Redbone that explores the early history of Jazz legends Tommy and Jimmy Dorsey and how their musical vision catalyzed Jazz from its improvisational roots into the Big Band sound. 57 minutes.'
   },
   {
     id: 5,
-    title: 'Gino Merli: The Healing Hero',
-    year: 2007,
-    desc: 'Docudrama reenacting Medal of Honor recipient Gino Merli’s WWII story. 28 minutes.'
+    title: 'Frank Schoonover: The Authentic Artist',
+    year: '',
+    image: '/horse2.png',
+    desc: 'A Cine Golden Eagle winner that recounts the creative adventures of the master American illustrator. Shot in the wilderness environs of northern Quebec Province and Wyoming’s Bighorn Mountains. 57 minutes.'
   },
   {
     id: 6,
-    title: 'Barbara Weisberger: En Pointe',
-    year: 2007,
-    desc: 'Biopic about the founder of the Pennsylvania Ballet and the company’s influence on ballet in the United States. Broadcast statewide. 58 minutes.'
+    title: 'Stories From The Mines',
+    year: 2001,
+    image: '/mines.png',
+    desc: 'Nationally distributed, 2001 feature-length Emmy-nominated dramatized documentary narrated by Academy Award winner Jason Miller that presents the epic struggle between early 20th century immigrant coal miners and American industrialists. 143 minutes.'
   },
   {
     id: 7,
-    title: 'The Extraordinary Journey',
-    year: 2007,
-    desc: 'Feature-length documentary on the one million eastern Europeans who immigrated to Pennsylvania between 1900–1914, reshaping the state’s trajectory. Broadcast statewide. 104 minutes.'
+    title: 'Spirit & Speed',
+    year: '',
+    image: '/horse.png',
+    desc: 'A behind-the-scenes look at the sport, art, industry and controversies of thoroughbred horse racing. Broadcast throughout Pennsylvania on the Pennsylvania Public Television network. 57 minutes.'
+  },
+  // move Little League & Ubaldo to the end and remove images (black bg)
+  {
+    id: 1,
+    title: 'Little League: A History',
+    year: '',
+    image: '',
+    desc: 'Nationally distributed and presented on ESPN during the Little League World Series broadcast. Narrated by Vin Scully, this documentary is the authorized cinematic biography of one of America’s iconic institutions. Shot on location in Japan. 57 minutes.'
   },
   {
-    id: 8,
-    title: 'Knoebel’s',
-    year: 2015,
-    desc: 'Visually rich documentary on the seven-generation history of one of America’s last family-owned amusement parks in central Pennsylvania. 58 minutes.'
+    id: 2,
+    title: 'Ubaldo',
+    year: '',
+    image: '',
+    desc: 'Shot on location in Italy. A cinematic rendition of the nearly millennium-old epic Italian cultural festival “La Festa Dei Ceri”, and its recreation in a small town in the United States. Nationally distributed. 57 minutes.'
   }
 ]
 const colors = ['#FEF3C7', '#FEE2E2', '#E9D5FF', '#DBEAFE', '#E6FFFA', '#FEF0C7', '#FFF7ED', '#F8FAFC']
@@ -60,6 +78,21 @@ function splitTitle(title: string) {
   const idx = title.indexOf(':')
   if (idx === -1) return { first: title, rest: '' }
   return { first: title.slice(0, idx + 1), rest: title.slice(idx + 1).trimStart() }
+}
+
+function getSlideStyle(item: { image?: string; id: number }) {
+  // explicit empty-string image means use a solid black background (no image available)
+  if (item.image === '') {
+    return {
+      backgroundColor: '#000'
+    }
+  }
+  const src = item.image ? item.image : `https://picsum.photos/seed/${item.id}/1200/800`
+  return {
+    backgroundImage: `url('${src}')`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center'
+  }
 }
 
 // visible count responsive: desktop 4, mobile 2 (will be updated on mount)
@@ -175,10 +208,6 @@ let resizeTimeout: number | null = null
 let onResize: (() => void) | null = null
 let io: IntersectionObserver | null = null
 let resyncTimeout: number | null = null
-// pause scrolling pixels when this section snaps to top
-const pauseRemaining = ref(0)
-const PAUSE_PIXELS = 1000
-let lastTouchY = 0
 
 function updateVisibleCount() {
   // responsive breakpoints:
@@ -200,69 +229,7 @@ function updateVisibleCount() {
   }
 }
 
-function normalizeWheelDelta(e: WheelEvent) {
-  // deltaMode: 0=pixel, 1=line, 2=page — convert to approximate pixels
-  let delta = e.deltaY || 0
-  if (e.deltaMode === 1) delta *= 16
-  if (e.deltaMode === 2) delta *= window.innerHeight || 800
-  return Math.abs(delta)
-}
 
-function onTouchStart(e: TouchEvent) {
-  lastTouchY = e.touches?.[0]?.clientY ?? lastTouchY
-}
-
-function onTouchMovePause(e: TouchEvent) {
-  if (!pauseRemaining.value) return
-  const y = e.touches?.[0]?.clientY ?? lastTouchY
-  const delta = Math.abs(y - lastTouchY)
-  lastTouchY = y
-  console.log('[HomeContent] touchmove pause delta=', delta, 'pauseRemainingBefore=', pauseRemaining.value)
-  pauseRemaining.value = Math.max(0, pauseRemaining.value - delta)
-  e.preventDefault()
-  e.stopPropagation()
-  console.log('[HomeContent] touchmove pauseRemainingAfter=', pauseRemaining.value)
-  if (pauseRemaining.value === 0) removePauseListeners()
-}
-
-function onWheelPause(e: WheelEvent) {
-  if (!pauseRemaining.value) return
-  const delta = normalizeWheelDelta(e)
-  console.log('[HomeContent] wheel pause delta=', delta, 'deltaMode=', e.deltaMode, 'pauseBefore=', pauseRemaining.value)
-  pauseRemaining.value = Math.max(0, pauseRemaining.value - delta)
-  e.preventDefault()
-  e.stopPropagation()
-  console.log('[HomeContent] wheel pauseRemainingAfter=', pauseRemaining.value)
-  if (pauseRemaining.value === 0) removePauseListeners()
-}
-
-function enablePauseListeners() {
-  pauseRemaining.value = PAUSE_PIXELS
-  console.log('[HomeContent] enablePauseListeners — pauseRemaining=', pauseRemaining.value)
-  try { window.addEventListener('wheel', onWheelPause as any, { passive: false }) } catch (err) { }
-  try { window.addEventListener('touchstart', onTouchStart as any, { passive: true }) } catch (err) { }
-  try { window.addEventListener('touchmove', onTouchMovePause as any, { passive: false }) } catch (err) { }
-}
-
-function removePauseListeners() {
-  try { window.removeEventListener('wheel', onWheelPause as any) } catch (err) { }
-  try { window.removeEventListener('touchstart', onTouchStart as any) } catch (err) { }
-  try { window.removeEventListener('touchmove', onTouchMovePause as any) } catch (err) { }
-}
-
-function checkAndEnablePause() {
-  if (!containerRef.value) return
-  // if already paused, nothing to do
-  if (pauseRemaining.value > 0) return
-  const stickyAncestor = containerRef.value?.closest?.('.sticky-card') as HTMLElement | null
-  const top = (stickyAncestor ? stickyAncestor.getBoundingClientRect().top : containerRef.value.getBoundingClientRect().top)
-  // increase tolerance for pin detection
-  if (Math.abs(top) <= 8) {
-    console.debug('[HomeContent] scroll fallback detects pinned top=', top)
-    enablePauseListeners()
-    try { window.removeEventListener('scroll', checkAndEnablePause as any) } catch (err) { }
-  }
-}
 
 function resyncTrackSnap() {
   // Force the track to snap to the correct pixel transform without animation.
@@ -303,23 +270,11 @@ onMounted(() => {
             await nextTick()
             // snap track to pixel-accurate position to avoid animated jump
             resyncTrackSnap()
-            // Only enable the pause when the carousel is actually pinned to the top
-            // determine the top of the nearest sticky ancestor (index.vue provides .sticky-card)
-            const stickyAncestor = containerRef.value?.closest?.('.sticky-card') as HTMLElement | null
-            const top = (stickyAncestor ? stickyAncestor.getBoundingClientRect().top : (containerRef.value?.getBoundingClientRect().top ?? 9999))
-            // increase tolerance to account for fractional layout shifts on some browsers
-            if (Math.abs(top) <= 8) {
-              console.debug('[HomeContent] pinned to top (top=', top, '); enabling pause — using', stickyAncestor ? 'sticky ancestor' : 'container')
-              enablePauseListeners()
-            } else {
-              console.debug('[HomeContent] intersecting but not pinned (top=', top, ')')
-            }
             // re-enable transitions after a short delay
             window.setTimeout(() => { suppressTransition.value = false }, 50)
           } else {
-            // leaving view: clear any pending pause and remove wheel/touch blockers
-            pauseRemaining.value = 0
-            removePauseListeners()
+            // leaving view: nothing special to do (no JS scroll-pausing)
+            /* intentionally left blank */
           }
         }
       }
@@ -344,8 +299,7 @@ onMounted(() => {
     }, 160)
   }
   window.addEventListener('resize', resizeResync)
-  // also watch scroll as a fallback to know when the sticky element pins to top
-  window.addEventListener('scroll', checkAndEnablePause, { passive: true })
+  // no scroll-pausing behavior attached; keep native scrolling
 })
 
 
@@ -361,23 +315,14 @@ onUnmounted(() => {
   if (io && containerRef.value) io.disconnect()
   if (resyncTimeout) window.clearTimeout(resyncTimeout)
   if (resizeTimeout) window.clearTimeout(resizeTimeout)
-  // ensure any temporary pause listeners are removed
-  removePauseListeners()
-  try { window.removeEventListener('scroll', checkAndEnablePause as any) } catch (err) { }
+  // no JS scroll-pausing to clean up
 })
 </script>
 
 <template>
   <div class="w-full mx-auto bg-stone-950">
     <div class="relative overflow-hidden">
-      <!-- debug badge: shows remaining pause pixels when active -->
-      <div
-        v-if="pauseRemaining > 0"
-        class="pause-badge fixed top-4 right-4 bg-black/70 text-white px-3 py-1 rounded-md text-sm"
-        style="z-index:9999;"
-      >
-        Pause: {{ Math.max(0, Math.round(pauseRemaining)) }}px
-      </div>
+      <!-- debug badge removed: no JS scroll-pausing -->
       <!-- buttons -->
       <button
         @click="prev"
@@ -430,11 +375,7 @@ onUnmounted(() => {
           >
             <div
               class="carousel-inner h-screen flex items-center justify-center text-center relative overflow-hidden"
-              :style="{
-                backgroundImage: `url('https://picsum.photos/seed/${item.id}/1200/800')`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center'
-              }"
+              :style="getSlideStyle(item)"
             >
               <!-- dark overlay sits above the image; becomes lighter on hover -->
               <div class="overlay absolute inset-0 pointer-events-none"></div>
