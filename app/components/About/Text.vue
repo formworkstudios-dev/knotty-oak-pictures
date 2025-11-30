@@ -12,7 +12,7 @@ const { reveal } = useScrollReveal()
     bg-color="bg-amber-50"
     :z-index="30"
   >
-    <div class="flex flex-col md:flex-row min-h-screen snap-y snap-mandatory overflow-y-auto">
+    <div class="flex flex-col md:flex-row min-h-screen snap-y snap-mandatory overflow-y-auto text-section">
       <!-- Left Column - Text -->
       <div
         class="w-full md:w-1/2 flex flex-col justify-center px-6 md:px-16 py-10 md:py-0 h-[50vh] md:h-auto snap-start"
@@ -70,13 +70,20 @@ const { reveal } = useScrollReveal()
       </div>
 
       <!-- Right Column - Fixed Background Image -->
+      <!-- Right Column - Fixed Background Image -->
       <div class="w-full md:w-1/2 h-[50vh] md:h-screen sticky top-0 snap-start">
-        <div
-          class="w-full h-full bg-cover bg-center bg-fixed"
-          style="background-image: url('https://picsum.photos/seed/text/1920/1080')"
-        ></div>
+        <div class="relative h-full w-full overflow-hidden">
+          <img
+            src="/desk.jpg"
+            alt=""
+            class="absolute top-0 left-0 h-full w-auto min-w-full object-cover will-change-transform"
+            style="transform: translateX(-0%);"
+          />
+        </div>
       </div>
+
     </div>
+
 
   </AboutWrapper>
 </template>

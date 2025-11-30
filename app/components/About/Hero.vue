@@ -114,7 +114,7 @@ onUnmounted(() => {
       <!-- Full background image with transparency, matching Text.vue -->
       <div
         class="absolute inset-0 w-full h-full bg-cover bg-center bg-fixed opacity-40 z-0 pointer-events-none"
-        style="background-image: url('/bg.webp')"
+        style="background-image: url('/tom-and-greg-35-years-ago.png')"
       ></div>
 
       <h1
@@ -122,20 +122,19 @@ onUnmounted(() => {
         :style="`background: linear-gradient(45deg, #FFFBEB 0%, #d6ad60 ${gradientCenter}% , #FFFBEB 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; opacity: 0.85;`"
       >
         <template v-if="isMobile">
+
+
+
           <!-- mobile: render three line-based reveals (no per-letter split) -->
-          <span class="block reveal-instant">What began as a shared love for honest, imaginative storytelling grew into
-            Knotty Oak Pictures.</span>
-          <span class="block reveal-instant-delayed-1">Every project we take on is a chance to tell something true —
-            with
-            heart, with beauty,</span>
-          <span class="block reveal-instant-delayed-2">and with purpose. Human
-            experience.</span>
+          <span class="block reveal-instant">Knotty Oak Pictures grew from a forged friendship,</span>
+          <span class="block reveal-instant-delayed-1"> the love for filmmaking,</span>
+          <span class="block reveal-instant-delayed-2">and life over thirty years.</span>
         </template>
         <template v-else>
           <!-- desktop: per-letter randomized entrance (existing behavior) -->
           <span class="block">
             <template
-              v-for="letter in getStaggeredSpans('What began as a shared love for honest, imaginative storytelling grew into Knotty Oak Pictures.', 1)"
+              v-for="letter in getStaggeredSpans('Knotty Oak Pictures grew from a forged friendship,', 1)"
               :key="`l1-${letter.i}`"
             >
               <span
@@ -147,7 +146,7 @@ onUnmounted(() => {
 
           <span class="block">
             <template
-              v-for="letter in getStaggeredSpans('Every project we take on is a chance to tell something true — with heart, with beauty,', 2)"
+              v-for="letter in getStaggeredSpans('the love for filmmaking, and life over 30 years.', 2)"
               :key="`l2-${letter.i}`"
             >
               <span
@@ -157,9 +156,9 @@ onUnmounted(() => {
             </template>
           </span>
 
-          <span class="block">
+          <!-- <span class="block">
             <template
-              v-for="letter in getStaggeredSpans('and with purpose. Human experience.', 3)"
+              v-for="letter in getStaggeredSpans('and life over 30 years.', 3)"
               :key="`l3-${letter.i}`"
             >
               <span
@@ -167,7 +166,7 @@ onUnmounted(() => {
                 :style="{ animationDelay: letter.delay + 420 + 'ms' }"
               >{{ letter.char }}</span>
             </template>
-          </span>
+          </span> -->
         </template>
       </h1>
     </div>

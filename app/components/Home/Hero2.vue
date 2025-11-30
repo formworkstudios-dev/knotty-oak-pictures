@@ -77,9 +77,16 @@ function runSlideCycle() {
   }, 1200) // Duration of fade-in
 }
 
+function ensureAnimationStarts() {
+  if (slideState.value !== 'fading-in' && slideState.value !== 'visible') {
+    slideState.value = 'fading-in';
+    runSlideCycle();
+  }
+}
 
 onMounted(() => {
   runSlideCycle()
+  ensureAnimationStarts();
 })
 
 onUnmounted(() => {
@@ -108,7 +115,7 @@ onUnmounted(() => {
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
-          zIndex: -1
+          zIndex: 0
         }"
       ></div>
     </transition-group>

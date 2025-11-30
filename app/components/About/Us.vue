@@ -40,7 +40,7 @@ const team = [
               <img
                 :src="person.image"
                 :alt="person.name"
-                class="w-full md:w-72 h-[200px] md:h-[400px] mx-0 md:mx-auto object-cover shadow-lg"
+                class="w-full md:w-72 h-[400px] md:h-[400px] mx-0 md:mx-auto object-cover shadow-lg"
               />
             </div>
 

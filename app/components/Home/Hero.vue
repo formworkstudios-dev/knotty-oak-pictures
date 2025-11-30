@@ -11,7 +11,6 @@ const slides = [
       'shared by two people who believe that authenticity',
       'and imagination are at the heart of every great story.'
     ],
-    // bg: 'bg-stone-950',
     img: '/agnes.png'
   },
   {
@@ -20,7 +19,6 @@ const slides = [
       'guiding you through places and possibilities',
       'you have never explored.'
     ],
-    // bg: 'bg-amber-950',
     img: '/battle.png'
   },
   {
@@ -29,7 +27,6 @@ const slides = [
       'ignite thought, and create',
       'lasting cinematic experiences.'
     ],
-    // bg: 'bg-red-950',
     img: '/gold.jpeg'
   }
 ]
@@ -40,9 +37,11 @@ let slideTimeout: number | null = null
 
 function nextSlide() {
   animating.value = true
+  console.log('Current Slide Before:', currentSlide.value) // Debugging reactivity
   setTimeout(() => {
     animating.value = false
     currentSlide.value = (currentSlide.value + 1) % slides.length
+    console.log('Current Slide After:', currentSlide.value) // Debugging reactivity
     slideTimeout = window.setTimeout(nextSlide, 5200)
   }, 600)
 }
@@ -59,9 +58,9 @@ onUnmounted(() => {
 <template>
   <div
     id="home-hero-bg"
-    :class="`min-h-screen flex flex-col items-center justify-center gap-6 w-full transition-colors duration-700 ${slides[currentSlide]?.bg ?? 'bg-stone-950'}`"
+    :class="`min-h-screen flex flex-col items-center justify-center gap-6 w-full transition-colors duration-700`"
     :style="{
-      backgroundImage: `linear-gradient(rgba(30, 30, 30, 0.55), rgba(30, 30, 30, 0.55)), url('${slides[currentSlide]?.img ?? ''}')`,
+      backgroundImage: `url('${slides[currentSlide]?.img}')`,
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundRepeat: 'no-repeat',

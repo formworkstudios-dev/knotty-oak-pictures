@@ -2,67 +2,86 @@
   setup
   lang="ts"
 >
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, computed } from 'vue';
 
-const appConfig = useAppConfig()
-const siteName = appConfig.siteName
-const siteLogo = appConfig.siteLogo
+const appConfig = useAppConfig();
+const siteName = appConfig.siteName;
+const siteLogo = appConfig.siteLogo;
 
-const isMenuOpen = ref(false)
+const isMenuOpen = ref(false);
+const hasScrolled = ref(false);
 
 const toggleMenu = () => {
-  isMenuOpen.value = !isMenuOpen.value
-}
+  isMenuOpen.value = !isMenuOpen.value;
+};
 
 const closeMenu = () => {
-  isMenuOpen.value = false
-}
+  isMenuOpen.value = false;
+};
 
 function isEditableFocused() {
-  const el = document.activeElement as HTMLElement | null
-  if (!el) return false
-  const tag = el.tagName
-  if (tag === 'INPUT' || tag === 'TEXTAREA' || (el as HTMLElement).isContentEditable) return true
-  return false
+  const el = document.activeElement as HTMLElement | null;
+  if (!el) return false;
+  const tag = el.tagName;
+  if (tag === 'INPUT' || tag === 'TEXTAREA' || (el as HTMLElement).isContentEditable) return true;
+  return false;
 }
 
 function keyHandler(e: KeyboardEvent) {
   // Ctrl/Cmd+K or 'm' open the menu (unless typing in an input)
   if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
-    e.preventDefault()
-    toggleMenu()
-    return
+    e.preventDefault();
+    toggleMenu();
+    return;
   }
   if (e.key.toLowerCase() === 'm' && !isEditableFocused()) {
     // toggle the menu on 'm' so pressing it again closes the menu
-    toggleMenu()
-    return
+    toggleMenu();
+    return;
   }
   if (e.key === 'Escape' && isMenuOpen.value) {
-    closeMenu()
-    return
+    closeMenu();
+    return;
   }
 }
 
+const titleColor = computed(() => {
+  if (isMenuOpen.value) {
+    return 'text-white';
+  }
+  return hasScrolled.value ? 'text-white' : 'text-[#FFFBEB]';
+});
+
+const navBackground = computed(() => {
+  return hasScrolled.value ? 'bg-stone-900/80' : 'bg-transparent';
+});
+
+const handleScroll = () => {
+  hasScrolled.value = window.scrollY > window.innerHeight;
+};
+
 onMounted(() => {
-  window.addEventListener('keydown', keyHandler)
-})
+  window.addEventListener('keydown', keyHandler);
+  window.addEventListener('scroll', handleScroll);
+});
 
 onUnmounted(() => {
-  window.removeEventListener('keydown', keyHandler)
-})
+  window.removeEventListener('keydown', keyHandler);
+  window.removeEventListener('scroll', handleScroll);
+});
 </script>
 
 <template>
   <div
-    class="fixed top-0 left-0 right-0 flex justify-center items-center p-2.5 z-[120] transition-colors"
-    :class="{ 'border-b border-stone-700': isMenuOpen, 'border-transparent': !isMenuOpen }"
+    class="fixed top-0 left-0 right-0 flex justify-center items-center p-2.5 z-[120] transition-colors duration-300 bg-stone-950/80"
+    :class="[navBackground, { 'border-b border-stone-700': isMenuOpen, 'border-transparent': !isMenuOpen }]"
   >
     <div class="absolute left-1/2 transform -translate-x-1/2 z-[130]">
       <NuxtLink
+        id="site-logo-link"
         to="/"
         @click="closeMenu"
-        class="text-lg tracking-wide md:text-2xl font-extralight !text-[#FFFBEB]"
+        :class="`text-lg tracking-wide md:text-2xl font-extralight ${titleColor}`"
       >
         {{ siteLogo ? siteLogo : siteName }}
       </NuxtLink>
@@ -73,7 +92,7 @@ onUnmounted(() => {
       class="ml-auto w-8 h-8 md:w-10 md:h-10 rounded-full border-1 border-stone-300 bg-stone-700/10 flex items-center justify-center hover:bg-amber-950/30 transition-colors z-[130] relative cursor-pointer p-1.5 md:p-2"
       aria-label="Menu"
     >
-      <span class="block w-4 h-4 md:w-5 md:h-5 relative">
+      <span class="block md:w-5 md:h-5 w-4 h-4 relative">
         <span :class="[
           'absolute left-0 w-4 h-0.5 md:w-5 md:h-0.5 bg-stone-300 transition-all duration-300',
           isMenuOpen ? 'top-2 md:top-2.5 rotate-45' : 'top-1'
@@ -187,5 +206,13 @@ onUnmounted(() => {
 .slide-enter-to,
 .slide-leave-from {
   transform: translateX(0);
+}
+
+.bg-transparent {
+  background-color: transparent;
+}
+
+.bg-stone-900 {
+  background-color: #1c1917;
 }
 </style>
