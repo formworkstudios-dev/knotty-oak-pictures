@@ -56,25 +56,25 @@ let cycleTimeout: number | null = null
 
 function runSlideCycle() {
   // 1. Start by fading in
-  slideState.value = 'fading-in'
+  slideState.value = 'fading-in';
 
-  // 2. After fade-in animation (1.2s), set to 'visible' and wait
+  // 2. After fade-in animation (0.8s), set to 'visible' and wait
   cycleTimeout = window.setTimeout(() => {
-    slideState.value = 'visible'
+    slideState.value = 'visible';
 
-    // 3. After wait period (5.2s), set to 'fading-out'
+    // 3. After wait period (3.6s), set to 'fading-out'
     cycleTimeout = window.setTimeout(() => {
-      slideState.value = 'fading-out'
+      slideState.value = 'fading-out';
 
-      // 4. After fade-out animation (1.2s), change slide and restart cycle
+      // 4. After fade-out animation (0.8s), change slide and restart cycle
       cycleTimeout = window.setTimeout(() => {
-        currentSlide.value = (currentSlide.value + 1) % slides.length
-        runSlideCycle() // Loop
-      }, 1200) // Duration of fade-out
+        currentSlide.value = (currentSlide.value + 1) % slides.length;
+        runSlideCycle(); // Loop
+      }, 800); // Duration of fade-out
 
-    }, 4200) // Wait duration
+    }, 3600); // Wait duration
 
-  }, 1200) // Duration of fade-in
+  }, 800); // Duration of fade-in
 }
 
 function ensureAnimationStarts() {
