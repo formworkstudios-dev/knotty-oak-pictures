@@ -72,7 +72,7 @@ function runSlideCycle() {
         runSlideCycle() // Loop
       }, 1200) // Duration of fade-out
 
-    }, 5200) // Wait duration
+    }, 4200) // Wait duration
 
   }, 1200) // Duration of fade-in
 }
