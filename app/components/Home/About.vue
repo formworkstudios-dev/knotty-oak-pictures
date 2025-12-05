@@ -43,7 +43,7 @@ onUnmounted(() => {
     class="h-screen flex items-center justify-center bg-stone-950 relative z-20 shadow-2xl flex-col gap-10 fade-in-section px-4"
     :class="{ 'is-visible': isVisible }"
   >
-  <div class="w-full max-w-3xl pt-20 overflow-hidden h-[54vh] md:h-auto">
+    <div class="w-full max-w-3xl pt-20 overflow-hidden h-[54vh] md:h-auto">
       <Nuxt-Img
         src="/tom-and-greg-35-years-ago-2.png"
         alt="Tom and Greg 35 years ago"
