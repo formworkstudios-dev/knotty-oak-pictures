@@ -353,7 +353,7 @@ onUnmounted(() => {
       <!-- viewport -->
 
       <div
-        class="w-full overflow-hidden"
+        class="w-full overflow-hidden swipe-viewport select-none"
         ref="containerRef"
         @pointerdown="onPointerDown"
         @pointermove="onPointerMove"
@@ -411,6 +411,14 @@ onUnmounted(() => {
 <style scoped>
 .flex[style] {
   will-change: transform;
+}
+
+/* Ensure horizontal swipe gestures work on mobile while preserving vertical scroll */
+.swipe-viewport {
+  touch-action: pan-y;
+  overscroll-behavior-x: contain;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 /* carousel sizing and hover expand */
