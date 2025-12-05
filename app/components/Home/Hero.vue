@@ -125,7 +125,7 @@ onUnmounted(() => {
   pointer-events: none;
   z-index: 1;
   opacity: 0.18;
-  background-image: url('https://www.transparenttextures.com/patterns/noise.png');
+  background-image: url('/noise.svg');
   background-repeat: repeat;
 }
 

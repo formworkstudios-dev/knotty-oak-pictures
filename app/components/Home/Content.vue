@@ -328,7 +328,7 @@ onUnmounted(() => {
         @click="prev"
         :disabled="currentIndex === 0"
         aria-label="Previous"
-        class="absolute left-3 top-1/2 -translate-y-1/2 z-50 bg-stone-900/70 hover:bg-stone-900/80 text-white disabled:opacity-40 shadow-lg nav-circle cursor-pointer disabled:cursor-not-allowed border w-8 h-8 md:w-10 md:h-10 p-1.5 md:p-2 rounded-full"
+        class="absolute left-3 top-1/2 -translate-y-1/2 z-50 bg-stone-900/70 hover:bg-stone-900/80 text-white disabled:opacity-40 shadow-lg nav-circle cursor-pointer disabled:cursor-not-allowed border w-12 h-12 md:w-10 md:h-10 p-2.5 md:p-2 rounded-full"
       >
         <UIcon
           name="i-mdi-chevron-left"
@@ -341,7 +341,7 @@ onUnmounted(() => {
         @click="next"
         :disabled="currentIndex === maxIndex"
         aria-label="Next"
-        class="absolute right-3 top-1/2 -translate-y-1/2 z-50 bg-stone-900/70 hover:bg-stone-900/80 text-white disabled:opacity-40 shadow-lg nav-circle cursor-pointer disabled:cursor-not-allowed border w-8 h-8 md:w-10 md:h-10 p-1.5 md:p-2 rounded-full"
+        class="absolute right-3 top-1/2 -translate-y-1/2 z-50 bg-stone-900/70 hover:bg-stone-900/80 text-white disabled:opacity-40 shadow-lg nav-circle cursor-pointer disabled:cursor-not-allowed border w-12 h-12 md:w-10 md:h-10 p-2.5 md:p-2 rounded-full"
       >
         <UIcon
           name="i-mdi-chevron-right"
@@ -480,14 +480,14 @@ onUnmounted(() => {
 }
 
 .uiicon svg {
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
 }
 
 @media (min-width: 768px) {
   .uiicon svg {
-    width: 24px;
-    height: 24px;
+    width: 28px;
+    height: 28px;
   }
 }
 

@@ -104,7 +104,7 @@ onUnmounted(() => {
   >
     <div
       id="about-hero-bg"
-      class="relative flex items-start justify-start min-h-screen px-4 py-4 md:pb-10 md:pl-10"
+      class="relative flex items-start justify-start min-h-screen px-4 py-4 md:pb-10 md:pl-10 overflow-x-hidden w-full"
     >
       <!-- fade-to-black overlay controlled by scroll -->
       <div
@@ -118,8 +118,8 @@ onUnmounted(() => {
       ></div>
 
       <h1
-        class="text-6xl text-left self-end relative z-10 cursor-default"
-        :style="`background: linear-gradient(45deg, #FFFBEB 0%, #d6ad60 ${gradientCenter}% , #FFFBEB 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; opacity: 0.85;`"
+        class="text-6xl text-left self-end relative z-10 cursor-default about-hero-title"
+        :style="`--gc: ${gradientCenter}%; opacity: 0.85;`"
       >
         <template v-if="isMobile">
 
@@ -206,12 +206,31 @@ onUnmounted(() => {
   will-change: opacity;
 }
 
-/* per-letter entrance (copied/adapted from Home/Hero2) */
+/* mobile reveal lines: render gradient-clipped text on the span (not the parent) */
+.reveal-instant,
+.reveal-instant-delayed-1,
+.reveal-instant-delayed-2 {
+  background: linear-gradient(45deg, #FFFBEB 0%, #d6ad60 var(--gc), #FFFBEB 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  /* fallback color for browsers without text-fill */
+  color: #fff;
+  -webkit-text-fill-color: transparent;
+}
+
+/* per-letter entrance */
 .hero-letter {
   display: inline-block;
   transform: none;
   opacity: 0;
   filter: blur(8px);
+  /* gradient on each letter to satisfy Chrome */
+  background: linear-gradient(45deg, #FFFBEB 0%, #d6ad60 var(--gc), #FFFBEB 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  /* fallback and Chrome gradient text */
+  color: #fff;
+  -webkit-text-fill-color: transparent;
 }
 
 .hero-letter-in {
@@ -228,5 +247,14 @@ onUnmounted(() => {
     opacity: 1;
     filter: blur(0);
   }
+}
+
+/* Constrain title width and wrap to avoid horizontal overflow */
+.about-hero-title {
+  max-width: 48ch;
+  width: min(92vw, 48ch);
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
 }
 </style>

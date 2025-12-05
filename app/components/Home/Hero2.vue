@@ -12,12 +12,12 @@ defineProps({
 })
 
 function getStaggeredSpans(text: string) {
-  const delays = [200, 250, 300, 350, 400, 450, 500, 600]
+  const delays = [200, 250, 300, 350, 400, 450, 500, 600];
   return text.split('').map((char, i) => ({
     char: char === ' ' ? '\u00A0' : char,
-    delay: delays[Math.floor(Math.random() * delays.length)],
+    delay: delays[i % delays.length], // Deterministic delay
     i
-  }))
+  }));
 }
 
 const slides = [
@@ -160,11 +160,17 @@ onUnmounted(() => {
       </div>
     </div>
 
-    <!-- Mobile -->
-    <HomeMobileHero
-      :lines="slides[currentSlide]?.lines ?? []"
-      :text-opacity="textOpacity"
-    />
+    <!-- Mobile: render only on small screens and keep above overlays -->
+    <div
+      class="md:hidden absolute left-4 bottom-4 z-10"
+      :style="{ opacity: textOpacity }"
+    >
+      <HomeMobileHero
+        :lines="slides[currentSlide]?.lines ?? []"
+        :text-opacity="textOpacity"
+        :slide-state="slideState"
+      />
+    </div>
   </div>
 </template>
 
@@ -218,9 +224,9 @@ onUnmounted(() => {
   height: 100vh;
   z-index: 3;
   opacity: 0.22;
-  background-image: url('https://www.transparenttextures.com/patterns/noise.png'), url('https://assets.codepen.io/1468070/noise.svg');
-  background-repeat: repeat, repeat;
-  background-size: auto, cover;
+  background-image: url('/noise.svg');
+  background-repeat: repeat;
+  background-size: cover;
   mix-blend-mode: overlay;
   filter: contrast(1.12) saturate(0.95) brightness(0.95);
   pointer-events: none;
@@ -234,6 +240,9 @@ onUnmounted(() => {
   opacity: 0;
   filter: blur(8px);
   will-change: opacity, filter;
+  /* Chrome fallback to avoid transparent text when parent uses -webkit-text-fill-color: transparent */
+  color: #fff;
+  -webkit-text-fill-color: initial;
 }
 
 .hero-letter.is-visible {
