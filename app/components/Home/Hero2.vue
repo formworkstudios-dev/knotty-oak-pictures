@@ -159,7 +159,7 @@ onUnmounted(() => {
 
     <!-- Mobile: render only on small screens and keep above overlays -->
     <div
-      class="md:hidden absolute left-4 bottom-4 z-10 pb-10"
+      class="md:hidden absolute left-4 bottom-4 z-10 !pb-20"
       :style="{ opacity: textOpacity }"
     >
       <HomeMobileHero

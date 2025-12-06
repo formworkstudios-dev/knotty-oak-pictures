@@ -23,8 +23,9 @@ const bgImages = [
 const bgCurrent = ref(0)
 const bgNext = ref(1)
 const bgFrontIsA = ref(true)
-const bgFadeMs = 1000
-const bgIntervalMs = 5000
+// Slightly longer fade and interval to improve perceived smoothness
+const bgFadeMs = 1400
+const bgIntervalMs = 5200
 let bgTimer: number | null = null
 const isBgFading = ref(false)
 
@@ -174,23 +175,25 @@ onUnmounted(() => {
       ></div>
       <!-- Full background image with transparency, matching Text.vue -->
       <!-- Crossfading background images -->
-      <div class="absolute inset-0 w-full h-full z-0 pointer-events-none opacity-40">
+      <div class="absolute inset-0 w-full h-full z-0 pointer-events-none opacity-40 will-change-opacity">
         <!-- Layer A -->
         <div
-          class="absolute inset-0 w-full h-full bg-cover bg-center bg-fixed bg-layer"
+          class="absolute inset-0 w-full h-full bg-cover bg-center bg-layer"
           :style="{
             backgroundImage: `url('${bgImages[bgCurrent]}')`,
             opacity: bgFrontIsA ? 1 : 0,
-            transition: `opacity ${bgFadeMs}ms ease`
+            transition: `opacity ${bgFadeMs}ms ease-in-out`,
+            transitionDelay: bgFrontIsA ? '0ms' : '80ms'
           }"
         ></div>
         <!-- Layer B -->
         <div
-          class="absolute inset-0 w-full h-full bg-cover bg-center bg-fixed bg-layer"
+          class="absolute inset-0 w-full h-full bg-cover bg-center bg-layer"
           :style="{
             backgroundImage: `url('${bgImages[bgNext]}')`,
             opacity: bgFrontIsA ? 0 : 1,
-            transition: `opacity ${bgFadeMs}ms ease`
+            transition: `opacity ${bgFadeMs}ms ease-in-out`,
+            transitionDelay: bgFrontIsA ? '80ms' : '0ms'
           }"
         ></div>
       </div>
