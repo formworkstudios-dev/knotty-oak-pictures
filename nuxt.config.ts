@@ -3,6 +3,7 @@ export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
   css: ["@/assets/css/main.css"],
+
   modules: [
     "@nuxt/content",
     "@nuxt/eslint",
@@ -20,5 +21,8 @@ export default defineNuxtConfig({
   },
   app: {
     pageTransition: { name: "page", mode: "out-in" },
+    head: {
+      link: [{ rel: "icon", href: "/favicon.ico?v=2" }],
+    },
   },
 });

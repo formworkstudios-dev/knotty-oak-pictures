@@ -54,7 +54,7 @@ const items = [
     id: 7,
     title: 'Paesani',
     year: '',
-    image: '',
+    image: '/italian.png',
     desc: 'An intimate portrait of Italian-American roots, traditions, and the ties that bind families across generations.'
   },
 

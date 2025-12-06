@@ -40,20 +40,34 @@ function startBgCrossfade() {
   if (bgTimer) return
   // Preload all images to avoid flicker at loop boundaries
   preloadBgImages(bgImages)
-  bgTimer = window.setInterval(() => {
-    if (isBgFading.value) return
+
+  const cycle = () => {
+    if (isBgFading.value) {
+      // In rare cases, ensure we schedule next cycle anyway
+      bgTimer = window.setTimeout(cycle, bgIntervalMs)
+      return
+    }
     isBgFading.value = true
-    // compute next index and ensure hidden layer has the correct next image before toggling
-    bgNext.value = (bgCurrent.value + 1) % bgImages.length
-    // toggle front layer to trigger CSS opacity transition
+
+    // Prepare next index and ensure the back layer shows the upcoming image BEFORE toggling
+    const nextIdx = (bgCurrent.value + 1) % bgImages.length
+    bgNext.value = nextIdx
+
+    // Trigger crossfade by flipping which layer is front
     bgFrontIsA.value = !bgFrontIsA.value
+
+    // After fade completes, commit current index and prime the following next image
     window.setTimeout(() => {
-      bgCurrent.value = bgNext.value
-      // prime the following next index to reduce chances of empty frame at wrap
+      bgCurrent.value = nextIdx
       bgNext.value = (bgCurrent.value + 1) % bgImages.length
       isBgFading.value = false
+      // Schedule next cycle using setTimeout to avoid setInterval drift/glitch at wrap
+      bgTimer = window.setTimeout(cycle, bgIntervalMs)
     }, bgFadeMs)
-  }, bgIntervalMs)
+  }
+
+  // Kick off first cycle using timeout to align timing precisely
+  bgTimer = window.setTimeout(cycle, bgIntervalMs)
 }
 
 // per-letter entrance animation (like Home/Hero2)
@@ -138,7 +152,7 @@ onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll)
   try { window.removeEventListener('resize', updateIsMobile) } catch (e) { }
   if (bgTimer) {
-    clearInterval(bgTimer)
+    clearTimeout(bgTimer)
     bgTimer = null
   }
 })
