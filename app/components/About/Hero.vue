@@ -14,6 +14,47 @@ let ambientDirection = 1
 
 // overlay opacity controlled by scroll (fade-to-black)
 const heroOverlayOpacity = ref(0)
+// Crossfade background images among three assets
+const bgImages = [
+  '/tom-and-greg-35-years-ago.png',
+  '/tom-and-greg-35-years-ago-2.png',
+  '/tom-and-greg-35-years-ago-3.png'
+]
+const bgCurrent = ref(0)
+const bgNext = ref(1)
+const bgFrontIsA = ref(true)
+const bgFadeMs = 1000
+const bgIntervalMs = 5000
+let bgTimer: number | null = null
+const isBgFading = ref(false)
+
+function preloadBgImages(urls: string[]) {
+  if (typeof window === 'undefined') return
+  urls.forEach((u) => {
+    const img = new Image()
+    img.src = u
+  })
+}
+
+function startBgCrossfade() {
+  if (bgTimer) return
+  // Preload all images to avoid flicker at loop boundaries
+  preloadBgImages(bgImages)
+  bgTimer = window.setInterval(() => {
+    if (isBgFading.value) return
+    isBgFading.value = true
+    // compute next index and ensure hidden layer has the correct next image before toggling
+    bgNext.value = (bgCurrent.value + 1) % bgImages.length
+    // toggle front layer to trigger CSS opacity transition
+    bgFrontIsA.value = !bgFrontIsA.value
+    window.setTimeout(() => {
+      bgCurrent.value = bgNext.value
+      // prime the following next index to reduce chances of empty frame at wrap
+      bgNext.value = (bgCurrent.value + 1) % bgImages.length
+      isBgFading.value = false
+    }, bgFadeMs)
+  }, bgIntervalMs)
+}
 
 // per-letter entrance animation (like Home/Hero2)
 function getStaggeredSpans(text: string, seed = 0) {
@@ -87,6 +128,8 @@ onMounted(() => {
   // set mobile state and listen for resize to toggle rendering mode
   updateIsMobile()
   window.addEventListener('resize', updateIsMobile)
+  // start background crossfade cycle
+  startBgCrossfade()
 })
 
 onUnmounted(() => {
@@ -94,6 +137,10 @@ onUnmounted(() => {
   if (animationFrame) cancelAnimationFrame(animationFrame)
   window.removeEventListener('scroll', handleScroll)
   try { window.removeEventListener('resize', updateIsMobile) } catch (e) { }
+  if (bgTimer) {
+    clearInterval(bgTimer)
+    bgTimer = null
+  }
 })
 </script>
 
@@ -112,13 +159,30 @@ onUnmounted(() => {
         :style="{ opacity: heroOverlayOpacity }"
       ></div>
       <!-- Full background image with transparency, matching Text.vue -->
-      <div
-        class="absolute inset-0 w-full h-full bg-cover bg-center bg-fixed opacity-40 z-0 pointer-events-none"
-        style="background-image: url('/tom-and-greg-35-years-ago.png')"
-      ></div>
+      <!-- Crossfading background images -->
+      <div class="absolute inset-0 w-full h-full z-0 pointer-events-none opacity-40">
+        <!-- Layer A -->
+        <div
+          class="absolute inset-0 w-full h-full bg-cover bg-center bg-fixed bg-layer"
+          :style="{
+            backgroundImage: `url('${bgImages[bgCurrent]}')`,
+            opacity: bgFrontIsA ? 1 : 0,
+            transition: `opacity ${bgFadeMs}ms ease`
+          }"
+        ></div>
+        <!-- Layer B -->
+        <div
+          class="absolute inset-0 w-full h-full bg-cover bg-center bg-fixed bg-layer"
+          :style="{
+            backgroundImage: `url('${bgImages[bgNext]}')`,
+            opacity: bgFrontIsA ? 0 : 1,
+            transition: `opacity ${bgFadeMs}ms ease`
+          }"
+        ></div>
+      </div>
 
       <h1
-        class="text-6xl text-left self-end relative z-10 cursor-default about-hero-title"
+        class="!text-6xl text-left self-end relative z-10 cursor-default about-hero-title leading-normal"
         :style="`--gc: ${gradientCenter}%; opacity: 0.85;`"
       >
         <template v-if="isMobile">
@@ -174,6 +238,12 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
+.bg-layer {
+  will-change: opacity;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
 .reveal-instant {
   animation: fadeUpIn 1s ease-out forwards;
   opacity: 0;

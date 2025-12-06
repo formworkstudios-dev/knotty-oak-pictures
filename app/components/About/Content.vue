@@ -18,6 +18,7 @@ const currentImageIndex = ref(0)
 
 // Auto-transition every 3 seconds
 let interval: ReturnType<typeof setInterval>
+let io: IntersectionObserver | null = null
 
 // two-finger swipe state (for horizontal navigation)
 const twoFingerActive = ref(false)
@@ -99,10 +100,34 @@ onMounted(() => {
   interval = setInterval(() => {
     currentImageIndex.value = (currentImageIndex.value + 1) % images.length
   }, 5000)
+
+  // IntersectionObserver: activate reveal animations when elements enter viewport
+  if ('IntersectionObserver' in window) {
+    const targets = Array.from(document.querySelectorAll('.reveal')) as HTMLElement[]
+    io = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        const el = entry.target as HTMLElement
+        if (entry.isIntersecting) {
+          el.classList.add('active')
+          // If we only need to reveal once, unobserve
+          io?.unobserve(el)
+        }
+      }
+    }, {
+      root: null,
+      threshold: 0.15,
+      rootMargin: '0px 0px -10% 0px'
+    })
+    targets.forEach(t => io?.observe(t))
+  }
 })
 
 onUnmounted(() => {
   if (interval) clearInterval(interval)
+  if (io) {
+    io.disconnect()
+    io = null
+  }
 })
 </script>
 
@@ -130,10 +155,20 @@ onUnmounted(() => {
         ></div>
       </TransitionGroup>
 
+      <!-- Dark overlay above background images to improve text contrast -->
+      <div
+        class="absolute inset-0 z-5 pointer-events-none"
+        style="background: rgba(0, 0, 0, 0.45);"
+      ></div>
+
       <!-- Content Overlay -->
       <div class="relative z-10 flex items-center justify-center min-h-screen snap-start">
-        <h1 class="text-6xl font-bold text-white intersect">
-          Our Lens
+        <h1
+          class="text-4xl md:text-6xl font-bold text-white text-center leading-tight px-4 reveal reveal-fade reveal-slow"
+        >
+          <span class="block font-bold pb-2">Our Lens is focused on a single purpose:</span>
+          <span class="block">Channeling original thought from our hearts,</span>
+          <span class="block">giving the audience a sense of place<br /> within a shared human experience.</span>
         </h1>
       </div>
     </div>

@@ -23,30 +23,27 @@ function getStaggeredSpans(text: string) {
 const slides = [
   {
     lines: [
-      'Knotty Oak Pictures began as a dream',
-      'shared by two people who believe that authenticity',
-      'and imagination are at the heart of every great story.'
+      'Knotty Oak grew from two creative',
+      'minds chasing the same vision',
     ],
     bg: 'bg-stone-950',
-    img: '/agnes.png'
+    img: '/jail.png'
   },
   {
     lines: [
-      'Every great story is a journey – they move you,',
-      'guiding you through places and possibilities',
-      'you have never explored.'
+      'Create cinema that inspires reflection',
+      ' and remind us what it means to be human.'
     ],
     bg: 'bg-amber-950',
-    img: '/battle.png'
+    img: '/ship.jpg'
   },
   {
     lines: [
-      'Knotty Oak crafts stories to stir the heart,',
-      'ignite thought, and create',
-      'lasting cinematic experiences.'
+      'Rooted by the belief that',
+      'authenticity is our original thought.'
     ],
     bg: 'bg-red-950',
-    img: '/gold.jpeg'
+    img: '/peg.png'
   }
 ]
 

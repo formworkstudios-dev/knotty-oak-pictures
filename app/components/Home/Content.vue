@@ -7,50 +7,66 @@ import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue'
 const items = [
   // previously last two items moved to the front
   {
-    id: 8,
-    title: 'The Healing Hero',
-    year: '',
-    image: '/healing.png',
-    desc: 'Docudrama that reenacts Medal of Honor recipient Gino Merli’s amazing story of one night during World War II when he killed 51 German soldiers.'
-  },
-  {
-    id: 9,
-    title: 'An Empty Place At The Table',
-    year: '',
-    image: '/table2.png',
-    desc: 'Susan Sarandon narrates this New York Film and Video Festival winner for Best Social Documentary about an art exhibit that memorializes women and children murdered in acts of domestic violence. Nationally distributed. 28 minutes.'
-  },
-  // remaining items
-  {
-    id: 3,
-    title: 'Hearth & Harvest',
-    year: '',
-    image: '/harvest.png',
-    desc: 'Feature-length visual tone poem that blends the story of agricultural heritage with contemporary issues that challenge farmers. Broadcast throughout Pennsylvania on the Pennsylvania Public Television network. 86 minutes.'
-  },
-  {
-    id: 4,
-    title: 'Remembering The Sirens',
-    year: '',
-    image: '/siren.png',
-    desc: 'Emmy Award winning and nationally distributed film narrated by Leon Redbone that explores the early history of Jazz legends Tommy and Jimmy Dorsey and how their musical vision catalyzed Jazz from its improvisational roots into the Big Band sound. 57 minutes.'
-  },
-  {
-    id: 5,
-    title: 'Frank Schoonover: The Authentic Artist',
-    year: '',
-    image: '/horse2.png',
-    desc: 'A Cine Golden Eagle winner that recounts the creative adventures of the master American illustrator. Shot in the wilderness environs of northern Quebec Province and Wyoming’s Bighorn Mountains. 57 minutes.'
-  },
-  {
-    id: 6,
+    id: 1,
     title: 'Stories From The Mines',
     year: 2001,
     image: '/mines.png',
     desc: 'Nationally distributed, 2001 feature-length Emmy-nominated dramatized documentary narrated by Academy Award winner Jason Miller that presents the epic struggle between early 20th century immigrant coal miners and American industrialists. 143 minutes.'
   },
   {
+    id: 2,
+    title: 'An Empty Place At The Table',
+    year: '',
+    image: '/table2.png',
+    desc: 'Susan Sarandon narrates this New York Film and Video Festival winner for Best Social Documentary about an art exhibit that memorializes women and children murdered in acts of domestic violence. Nationally distributed. 28 minutes.'
+  },
+  {
+    id: 3,
+    title: 'Looking to the River',
+    year: '',
+    image: '',
+    desc: 'Description'
+  },
+  {
+    id: 4,
+    title: 'Ubaldo',
+    year: '',
+    image: '/ubaldo.webp',
+    desc: 'Shot on location in Italy. A cinematic rendition of the nearly millennium-old epic Italian cultural festival “La Festa Dei Ceri”, and its recreation in a small town in the United States. Nationally distributed. 57 minutes.'
+  },
+  {
+    id: 5,
+    title: 'The Healing Hero',
+    year: '',
+    image: '/healing.png',
+    desc: 'Docudrama that reenacts Medal of Honor recipient Gino Merli’s amazing story of one night during World War II when he killed 51 German soldiers.'
+  },
+
+  // remaining items
+  {
+    id: 6,
+    title: 'Hearth & Harvest',
+    year: '',
+    image: '/harvest.png',
+    desc: 'Feature-length visual tone poem that blends the story of agricultural heritage with contemporary issues that challenge farmers. Broadcast throughout Pennsylvania on the Pennsylvania Public Television network. 86 minutes.'
+  },
+  {
     id: 7,
+    title: 'Paesani',
+    year: '',
+    image: '',
+    desc: 'An intimate portrait of Italian-American roots, traditions, and the ties that bind families across generations.'
+  },
+
+  {
+    id: 8,
+    title: 'Chocolate Dreams',
+    year: '',
+    image: '',
+    desc: 'Description'
+  },
+  {
+    id: 9,
     title: 'Spirit & Speed',
     year: '',
     image: '/horse.png',
@@ -58,21 +74,30 @@ const items = [
   },
   // move Little League & Ubaldo to the end and remove images (black bg)
   {
-    id: 1,
+    id: 10,
     title: 'Little League: A History',
     year: '',
     image: '',
     desc: 'Nationally distributed and presented on ESPN during the Little League World Series broadcast. Narrated by Vin Scully, this documentary is the authorized cinematic biography of one of America’s iconic institutions. Shot on location in Japan. 57 minutes.'
   },
   {
-    id: 2,
-    title: 'Ubaldo',
+    id: 11,
+    title: 'Frank Schoonover: The Authentic Artist',
     year: '',
-    image: '',
-    desc: 'Shot on location in Italy. A cinematic rendition of the nearly millennium-old epic Italian cultural festival “La Festa Dei Ceri”, and its recreation in a small town in the United States. Nationally distributed. 57 minutes.'
-  }
+    image: '/horse2.png',
+    desc: 'A Cine Golden Eagle winner that recounts the creative adventures of the master American illustrator. Shot in the wilderness environs of northern Quebec Province and Wyoming’s Bighorn Mountains. 57 minutes.'
+  },
+  {
+    id: 12,
+    title: 'Remembering The Sirens',
+    year: '',
+    image: '/siren.png',
+    desc: 'Emmy Award winning and nationally distributed film narrated by Leon Redbone that explores the early history of Jazz legends Tommy and Jimmy Dorsey and how their musical vision catalyzed Jazz from its improvisational roots into the Big Band sound. 57 minutes.'
+  },
+
+
+
 ]
-const colors = ['#FEF3C7', '#FEE2E2', '#E9D5FF', '#DBEAFE', '#E6FFFA', '#FEF0C7', '#FFF7ED', '#F8FAFC']
 
 function splitTitle(title: string) {
   const idx = title.indexOf(':')

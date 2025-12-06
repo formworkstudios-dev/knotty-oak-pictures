@@ -60,22 +60,22 @@ const { reveal } = useScrollReveal()
         <div class="flex flex-col">
           <h2
             :ref="reveal"
-            class="text-2xl md:text-4xl reveal block !m-0 !pb-0 text-stone-900"
+            class="!text-3xl md:text-4xl reveal block !m-0 !pb-0 text-stone-900"
           >
-            We blend art and honesty to create films
+            Every story we product is a chance to tell something true
           </h2>
           <h2
             :ref="reveal"
-            class="text-2xl md:text-4xl reveal reveal-delay-200 block !m-0 !pb-0 text-stone-900"
+            class="!text-3xl md:text-4xl reveal reveal-delay-200 block !m-0 !pb-0 text-stone-900"
           >
-            that inspire reflection and remind us
+            —with heart, with purpose through the human experience.
           </h2>
-          <h2
+          <!-- <h2
             :ref="reveal"
             class="text-2xl md:text-4xl reveal reveal-delay-400 block !m-0 !pb-0 text-stone-900"
           >
             what it means to be human.
-          </h2>
+          </h2> -->
         </div>
       </div>
     </div>

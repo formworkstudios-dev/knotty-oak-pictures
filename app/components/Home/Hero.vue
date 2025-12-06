@@ -19,7 +19,7 @@ const slides = [
       'guiding you through places and possibilities',
       'you have never explored.'
     ],
-    img: '/battle.png'
+    img: '/ship.jpg'
   },
   {
     lines: [
