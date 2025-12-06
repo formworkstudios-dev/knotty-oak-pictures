@@ -43,7 +43,7 @@ const slides = [
       'authenticity is our original thought.'
     ],
     bg: 'bg-red-950',
-    img: '/peg.png'
+    img: '/empty-place.png'
   }
 ]
 
@@ -55,23 +55,23 @@ function runSlideCycle() {
   // 1. Start by fading in
   slideState.value = 'fading-in';
 
-  // 2. After fade-in animation (0.8s), set to 'visible' and wait
+  // 2. After fade-in animation (1.2s), set to 'visible' and wait
   cycleTimeout = window.setTimeout(() => {
     slideState.value = 'visible';
 
-    // 3. After wait period (3.6s), set to 'fading-out'
+    // 3. After wait period (4.8s), set to 'fading-out'
     cycleTimeout = window.setTimeout(() => {
       slideState.value = 'fading-out';
 
-      // 4. After fade-out animation (0.8s), change slide and restart cycle
+      // 4. After fade-out animation (1.2s), change slide and restart cycle
       cycleTimeout = window.setTimeout(() => {
         currentSlide.value = (currentSlide.value + 1) % slides.length;
         runSlideCycle(); // Loop
-      }, 800); // Duration of fade-out
+      }, 1200); // Duration of fade-out
 
-    }, 3600); // Wait duration
+    }, 4800); // Wait duration
 
-  }, 800); // Duration of fade-in
+  }, 1200); // Duration of fade-in
 }
 
 function ensureAnimationStarts() {
@@ -175,7 +175,7 @@ onUnmounted(() => {
 /* Background fade */
 .bg-fade-enter-active,
 .bg-fade-leave-active {
-  transition: opacity 0.8s cubic-bezier(.77, .2, .32, 1);
+  transition: opacity 1.2s cubic-bezier(.77, .2, .32, 1);
 }
 
 .bg-fade-enter-from,
@@ -214,20 +214,7 @@ onUnmounted(() => {
   pointer-events: none;
 }
 
-.hero-noise-overlay {
-  position: absolute;
-  inset: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 3;
-  opacity: 0.22;
-  background-image: url('/noise.svg');
-  background-repeat: repeat;
-  background-size: cover;
-  mix-blend-mode: overlay;
-  filter: contrast(1.12) saturate(0.95) brightness(0.95);
-  pointer-events: none;
-}
+/* noise overlay removed */
 
 /* Letter animations */
 .hero-letter {

@@ -6,12 +6,11 @@ import { ref, onMounted, onUnmounted } from 'vue'
 
 const ContentText = ref("Our Work")
 
-// Array of image URLs
+// Array of image URLs (local project images)
 const images = [
-  'https://picsum.photos/seed/1/1920/1080',
-  'https://picsum.photos/seed/2/1920/1080',
-  'https://picsum.photos/seed/3/1920/1080',
-  'https://picsum.photos/seed/4/1920/1080'
+  '/empty-place-protest.png',
+  '/mines4.png',
+  '/shooting.png'
 ]
 
 const currentImageIndex = ref(0)
@@ -158,7 +157,7 @@ onUnmounted(() => {
       <!-- Dark overlay above background images to improve text contrast -->
       <div
         class="absolute inset-0 z-5 pointer-events-none"
-        style="background: rgba(0, 0, 0, 0.45);"
+        style="background: rgba(0, 0, 0, 0.55);"
       ></div>
 
       <!-- Content Overlay -->

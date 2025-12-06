@@ -17,7 +17,7 @@ const items = [
     id: 2,
     title: 'An Empty Place At The Table',
     year: '',
-    image: '/table2.png',
+    image: '/peg.png',
     desc: 'Susan Sarandon narrates this New York Film and Video Festival winner for Best Social Documentary about an art exhibit that memorializes women and children murdered in acts of domestic violence. Nationally distributed. 28 minutes.'
   },
   {
@@ -420,7 +420,6 @@ onUnmounted(() => {
                     {{ item.title }}
                   </template>
                 </div>
-                <div class="text-sm md:text-base text-white/80 mt-1">{{ item.year }}</div>
                 <div class="desc mt-4 text-base md:text-md text-white/90 mx-auto px-4">
                   {{ item.desc }}
                 </div>

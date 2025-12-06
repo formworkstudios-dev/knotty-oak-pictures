@@ -341,4 +341,15 @@ onUnmounted(() => {
   word-break: break-word;
   hyphens: auto;
 }
+
+/* Mobile: make the line-based hero text smaller */
+@media (max-width: 640px) {
+
+  .about-hero-title .reveal-instant,
+  .about-hero-title .reveal-instant-delayed-1,
+  .about-hero-title .reveal-instant-delayed-2 {
+    font-size: 0.95rem !important;
+    line-height: 1.25rem !important;
+  }
+}
 </style>
