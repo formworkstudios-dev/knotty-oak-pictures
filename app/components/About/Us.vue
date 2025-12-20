@@ -29,37 +29,48 @@ const team = [
           Our Story
         </h1>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-3xl mx-auto">
-          <div
-            v-for="(person, index) in team"
-            :key="person.name"
-            class="text-left md:text-center"
-          >
-            <!-- Photo -->
+        <div class="flex flex-col md:flex-row gap-10 max-w-3xl mx-auto">
+          <!-- Tom Currà: default alignment -->
+          <div class="flex-1 flex flex-col items-center md:items-center">
             <div class="mb-4 flex-shrink-0">
               <img
-                :src="person.image"
-                :alt="person.name"
+                src="/tom.webp"
+                alt="Tom Currà"
                 class="w-full md:w-72 h-[400px] md:h-[400px] mx-0 md:mx-auto object-cover shadow-lg"
               />
             </div>
-
-            <!-- Name & Text -->
             <div
-              class="mx-0 md:mx-auto flex-1 flex flex-col justify-start pt-1 md:pt-0"
+              class="mx-0 md:mx-auto flex-1 flex flex-col justify-start pt-1 md:pt-0 text-center"
               style="max-width: 288px;"
             >
-              <h2 class="text-3xl font-bold !mb-1">
-                {{ person.name }}
-              </h2>
-              <!-- Role -->
-              <p class="text-xl font-semibold mb-4 opacity-50">
-                {{ person.role }}
-              </p>
-              <!-- Description -->
-              <p class="text-lg opacity-80">
-                {{ person.description }}
-              </p>
+              <h2 class="text-3xl font-bold !mb-1 text-center">Tom Currà</h2>
+              <p class="text-xl font-semibold mb-4 opacity-50 text-center">President & Executive Producer</p>
+              <p class="text-lg opacity-80 text-center">Tom is a storyteller and executive producer who enjoys
+                delivering
+                exceptional documentary, television, and film projects through creative vision, careful management, and
+                collaboration.</p>
+            </div>
+          </div>
+
+          <!-- Greg Matkosky: right-aligned image flush with edge, bio below image -->
+          <div class="flex-1 flex flex-col items-center md:items-end justify-center">
+            <div class="mb-4 flex-shrink-0 w-full flex justify-end items-center">
+              <img
+                src="/greg-bio.jpg"
+                alt="Greg Matkosky"
+                class="w-full md:w-72 h-[400px] md:h-[400px] object-cover object-center shadow-lg"
+                style="margin-right:0;"
+              />
+            </div>
+            <div
+              class="mx-0 md:mx-0 flex-1 flex flex-col justify-start pt-1 md:pt-0 items-center text-center"
+              style="max-width: 288px;"
+            >
+              <h2 class="text-3xl font-bold !mb-1 text-center">Greg Matkosky</h2>
+              <p class="text-xl font-semibold mb-4 opacity-50 text-center">Director & Cinematographer</p>
+              <p class="text-lg opacity-80 text-center">Greg is an award-winning filmmaker with nearly 40 years of
+                global experience
+                directing and shooting commercial, documentary, Giant-Screen, and corporate film productions.</p>
             </div>
           </div>
         </div>
