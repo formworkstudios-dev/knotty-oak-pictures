@@ -7,92 +7,101 @@ import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue'
 const items = [
   // previously last two items moved to the front
   {
-    id: 1,
+    id: 6,
     title: 'Stories From The Mines',
     year: 2001,
-    image: '/mines.png',
-    desc: 'Nationally distributed, 2001 feature-length Emmy-nominated dramatized documentary narrated by Academy Award winner Jason Miller that presents the epic struggle between early 20th century immigrant coal miners and American industrialists. 143 minutes.'
-  },
-  {
-    id: 2,
-    title: 'An Empty Place At The Table',
-    year: '',
-    image: '/peg.png',
-    desc: 'Susan Sarandon narrates this New York Film and Video Festival winner for Best Social Documentary about an art exhibit that memorializes women and children murdered in acts of domestic violence. Nationally distributed. 28 minutes.'
-  },
-  {
-    id: 3,
-    title: 'Looking to the River',
-    year: '',
-    image: '',
-    desc: 'Description'
-  },
-  {
-    id: 4,
-    title: 'Ubaldo',
-    year: '',
-    image: '/ubaldo.webp',
-    desc: 'Shot on location in Italy. A cinematic rendition of the nearly millennium-old epic Italian cultural festival “La Festa Dei Ceri”, and its recreation in a small town in the United States. Nationally distributed. 57 minutes.'
+    image: '/panel/mines-clipped.webp',
+    desc: '<strong>Nationally distributed</strong>, 2001 feature-length <strong>Emmy-nominated</strong> dramatized documentary narrated by Academy Award winner Jason Miller that presents the epic struggle between early 20th century immigrant coal miners and American industrialists.',
+    length: '143 minutes'
   },
   {
     id: 5,
+    title: 'An Empty Place At The Table',
+    year: '',
+    image: '/panel/table-clipped.webp',
+    desc: 'Susan Sarandon narrates this New York Film and Video Festival winner for <strong>Best Social Documentary</strong> about an art exhibit that memorializes women and children murdered in acts of domestic violence. <strong>Nationally distributed</strong>.',
+    length: '28 minutes'
+  },
+  // {
+  //   id: 3,
+  //   title: 'Looking to the River',
+  //   year: '',
+  //   image: '',
+  //   desc: 'Description'
+  // },
+  {
+    id: 1,
+    title: 'Ubaldo',
+    year: '',
+    image: '/panel/ubaldo-clipped.webp',
+    desc: 'Shot on location in Italy. A cinematic rendition of the nearly millennium-old epic Italian cultural festival “La Festa Dei Ceri”, and its recreation in a small town in the United States. <strong>Nationally distributed</strong>.',
+    length: '57 minutes'
+  },
+  {
+    id: 9,
     title: 'The Healing Hero',
     year: '',
-    image: '/healing.png',
-    desc: 'Docudrama that reenacts Medal of Honor recipient Gino Merli’s amazing story of one night during World War II when he killed 51 German soldiers.'
+    image: '/panel/healing-clipped.webp',
+    desc: '<strong>Docudrama</strong> that reenacts Medal of Honor recipient Gino Merli’s amazing story of one night during World War II when he killed 51 German soldiers.',
+    length: '28 minutes'
   },
 
   // remaining items
   {
-    id: 6,
+    id: 7,
     title: 'Hearth & Harvest',
     year: '',
-    image: '/harvest.png',
-    desc: 'Feature-length visual tone poem that blends the story of agricultural heritage with contemporary issues that challenge farmers. Broadcast throughout Pennsylvania on the Pennsylvania Public Television network. 86 minutes.'
+    image: '/panel/harvest-clipped.webp',
+    desc: '<strong>Feature-length</strong> visual tone poem that blends the story of agricultural heritage with contemporary issues that challenge farmers. Broadcast throughout Pennsylvania on the Pennsylvania Public Television network.',
+    length: '86 minutes'
   },
-  {
-    id: 7,
-    title: 'Paesani',
-    year: '',
-    image: '/italian.png',
-    desc: 'An intimate portrait of Italian-American roots, traditions, and the ties that bind families across generations.'
-  },
+  // {
+  //   id: 7,
+  //   title: 'Paesani',
+  //   year: '',
+  //   image: '/italian.png',
+  //   desc: 'An intimate portrait of Italian-American roots, traditions, and the ties that bind families across generations.'
+  // },
 
+  // {
+  //   id: 8,
+  //   title: 'Chocolate Dreams',
+  //   year: '',
+  //   image: '',
+  //   desc: 'Description'
+  // },
   {
     id: 8,
-    title: 'Chocolate Dreams',
-    year: '',
-    image: '',
-    desc: 'Description'
-  },
-  {
-    id: 9,
     title: 'Spirit & Speed',
     year: '',
-    image: '/horse.png',
-    desc: 'A behind-the-scenes look at the sport, art, industry and controversies of thoroughbred horse racing. Broadcast throughout Pennsylvania on the Pennsylvania Public Television network. 57 minutes.'
+    image: '/panel/spirit-clipped.webp',
+    desc: 'A behind-the-scenes look at the sport, art, industry and controversies of thoroughbred horse racing. Broadcast throughout Pennsylvania on the Pennsylvania Public Television network.',
+    length: '57 minutes'
   },
   // move Little League & Ubaldo to the end and remove images (black bg)
   {
-    id: 10,
+    id: 3,
     title: 'Little League: A History',
     year: '',
-    image: '',
-    desc: 'Nationally distributed and presented on ESPN during the Little League World Series broadcast. Narrated by Vin Scully, this documentary is the authorized cinematic biography of one of America’s iconic institutions. Shot on location in Japan. 57 minutes.'
+    image: '/panel/little-clipped.webp',
+    desc: '<strong>Nationally distributed</strong> and presented on ESPN during the Little League World Series broadcast. Narrated by Vin Scully, this documentary is the authorized cinematic biography of one of America’s iconic institutions. Shot on location in Japan.',
+    length: '57 minutes'
   },
   {
-    id: 11,
+    id: 4,
     title: 'Frank Schoonover: The Authentic Artist',
     year: '',
-    image: '/horse2.png',
-    desc: 'A Cine Golden Eagle winner that recounts the creative adventures of the master American illustrator. Shot in the wilderness environs of northern Quebec Province and Wyoming’s Bighorn Mountains. 57 minutes.'
+    image: '/panel/frank-clipped.webp',
+    desc: 'A <strong>Cine Golden Eagle winner</strong> that recounts the creative adventures of the master American illustrator. Shot in the wilderness environs of northern Quebec Province and Wyoming’s Bighorn Mountains.',
+    length: '57 minutes'
   },
   {
-    id: 12,
+    id: 2,
     title: 'Remembering The Sirens',
     year: '',
-    image: '/siren.png',
-    desc: 'Emmy Award winning and nationally distributed film narrated by Leon Redbone that explores the early history of Jazz legends Tommy and Jimmy Dorsey and how their musical vision catalyzed Jazz from its improvisational roots into the Big Band sound. 57 minutes.'
+    image: '/panel/sirens-clipped.webp',
+    desc: '<strong>Emmy Award winning</strong> and <strong>nationally distributed</strong> film narrated by Leon Redbone that explores the early history of Jazz legends Tommy and Jimmy Dorsey and how their musical vision catalyzed Jazz from its improvisational roots into the Big Band sound.',
+    length: '57 minutes'
   },
 
 
@@ -120,13 +129,13 @@ function getSlideStyle(item: { image?: string; id: number }) {
   }
 }
 
-// visible count responsive: desktop 4, mobile 2 (will be updated on mount)
-const visibleCount = ref(4)
+// visible count responsive: desktop 3, mobile 2 (will be updated on mount)
+const visibleCount = ref(3)
 // percent width per item (responsive to container size)
 const itemWidthPercent = computed(() => 100 / visibleCount.value)
 const maxIndex = computed(() => Math.max(0, items.length - visibleCount.value))
-// start so the left edge of item 4 (1-based) is aligned to the left of the viewport
-const currentIndex = ref(3)
+// start so the left edge of item 3 (1-based) is aligned to the left of the viewport
+const currentIndex = ref(2)
 // dragging state for pointer swipe-to-scroll
 const containerRef = ref<HTMLElement | null>(null)
 const trackRef = ref<HTMLElement | null>(null)
@@ -238,9 +247,9 @@ function updateVisibleCount() {
   // responsive breakpoints:
   // - <420px: 1 slide
   // - 420px <= width < 768px: 2 slides
-  // - >=768px: 4 slides
+  // - >=768px: 3 slides
   const w = (typeof window !== 'undefined') ? window.innerWidth : 1024
-  let newCount = 4
+  let newCount = 3
   if (w < 420) newCount = 1
   else if (w < 768) newCount = 2
   if (visibleCount.value !== newCount) {
@@ -420,8 +429,15 @@ onUnmounted(() => {
                     {{ item.title }}
                   </template>
                 </div>
-                <div class="desc mt-4 text-base md:text-md text-white/90 mx-auto px-4">
-                  {{ item.desc }}
+                <div
+                  class="desc mt-4 text-base md:text-md text-white/90 mx-auto px-4"
+                  v-html="item.desc"
+                ></div>
+                <div
+                  v-if="item.length"
+                  class="length mt-2 text-white/80 text-sm md:text-base"
+                >
+                  {{ item.length }}
                 </div>
               </div>
             </div>
@@ -479,10 +495,6 @@ onUnmounted(() => {
 
 
 @media (min-width: 768px) {
-  .carousel-item:hover {
-    flex-basis: 33% !important;
-  }
-
   .carousel-item:hover .overlay {
     background: rgba(0, 0, 0, 0.18);
   }
@@ -570,6 +582,30 @@ onUnmounted(() => {
   opacity: 1;
   transform: translateY(0);
   max-height: 12rem;
+  pointer-events: auto;
+}
+
+/* length behaves like description: hidden by default, reveals on hover/focus */
+.length {
+  opacity: 0;
+  transform: translateY(6px);
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 200ms ease, transform 200ms ease, max-height 240ms ease;
+  pointer-events: none;
+}
+
+.carousel-item:hover .length {
+  opacity: 1;
+  transform: translateY(0);
+  max-height: 6rem;
+  pointer-events: auto;
+}
+
+.carousel-item:focus-within .length {
+  opacity: 1;
+  transform: translateY(0);
+  max-height: 8rem;
   pointer-events: auto;
 }
 

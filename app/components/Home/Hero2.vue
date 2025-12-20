@@ -53,25 +53,23 @@ let cycleTimeout: number | null = null
 
 function runSlideCycle() {
   // 1. Start by fading in
-  slideState.value = 'fading-in';
+  slideState.value = 'fading-in'
 
   // 2. After fade-in animation (1.2s), set to 'visible' and wait
   cycleTimeout = window.setTimeout(() => {
-    slideState.value = 'visible';
+    slideState.value = 'visible'
 
     // 3. After wait period (4.8s), set to 'fading-out'
     cycleTimeout = window.setTimeout(() => {
-      slideState.value = 'fading-out';
+      slideState.value = 'fading-out'
 
       // 4. After fade-out animation (1.2s), change slide and restart cycle
       cycleTimeout = window.setTimeout(() => {
-        currentSlide.value = (currentSlide.value + 1) % slides.length;
-        runSlideCycle(); // Loop
-      }, 1200); // Duration of fade-out
-
-    }, 4800); // Wait duration
-
-  }, 1200); // Duration of fade-in
+        currentSlide.value = (currentSlide.value + 1) % slides.length
+        runSlideCycle() // Loop
+      }, 1200) // Duration of fade-out
+    }, 4800) // Wait duration
+  }, 1200) // Duration of fade-in
 }
 
 function ensureAnimationStarts() {
@@ -89,6 +87,12 @@ onMounted(() => {
 onUnmounted(() => {
   if (cycleTimeout) window.clearTimeout(cycleTimeout)
 })
+
+function scrollDownOneViewport(): void {
+  if (typeof window !== 'undefined') {
+    window.scrollBy({ top: window.innerHeight, behavior: 'smooth' })
+  }
+}
 </script>
 
 <template>
@@ -117,13 +121,9 @@ onUnmounted(() => {
       ></div>
     </transition-group>
 
-    <!-- Overlays -->
+    <!-- Overlay -->
     <div
       class="hero-conical-overlay"
-      aria-hidden="true"
-    ></div>
-    <div
-      class="hero-noise-overlay"
       aria-hidden="true"
     ></div>
 
@@ -168,6 +168,48 @@ onUnmounted(() => {
         :slide-state="slideState"
       />
     </div>
+
+    <!-- Scroll indicator button: thin V arrow with tail -->
+    <button
+      type="button"
+      class="absolute left-1/2 bottom-6 -translate-x-1/2 z-20 text-white/85 cursor-pointer bg-transparent border-0 p-2"
+      aria-label="Scroll down"
+      @click="scrollDownOneViewport"
+    >
+      <span class="scroll-indicator-icon inline-flex">
+        <svg
+          width="80"
+          height="80"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <!-- thin tail -->
+          <path
+            d="M12 5 V13"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="butt"
+            vector-effect="non-scaling-stroke"
+          />
+          <!-- two-line arrow head (V shape) -->
+          <path
+            d="M8 16 L12 20"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="butt"
+            vector-effect="non-scaling-stroke"
+          />
+          <path
+            d="M16 16 L12 20"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="butt"
+            vector-effect="non-scaling-stroke"
+          />
+        </svg>
+      </span>
+    </button>
   </div>
 </template>
 
@@ -269,6 +311,24 @@ onUnmounted(() => {
 /* ensure outgoing layer appears above incoming during fade */
 .hero-outgoing {
   z-index: 20;
+}
+
+/* Scroll indicator bounce (animate translateY only to avoid overriding centering) */
+.scroll-indicator-icon {
+  animation: scrollBounce 1.6s ease-in-out infinite;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.6));
+}
+
+@keyframes scrollBounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
 }
 
 /* Lines */

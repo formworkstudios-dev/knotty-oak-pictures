@@ -83,7 +83,11 @@ onUnmounted(() => {
         @click="closeMenu"
         :class="`text-lg tracking-wide md:text-2xl font-extralight ${titleColor}`"
       >
-        {{ siteLogo ? siteLogo : siteName }}
+        <img
+          src="/knotty-logo-inverse.png"
+          alt="Knotty Oak Pictures"
+          class="h-8 md:h-10 w-auto"
+        />
       </NuxtLink>
     </div>
 
