@@ -10,12 +10,16 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@libsql/client": "^0.15.15",
     "@nuxt/content": "^3.7.1",
     "@nuxt/eslint": "^1.9.0",
     "@nuxt/image": "^1.11.0",
     "@nuxt/ui": "^4.0.0-alpha.2",
+    "@nuxthub/core": "^0.10.3",
     "@nuxtjs/google-fonts": "^3.2.0",
     "better-sqlite3": "^12.2.0",
+    "drizzle-kit": "^0.31.8",
+    "drizzle-orm": "^0.45.1",
     "eslint": "^9.36.0",
     "nuxt": "^4.1.2",
     "typescript": "^5.9.2",
