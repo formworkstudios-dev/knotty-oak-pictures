@@ -48,14 +48,15 @@ const slides = [
 ]
 
 const currentSlide = ref(0)
-const slideState = ref<'fading-in' | 'letters-in' | 'letters-out' | 'fading-out'>('fading-in')
+const slideState = ref<'fading-in' | 'letters-in' | 'letters-visible' | 'letters-out' | 'fading-out'>('fading-in')
 let cycleTimeout: number | null = null
+
 
 // Timings (ms)
 const bgFadeMs = 1200;
 const lettersInMs = 900; // covers staggered delays and animation
-const lettersOutMs = 700;
 const lettersVisibleMs = 2600; // time letters are fully visible before fading out
+const lettersOutMs = 700;
 
 function runSlideCycle() {
   // 1. Fade in background (no letters)
@@ -64,17 +65,21 @@ function runSlideCycle() {
     // 2. Letters fade in
     slideState.value = 'letters-in';
     cycleTimeout = window.setTimeout(() => {
-      // 3. Letters fully visible
-      slideState.value = 'letters-out';
+      // 3. Letters fully visible (no animation, just visible)
+      slideState.value = 'letters-visible';
       cycleTimeout = window.setTimeout(() => {
-        // 4. Fade out background (no letters)
-        slideState.value = 'fading-out';
+        // 4. Letters fade out
+        slideState.value = 'letters-out';
         cycleTimeout = window.setTimeout(() => {
-          currentSlide.value = (currentSlide.value + 1) % slides.length;
-          runSlideCycle();
-        }, bgFadeMs);
-      }, lettersOutMs);
-    }, lettersVisibleMs + lettersInMs);
+          // 5. Fade out background (no letters)
+          slideState.value = 'fading-out';
+          cycleTimeout = window.setTimeout(() => {
+            currentSlide.value = (currentSlide.value + 1) % slides.length;
+            runSlideCycle();
+          }, bgFadeMs);
+        }, lettersOutMs);
+      }, lettersVisibleMs);
+    }, lettersInMs);
   }, bgFadeMs);
 }
 
@@ -150,13 +155,16 @@ function scrollDownOneViewport(): void {
             :class="[
               'hero-letter',
               slideState === 'letters-in' && 'hero-letter-in',
+              slideState === 'letters-visible' && 'is-visible',
               slideState === 'letters-out' && 'hero-letter-out',
-              (slideState === 'letters-in' || slideState === 'letters-out') ? 'is-visible' : '',
-              (slideState === 'fading-in' || slideState === 'fading-out') ? 'force-invisible' : '',
               '!font-thin',
               'hero'
             ]"
-            :style="slideState === 'letters-in' ? `animation-delay: ${letter.delay}ms; animation-duration: 0.5s;` : slideState === 'letters-out' ? `animation-delay: ${letter.delay}ms; animation-duration: 0.4s;` : ''"
+            :style="slideState === 'letters-in'
+              ? `animation-delay: ${letter.delay}ms; animation-duration: 0.5s;`
+              : slideState === 'letters-out'
+                ? `animation-delay: ${letter.delay}ms; animation-duration: 0.4s;`
+                : ''"
           >
             {{ letter.char }}
           </span>
@@ -279,12 +287,6 @@ function scrollDownOneViewport(): void {
   -webkit-text-fill-color: initial;
 }
 
-.force-invisible {
-  opacity: 0 !important;
-  filter: blur(8px) !important;
-  transition: none !important;
-}
-
 .hero-letter.is-visible {
   opacity: 1;
   filter: blur(0);
@@ -292,10 +294,12 @@ function scrollDownOneViewport(): void {
 
 .hero-letter-in {
   animation: letterFadeIn 0.5s cubic-bezier(.77, .2, .32, 1) forwards;
+  animation-fill-mode: both;
 }
 
 .hero-letter-out {
   animation: letterFadeOut 0.5s cubic-bezier(.77, .2, .32, 1) forwards;
+  animation-fill-mode: both;
 }
 
 @keyframes letterFadeIn {
