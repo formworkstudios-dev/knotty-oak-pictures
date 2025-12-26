@@ -64,7 +64,7 @@ let cycleTimeout: number | null = null
 // Timings (ms)
 const bgFadeMs = 1200;
 const lettersInMs = 900; // covers staggered delays and animation
-const lettersVisibleMs = 2600; // time letters are fully visible before fading out
+const lettersVisibleMs = 4100; // time letters are fully visible before fading out
 const lettersOutMs = 700;
 
 function runSlideCycle() {

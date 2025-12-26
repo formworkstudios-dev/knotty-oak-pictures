@@ -598,7 +598,7 @@ onUnmounted(() => {
   .desc {
     opacity: 1;
     transform: translateY(0);
-    max-height: 12rem;
+    max-height: 20rem;
     pointer-events: auto;
   }
 }
