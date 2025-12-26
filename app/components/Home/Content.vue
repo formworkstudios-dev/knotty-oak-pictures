@@ -127,16 +127,6 @@ const items = [
   // move Little League & Ubaldo to the end and remove images (black bg)
 
 
-  {
-    id: 12,
-    title: 'Fit Club',
-    year: '',
-    image: '/panel/fit-clipped.png',
-    desc: 'Short film about the competitive martial artist and wrestling coach Matt Marcinek, who was born with cerebral palsy but has defined his life by a commitment to excellence.',
-    length: ''
-  },
-
-
 
 ]
 
@@ -601,6 +591,16 @@ onUnmounted(() => {
   /* limit description width to avoid stretching on hover */
   width: min(92%, 56ch);
   text-align: center;
+}
+
+/* Mobile/touch: no hover, so show description by default */
+@media (hover: none) and (pointer: coarse) {
+  .desc {
+    opacity: 1;
+    transform: translateY(0);
+    max-height: 12rem;
+    pointer-events: auto;
+  }
 }
 
 .carousel-item:hover .desc {

@@ -8,7 +8,7 @@ const items = [
     id: 1,
     title: 'Expedition Chesapeake',
     year: '',
-    image: '/panel/ship-clipped.jpg',
+    image: '/panel/ship.jpg',
     desc: 'Expedition Chesapeake is a giant-screen journey of discovery that follows Emmy-Award winning wildlife biologist and conservationist Jeff Corwin as he navigates on, above and below the bay’s astonishingly diverse environment and celebrates the human history that has imbued this body of water with a soul. <strong>IMAX theaters nationally.</strong>',
     length: ''
   },
@@ -16,7 +16,7 @@ const items = [
     id: 2,
     title: 'Ubaldo',
     year: '',
-    image: '/panel/ubaldo-clipped.webp',
+    image: '/panel/ubaldo-full.webp',
     desc: 'Shot on location in Italy. A cinematic rendition of the nearly millennium-old epic Italian cultural festival “La Festa Dei Ceri”, and its recreation in a small town in the United States. <strong>Nationally distributed</strong>.',
     length: '57 minutes'
   },
@@ -24,7 +24,7 @@ const items = [
     id: 3,
     title: 'Remembering The Sirens',
     year: '',
-    image: '/panel/sirens-clipped.webp',
+    image: '/panel/sirens.webp',
     desc: '<strong>Emmy Award winning</strong> and <strong>nationally distributed</strong> film narrated by Leon Redbone that explores the early history of Jazz legends Tommy and Jimmy Dorsey and how their musical vision catalyzed Jazz from its improvisational roots into the Big Band sound.',
     length: '57 minutes'
   },
@@ -32,7 +32,7 @@ const items = [
     id: 4,
     title: 'Little League: A History',
     year: '',
-    image: '/panel/little-clipped.webp',
+    image: '/panel/little.webp',
     desc: '<strong>Nationally distributed</strong> and presented on ESPN during the Little League World Series broadcast. Narrated by Vin Scully, this documentary is the authorized cinematic biography of one of America’s iconic institutions. Shot on location in Japan.',
     length: '57 minutes'
   },
@@ -41,7 +41,7 @@ const items = [
     id: 5,
     title: 'Frank Schoonover: The Authentic Artist',
     year: '',
-    image: '/panel/frank-clipped.webp',
+    image: '/panel/frank.webp',
     desc: 'A <strong>Cine Golden Eagle winner</strong> that recounts the creative adventures of the master American illustrator. Shot in the wilderness environs of northern Quebec Province and Wyoming’s Bighorn Mountains.',
     length: '57 minutes'
   },
@@ -49,7 +49,7 @@ const items = [
     id: 6,
     title: 'An Empty Place At The Table',
     year: '',
-    image: '/panel/table-clipped.webp',
+    image: '/panel/table.webp',
     desc: 'Susan Sarandon narrates this New York Film and Video Festival winner for <strong>Best Social Documentary</strong> about an art exhibit that memorializes women and children murdered in acts of domestic violence. <strong>Nationally distributed</strong>.',
     length: '28 minutes'
   },
@@ -57,7 +57,7 @@ const items = [
     id: 7,
     title: 'Stories From The Mines',
     year: 2001,
-    image: '/panel/mines-clipped.webp',
+    image: '/panel/mines.webp',
     desc: '<strong>Nationally distributed</strong>, 2001 feature-length <strong>Emmy-nominated</strong> dramatized documentary narrated by Academy Award winner Jason Miller that presents the epic struggle between early 20th century immigrant coal miners and American industrialists.',
     length: '143 minutes'
   },
@@ -65,7 +65,7 @@ const items = [
     id: 8,
     title: 'Hearth & Harvest',
     year: '',
-    image: '/panel/harvest-clipped.webp',
+    image: '/panel/harvest.webp',
     desc: '<strong>Feature-length</strong> visual tone poem that blends the story of agricultural heritage with contemporary issues that challenge farmers. Broadcast throughout Pennsylvania on the Pennsylvania Public Television network.',
     length: '86 minutes'
   },
@@ -73,7 +73,7 @@ const items = [
     id: 9,
     title: 'Spirit & Speed',
     year: '',
-    image: '/panel/spirit-clipped.webp',
+    image: '/panel/spirit.webp',
     desc: 'A behind-the-scenes look at the sport, art, industry and controversies of thoroughbred horse racing. Broadcast throughout Pennsylvania on the Pennsylvania Public Television network.',
     length: '57 minutes'
   },
@@ -81,7 +81,7 @@ const items = [
     id: 10,
     title: 'The Healing Hero',
     year: '',
-    image: '/panel/healing-clipped.webp',
+    image: '/panel/healing.webp',
     desc: '<strong>Docudrama</strong> that reenacts Medal of Honor recipient Gino Merli’s amazing story of one night during World War II when he killed 51 German soldiers.',
     length: '28 minutes'
   },
@@ -89,7 +89,7 @@ const items = [
     id: 11,
     title: 'Fit Club',
     year: '',
-    image: '/panel/fit-clipped.png',
+    image: '/panel/fit.png',
     desc: 'Short film about the competitive martial artist and wrestling coach Matt Marcinek, who was born with cerebral palsy but has defined his life by a commitment to excellence.',
     length: ''
   },

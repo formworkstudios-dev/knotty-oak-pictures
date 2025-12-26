@@ -40,8 +40,8 @@ const slides = [
   },
   {
     lines: [
-      'to create films that remind us what it means to be',
-      'human.'
+      'to create films that remind us',
+      'what it means to be human.'
     ],
     bg: 'bg-amber-950',
     img: '/slide2.jpg'

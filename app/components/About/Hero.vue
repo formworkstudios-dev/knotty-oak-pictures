@@ -208,7 +208,7 @@ onUnmounted(() => {
   >
     <div
       id="about-hero-bg"
-      class="relative flex items-start justify-start min-h-screen px-4 py-4 md:pb-10 md:pl-10 overflow-x-hidden w-full"
+      class="relative flex items-start justify-start min-h-screen px-4 pt-4 pb-12 md:pb-10 md:pl-10 overflow-x-hidden w-full"
     >
       <!-- fade-to-black overlay controlled by scroll -->
       <div
@@ -459,8 +459,8 @@ onUnmounted(() => {
   .about-hero-title .reveal-instant-delayed-1,
   .about-hero-title .reveal-instant-delayed-2,
   .about-hero-title .reveal-instant-delayed-3 {
-    font-size: 0.9rem !important;
-    line-height: 1.2rem !important;
+    font-size: 1.05rem !important;
+    line-height: 1.45rem !important;
   }
 }
 </style>
