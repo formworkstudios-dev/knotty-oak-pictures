@@ -125,23 +125,23 @@ const items = [
 </script>
 
 <template>
-  <div class="min-h-screen bg-stone-900 text-stone-50 flex flex-col items-center justify-center py-32 md:py-38 px-6 ">
+  <div class="min-h-screen bg-stone-900 text-stone-50 flex flex-col items-center justify-center py-24 md:py-38 px-6">
     <h1 class="text-4xl font-bold mb-10 pb-10">Our Work</h1>
     <div class="flex flex-col gap-8 w-full max-w-4xl">
       <div
         v-for="movie in items"
         :key="`${movie.id}-${movie.title}`"
-        class="flex flex-row items-start gap-6 py-4"
+        class="flex flex-col md:flex-row items-start gap-4 md:gap-6 py-4"
       >
-        <div class="w-1/3 h-48 bg-stone-800 flex items-center justify-center">
+        <div class="w-full md:w-1/3 h-56 md:h-48 bg-stone-800 flex items-center justify-center overflow-hidden">
           <img
             :src="movie.image"
-            alt="movie.title"
+            :alt="movie.title"
             class="object-cover h-full w-full"
           />
         </div>
-        <div class="flex flex-col w-2/3">
-          <h2 class="text-lg font-semibold">{{ movie.title }}</h2>
+        <div class="flex flex-col w-full md:w-2/3">
+          <h2 class="text-xl md:text-lg font-semibold">{{ movie.title }}</h2>
           <p
             class="text-sm mt-2"
             v-html="movie.desc"
