@@ -7,30 +7,15 @@ import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue'
 const items = [
   // previously last two items moved to the front
   {
-    id: 6,
-    title: 'Stories From The Mines',
-    year: 2001,
-    image: '/panel/mines-clipped.webp',
-    desc: '<strong>Nationally distributed</strong>, 2001 feature-length <strong>Emmy-nominated</strong> dramatized documentary narrated by Academy Award winner Jason Miller that presents the epic struggle between early 20th century immigrant coal miners and American industrialists.',
-    length: '143 minutes'
-  },
-  {
-    id: 5,
-    title: 'An Empty Place At The Table',
-    year: '',
-    image: '/panel/table-clipped.webp',
-    desc: 'Susan Sarandon narrates this New York Film and Video Festival winner for <strong>Best Social Documentary</strong> about an art exhibit that memorializes women and children murdered in acts of domestic violence. <strong>Nationally distributed</strong>.',
-    length: '28 minutes'
-  },
-  // {
-  //   id: 3,
-  //   title: 'Looking to the River',
-  //   year: '',
-  //   image: '',
-  //   desc: 'Description'
-  // },
-  {
     id: 1,
+    title: 'Expedition Chesapeake',
+    year: '',
+    image: '/panel/ship-clipped.jpg',
+    desc: 'Expedition Chesapeake is a giant-screen journey of discovery that follows Emmy-Award winning wildlife biologist and conservationist Jeff Corwin as he navigates on, above and below the bay’s astonishingly diverse environment and celebrates the human history that has imbued this body of water with a soul. <strong>IMAX theaters nationally.</strong>',
+    length: ''
+  },
+  {
+    id: 2,
     title: 'Ubaldo',
     year: '',
     image: '/panel/ubaldo-clipped.webp',
@@ -38,23 +23,91 @@ const items = [
     length: '57 minutes'
   },
   {
-    id: 9,
-    title: 'The Healing Hero',
+    id: 3,
+    title: 'Remembering The Sirens',
     year: '',
-    image: '/panel/healing-clipped.webp',
-    desc: '<strong>Docudrama</strong> that reenacts Medal of Honor recipient Gino Merli’s amazing story of one night during World War II when he killed 51 German soldiers.',
-    length: '28 minutes'
+    image: '/panel/sirens-clipped.webp',
+    desc: '<strong>Emmy Award winning</strong> and <strong>nationally distributed</strong> film narrated by Leon Redbone that explores the early history of Jazz legends Tommy and Jimmy Dorsey and how their musical vision catalyzed Jazz from its improvisational roots into the Big Band sound.',
+    length: '57 minutes'
+  },
+  {
+    id: 4,
+    title: 'Little League: A History',
+    year: '',
+    image: '/panel/little-clipped.webp',
+    desc: '<strong>Nationally distributed</strong> and presented on ESPN during the Little League World Series broadcast. Narrated by Vin Scully, this documentary is the authorized cinematic biography of one of America’s iconic institutions. Shot on location in Japan.',
+    length: '57 minutes'
   },
 
-  // remaining items
+  {
+    id: 5,
+    title: 'Frank Schoonover: The Authentic Artist',
+    year: '',
+    image: '/panel/frank-clipped.webp',
+    desc: 'A <strong>Cine Golden Eagle winner</strong> that recounts the creative adventures of the master American illustrator. Shot in the wilderness environs of northern Quebec Province and Wyoming’s Bighorn Mountains.',
+    length: '57 minutes'
+  },
+  {
+    id: 6,
+    title: 'An Empty Place At The Table',
+    year: '',
+    image: '/panel/table-clipped.webp',
+    desc: 'Susan Sarandon narrates this New York Film and Video Festival winner for <strong>Best Social Documentary</strong> about an art exhibit that memorializes women and children murdered in acts of domestic violence. <strong>Nationally distributed</strong>.',
+    length: '28 minutes'
+  },
   {
     id: 7,
+    title: 'Stories From The Mines',
+    year: 2001,
+    image: '/panel/mines-clipped.webp',
+    desc: '<strong>Nationally distributed</strong>, 2001 feature-length <strong>Emmy-nominated</strong> dramatized documentary narrated by Academy Award winner Jason Miller that presents the epic struggle between early 20th century immigrant coal miners and American industrialists.',
+    length: '143 minutes'
+  },
+  {
+    id: 8,
     title: 'Hearth & Harvest',
     year: '',
     image: '/panel/harvest-clipped.webp',
     desc: '<strong>Feature-length</strong> visual tone poem that blends the story of agricultural heritage with contemporary issues that challenge farmers. Broadcast throughout Pennsylvania on the Pennsylvania Public Television network.',
     length: '86 minutes'
   },
+  {
+    id: 9,
+    title: 'Spirit & Speed',
+    year: '',
+    image: '/panel/spirit-clipped.webp',
+    desc: 'A behind-the-scenes look at the sport, art, industry and controversies of thoroughbred horse racing. Broadcast throughout Pennsylvania on the Pennsylvania Public Television network.',
+    length: '57 minutes'
+  },
+  {
+    id: 10,
+    title: 'The Healing Hero',
+    year: '',
+    image: '/panel/healing-clipped.webp',
+    desc: '<strong>Docudrama</strong> that reenacts Medal of Honor recipient Gino Merli’s amazing story of one night during World War II when he killed 51 German soldiers.',
+    length: '28 minutes'
+  },
+  {
+    id: 11,
+    title: 'Fit Club',
+    year: '',
+    image: '/panel/fit-clipped.png',
+    desc: 'Short film about the competitive martial artist and wrestling coach Matt Marcinek, who was born with cerebral palsy but has defined his life by a commitment to excellence.',
+    length: ''
+  },
+
+  // {
+  //   id: 3,
+  //   title: 'Looking to the River',
+  //   year: '',
+  //   image: '',
+  //   desc: 'Description'
+  // },
+
+
+
+  // remaining items
+
   // {
   //   id: 7,
   //   title: 'Paesani',
@@ -70,38 +123,17 @@ const items = [
   //   image: '',
   //   desc: 'Description'
   // },
-  {
-    id: 8,
-    title: 'Spirit & Speed',
-    year: '',
-    image: '/panel/spirit-clipped.webp',
-    desc: 'A behind-the-scenes look at the sport, art, industry and controversies of thoroughbred horse racing. Broadcast throughout Pennsylvania on the Pennsylvania Public Television network.',
-    length: '57 minutes'
-  },
+
   // move Little League & Ubaldo to the end and remove images (black bg)
+
+
   {
-    id: 3,
-    title: 'Little League: A History',
+    id: 12,
+    title: 'Fit Club',
     year: '',
-    image: '/panel/little-clipped.webp',
-    desc: '<strong>Nationally distributed</strong> and presented on ESPN during the Little League World Series broadcast. Narrated by Vin Scully, this documentary is the authorized cinematic biography of one of America’s iconic institutions. Shot on location in Japan.',
-    length: '57 minutes'
-  },
-  {
-    id: 4,
-    title: 'Frank Schoonover: The Authentic Artist',
-    year: '',
-    image: '/panel/frank-clipped.webp',
-    desc: 'A <strong>Cine Golden Eagle winner</strong> that recounts the creative adventures of the master American illustrator. Shot in the wilderness environs of northern Quebec Province and Wyoming’s Bighorn Mountains.',
-    length: '57 minutes'
-  },
-  {
-    id: 2,
-    title: 'Remembering The Sirens',
-    year: '',
-    image: '/panel/sirens-clipped.webp',
-    desc: '<strong>Emmy Award winning</strong> and <strong>nationally distributed</strong> film narrated by Leon Redbone that explores the early history of Jazz legends Tommy and Jimmy Dorsey and how their musical vision catalyzed Jazz from its improvisational roots into the Big Band sound.',
-    length: '57 minutes'
+    image: '/panel/fit-clipped.png',
+    desc: 'Short film about the competitive martial artist and wrestling coach Matt Marcinek, who was born with cerebral palsy but has defined his life by a commitment to excellence.',
+    length: ''
   },
 
 

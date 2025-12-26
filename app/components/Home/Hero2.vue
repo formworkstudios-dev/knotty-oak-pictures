@@ -20,22 +20,31 @@ function getStaggeredSpans(text: string) {
   }));
 }
 
+function shouldBold(slideIdx: number, lineIdx: number): boolean {
+  try {
+    const text = slides[slideIdx]?.lines?.[lineIdx] ?? ''
+    return /\bhuman\b/i.test(text)
+  } catch {
+    return false
+  }
+}
+
 const slides = [
   {
     lines: [
-      'Knotty Oak grew from two creative',
-      'minds chasing the same vision',
+      'Knotty Oak grew from two creative minds',
+      'chasing one cinematic vision:',
     ],
     bg: 'bg-stone-950',
-    img: '/jail.png'
+    img: '/tom-and-greg-35-years-ago-2.png'
   },
   {
     lines: [
-      'Create cinema that inspires reflection',
-      ' and remind us what it means to be human.'
+      'to create films that remind us what it means to be',
+      'human.'
     ],
     bg: 'bg-amber-950',
-    img: '/ship.jpg'
+    img: '/slide2.jpg'
   },
   {
     lines: [
@@ -43,7 +52,7 @@ const slides = [
       'authenticity is our original thought.'
     ],
     bg: 'bg-red-950',
-    img: '/empty-place.png'
+    img: '/ship.jpg'
   }
 ]
 
@@ -144,7 +153,7 @@ function scrollDownOneViewport(): void {
       :style="{ opacity: textOpacity }"
     >
       <div
-        v-for="(line, lineIdx) in 3"
+        v-for="(line, lineIdx) in (slides[currentSlide]?.lines?.length ?? 0)"
         :key="lineIdx"
         class="hero-line-container"
       >
@@ -157,7 +166,7 @@ function scrollDownOneViewport(): void {
               slideState === 'letters-in' && 'hero-letter-in',
               slideState === 'letters-visible' && 'is-visible',
               slideState === 'letters-out' && 'hero-letter-out',
-              '!font-thin',
+              shouldBold(currentSlide, lineIdx) ? 'font-semibold' : '!font-thin',
               'hero'
             ]"
             :style="slideState === 'letters-in'

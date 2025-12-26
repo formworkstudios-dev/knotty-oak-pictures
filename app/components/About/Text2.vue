@@ -62,13 +62,13 @@ const { reveal } = useScrollReveal()
             :ref="reveal"
             class="!text-3xl md:text-4xl reveal block !m-0 !pb-0 text-stone-900"
           >
-            Every story we product is a chance to tell something true
+            Our company is rooted in a 30-year collaboration
           </h2>
           <h2
             :ref="reveal"
             class="!text-3xl md:text-4xl reveal reveal-delay-200 block !m-0 !pb-0 text-stone-900"
           >
-            —with heart, with purpose through the human experience.
+            rooted in friendship and a love of and for filmmaking.
           </h2>
           <!-- <h2
             :ref="reveal"

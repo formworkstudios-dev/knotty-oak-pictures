@@ -31,7 +31,7 @@ onUnmounted(() => {
     <!-- <AboutInfo /> -->
     <AboutText />
     <AboutText2 />
-    <AboutContent />
+    <!-- <AboutContent /> -->
     <AboutUs />
   </div>
 </template>

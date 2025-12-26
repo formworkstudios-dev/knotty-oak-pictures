@@ -22,20 +22,20 @@ const { reveal } = useScrollReveal()
             :ref="reveal"
             class="text-2xl md:text-4xl reveal block !m-0 text-stone-900"
           >
-            Rooted in a shared passion for authentic storytelling,
+            From this recognition, Knotty Oak Pictures produces
           </h2>
           <h2
             :ref="reveal"
             class="text-2xl md:text-4xl reveal reveal-delay-200 block !m-0 text-stone-900"
           >
-            Knotty Oak Pictures grew from two creative minds
+            films ingrained in 40 years of craft experience
 
           </h2>
           <h2
             :ref="reveal"
             class="text-2xl md:text-4xl reveal reveal-delay-400 block !m-0 text-stone-900"
           >
-            chasing the same vision.
+            <strong>in cinematic storytelling.</strong>
           </h2>
         </div>
         <svg

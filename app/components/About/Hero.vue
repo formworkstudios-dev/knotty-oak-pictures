@@ -20,8 +20,9 @@ const bgImages = [
   '/tom-and-greg-35-years-ago-2.png',
   '/tom-and-greg-35-years-ago-3.png'
 ]
-const bgCurrent = ref(0)
-const bgNext = ref(1)
+const bgCurrentIndex = ref(0)
+const bgLayerAUrl = ref(bgImages[0] ?? '')
+const bgLayerBUrl = ref(bgImages[1] ?? bgImages[0] ?? '')
 const bgFrontIsA = ref(true)
 // Slightly longer fade and interval to improve perceived smoothness
 const bgFadeMs = 1400
@@ -42,6 +43,14 @@ function startBgCrossfade() {
   // Preload all images to avoid flicker at loop boundaries
   preloadBgImages(bgImages)
 
+  if (bgImages.length <= 1) return
+
+  // Initialize layers deterministically
+  bgCurrentIndex.value = 0
+  bgLayerAUrl.value = bgImages[0] ?? ''
+  bgLayerBUrl.value = bgImages[1] ?? bgImages[0] ?? ''
+  bgFrontIsA.value = true
+
   const cycle = () => {
     if (isBgFading.value) {
       // In rare cases, ensure we schedule next cycle anyway
@@ -50,17 +59,22 @@ function startBgCrossfade() {
     }
     isBgFading.value = true
 
-    // Prepare next index and ensure the back layer shows the upcoming image BEFORE toggling
-    const nextIdx = (bgCurrent.value + 1) % bgImages.length
-    bgNext.value = nextIdx
+    // Prepare next index by updating ONLY the hidden layer, then flip opacity.
+    const nextIdx = (bgCurrentIndex.value + 1) % bgImages.length
+    if (bgFrontIsA.value) {
+      // A is currently visible; update hidden B
+      bgLayerBUrl.value = bgImages[nextIdx] ?? ''
+    } else {
+      // B is currently visible; update hidden A
+      bgLayerAUrl.value = bgImages[nextIdx] ?? ''
+    }
 
     // Trigger crossfade by flipping which layer is front
     bgFrontIsA.value = !bgFrontIsA.value
 
     // After fade completes, commit current index and prime the following next image
     window.setTimeout(() => {
-      bgCurrent.value = nextIdx
-      bgNext.value = (bgCurrent.value + 1) % bgImages.length
+      bgCurrentIndex.value = nextIdx
       isBgFading.value = false
       // Schedule next cycle using setTimeout to avoid setInterval drift/glitch at wrap
       bgTimer = window.setTimeout(cycle, bgIntervalMs)
@@ -80,11 +94,39 @@ function getStaggeredSpans(text: string, seed = 0) {
     const base = delays[idx] ?? delays[0]
     const baseNum = Number(base || delays[0])
     return {
-      char: char === ' ' ? '\u00A0' : char,
+      char: char,
       delay: baseNum + Math.floor((Math.random() * 60) - 30),
       i
     }
   })
+}
+
+// Word-safe tokenization to avoid breaking words across lines
+function getWordTokens(text: string, seed = 0) {
+  const delays = [120, 160, 200, 240, 280, 320, 360, 420]
+  const words = text.split(' ')
+  const tokens: Array<
+    | { type: 'word'; letters: Array<{ char: string; delay: number; i: number }> }
+    | { type: 'space' }
+  > = []
+  let letterIndex = 0
+  words.forEach((w, wi) => {
+    const letters = w.split('').map((char) => {
+      const idx = (letterIndex + seed) % delays.length
+      const base = delays[idx] ?? delays[0]
+      const baseNum = Number(base || delays[0])
+      const out = {
+        char,
+        delay: baseNum + Math.floor((Math.random() * 60) - 30),
+        i: letterIndex
+      }
+      letterIndex++
+      return out
+    })
+    tokens.push({ type: 'word', letters })
+    if (wi < words.length - 1) tokens.push({ type: 'space' })
+  })
+  return tokens
 }
 
 const animateEntrance = ref(false)
@@ -175,79 +217,127 @@ onUnmounted(() => {
       ></div>
       <!-- Full background image with transparency, matching Text.vue -->
       <!-- Crossfading background images -->
-      <div class="absolute inset-0 w-full h-full z-0 pointer-events-none opacity-40 will-change-opacity">
+      <div
+        class="absolute inset-0 w-full h-full z-0 pointer-events-none opacity-40 will-change-opacity"
+        :style="{ '--bg-fade-ms': bgFadeMs + 'ms' }"
+      >
         <!-- Layer A -->
         <div
           class="absolute inset-0 w-full h-full bg-cover bg-center bg-layer"
           :style="{
-            backgroundImage: `url('${bgImages[bgCurrent]}')`,
-            opacity: bgFrontIsA ? 1 : 0,
-            transition: `opacity ${bgFadeMs}ms ease-in-out`,
-            transitionDelay: bgFrontIsA ? '0ms' : '80ms'
+            backgroundImage: `url('${bgLayerAUrl}')`,
+            opacity: bgFrontIsA ? 1 : 0
           }"
         ></div>
         <!-- Layer B -->
         <div
           class="absolute inset-0 w-full h-full bg-cover bg-center bg-layer"
           :style="{
-            backgroundImage: `url('${bgImages[bgNext]}')`,
-            opacity: bgFrontIsA ? 0 : 1,
-            transition: `opacity ${bgFadeMs}ms ease-in-out`,
-            transitionDelay: bgFrontIsA ? '80ms' : '0ms'
+            backgroundImage: `url('${bgLayerBUrl}')`,
+            opacity: bgFrontIsA ? 0 : 1
           }"
         ></div>
       </div>
 
       <h1
-        class="!text-6xl text-left self-end relative z-10 cursor-default about-hero-title leading-normal"
+        class="!text-4xl lg:!text-5xl text-left self-end relative z-10 cursor-default about-hero-title leading-normal"
         :style="`--gc: ${gradientCenter}%; opacity: 0.85;`"
       >
         <template v-if="isMobile">
 
 
 
-          <!-- mobile: render three line-based reveals (no per-letter split) -->
-          <span class="block reveal-instant">Knotty Oak Pictures grew from a forged friendship,</span>
-          <span class="block reveal-instant-delayed-1"> the love for filmmaking,</span>
-          <span class="block reveal-instant-delayed-2">and life over thirty years.</span>
+          <!-- mobile: render four line-based reveals (no per-letter split) -->
+          <span class="block reveal-instant">Filmmaking is a complex enterprise.</span>
+          <span class="block reveal-instant-delayed-1">It is a business, an artform and a medium —</span>
+          <span class="block reveal-instant-delayed-2">a mass-medium, capable of attracting both niche</span>
+          <span class="block reveal-instant-delayed-3">and diverse audiences.</span>
         </template>
         <template v-else>
           <!-- desktop: per-letter randomized entrance (existing behavior) -->
           <span class="block">
             <template
-              v-for="letter in getStaggeredSpans('Knotty Oak Pictures grew from a forged friendship,', 1)"
-              :key="`l1-${letter.i}`"
+              v-for="(token, ti) in getWordTokens('Filmmaking is a complex enterprise.', 1)"
+              :key="`t1-${ti}`"
             >
-              <span
-                :class="['hero-letter', animateEntrance ? 'hero-letter-in' : '']"
-                :style="{ animationDelay: letter.delay + 'ms' }"
-              >{{ letter.char }}</span>
+              <template v-if="token.type === 'space'">
+                <span class="word-space"> </span>
+              </template>
+              <template v-else>
+                <span class="word">
+                  <span
+                    v-for="letter in token.letters"
+                    :key="`l1-${letter.i}`"
+                    :class="['hero-letter', animateEntrance ? 'hero-letter-in' : '']"
+                    :style="{ animationDelay: letter.delay + 'ms' }"
+                  >{{ letter.char }}</span>
+                </span>
+              </template>
             </template>
           </span>
 
           <span class="block">
             <template
-              v-for="letter in getStaggeredSpans('the love for filmmaking, and life over 30 years.', 2)"
-              :key="`l2-${letter.i}`"
+              v-for="(token, ti) in getWordTokens('It is a business, an artform and a medium —', 2)"
+              :key="`t2-${ti}`"
             >
-              <span
-                :class="['hero-letter', animateEntrance ? 'hero-letter-in' : '']"
-                :style="{ animationDelay: letter.delay + 200 + 'ms' }"
-              >{{ letter.char }}</span>
+              <template v-if="token.type === 'space'">
+                <span class="word-space"> </span>
+              </template>
+              <template v-else>
+                <span class="word">
+                  <span
+                    v-for="letter in token.letters"
+                    :key="`l2-${letter.i}`"
+                    :class="['hero-letter', animateEntrance ? 'hero-letter-in' : '']"
+                    :style="{ animationDelay: letter.delay + 200 + 'ms' }"
+                  >{{ letter.char }}</span>
+                </span>
+              </template>
             </template>
           </span>
 
-          <!-- <span class="block">
+          <span class="block">
             <template
-              v-for="letter in getStaggeredSpans('and life over 30 years.', 3)"
-              :key="`l3-${letter.i}`"
+              v-for="(token, ti) in getWordTokens('a mass-medium, capable of attracting both niche', 3)"
+              :key="`t3-${ti}`"
             >
-              <span
-                :class="['hero-letter', animateEntrance ? 'hero-letter-in' : '']"
-                :style="{ animationDelay: letter.delay + 420 + 'ms' }"
-              >{{ letter.char }}</span>
+              <template v-if="token.type === 'space'">
+                <span class="word-space"> </span>
+              </template>
+              <template v-else>
+                <span class="word">
+                  <span
+                    v-for="letter in token.letters"
+                    :key="`l3-${letter.i}`"
+                    :class="['hero-letter', animateEntrance ? 'hero-letter-in' : '']"
+                    :style="{ animationDelay: letter.delay + 420 + 'ms' }"
+                  >{{ letter.char }}</span>
+                </span>
+              </template>
             </template>
-          </span> -->
+          </span>
+
+          <span class="block">
+            <template
+              v-for="(token, ti) in getWordTokens('and diverse audiences.', 4)"
+              :key="`t4-${ti}`"
+            >
+              <template v-if="token.type === 'space'">
+                <span class="word-space"> </span>
+              </template>
+              <template v-else>
+                <span class="word">
+                  <span
+                    v-for="letter in token.letters"
+                    :key="`l4-${letter.i}`"
+                    :class="['hero-letter', animateEntrance ? 'hero-letter-in' : '']"
+                    :style="{ animationDelay: letter.delay + 640 + 'ms' }"
+                  >{{ letter.char }}</span>
+                </span>
+              </template>
+            </template>
+          </span>
         </template>
       </h1>
     </div>
@@ -259,6 +349,9 @@ onUnmounted(() => {
   will-change: opacity;
   backface-visibility: hidden;
   transform: translateZ(0);
+  transition-property: opacity;
+  transition-duration: var(--bg-fade-ms, 1400ms);
+  transition-timing-function: ease-in-out;
 }
 
 .reveal-instant {
@@ -273,6 +366,11 @@ onUnmounted(() => {
 
 .reveal-instant-delayed-2 {
   animation: fadeUpIn 1s ease-out 0.6s forwards;
+  opacity: 0;
+}
+
+.reveal-instant-delayed-3 {
+  animation: fadeUpIn 1s ease-out 0.9s forwards;
   opacity: 0;
 }
 
@@ -340,9 +438,18 @@ onUnmounted(() => {
 .about-hero-title {
   max-width: 48ch;
   width: min(92vw, 48ch);
-  overflow-wrap: anywhere;
-  word-break: break-word;
-  hyphens: auto;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
+}
+
+.word {
+  display: inline-block;
+}
+
+.word-space {
+  display: inline-block;
+  width: 0.5ch;
 }
 
 /* Mobile: make the line-based hero text smaller */
@@ -350,9 +457,10 @@ onUnmounted(() => {
 
   .about-hero-title .reveal-instant,
   .about-hero-title .reveal-instant-delayed-1,
-  .about-hero-title .reveal-instant-delayed-2 {
-    font-size: 0.95rem !important;
-    line-height: 1.25rem !important;
+  .about-hero-title .reveal-instant-delayed-2,
+  .about-hero-title .reveal-instant-delayed-3 {
+    font-size: 0.9rem !important;
+    line-height: 1.2rem !important;
   }
 }
 </style>
