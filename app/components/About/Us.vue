@@ -12,7 +12,7 @@ const team = [
   {
     name: 'Greg Matkosky',
     role: 'Director & Cinematographer',
-    description: 'Greg is an award-winning filmmaker with nearly 40 years of global experience directing and shooting commercial, documentary, Giant-Screen, and corporate film productions.',
+    description: 'Greg Matkosky is an Emmy and Cine Golden Eagle Award-winning writer/director with nearly 40 years experience in national commercial, international documentary, giant-screen and corporate production across five continents. He received his BA in journalism from Penn State and has an MFA in cinematography from AFI.',
     image: '/greg-bio.jpg'
   }
 ]
@@ -68,9 +68,13 @@ const team = [
             >
               <h2 class="text-3xl font-bold !mb-1 text-center">Greg Matkosky</h2>
               <p class="text-xl font-semibold mb-4 opacity-50 text-center">Director & Cinematographer</p>
-              <p class="text-lg opacity-80 text-center">Greg is an award-winning filmmaker with nearly 40 years of
-                global experience
-                directing and shooting commercial, documentary, Giant-Screen, and corporate film productions.</p>
+              <p class="text-lg opacity-80 text-center">Greg Matkosky is an Emmy and Cine Golden
+                Eagle Award-winning writer/director with nearly 40
+                years experience in national commercial,
+                international documentary, giant-screen and
+                corporate production across five continents. He
+                received his BA in journalism from Penn State
+                and has an MFA in cinematography from AFI.</p>
             </div>
           </div>
         </div>

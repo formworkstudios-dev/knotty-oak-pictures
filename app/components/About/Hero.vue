@@ -248,16 +248,14 @@ onUnmounted(() => {
 
 
           <!-- mobile: render four line-based reveals (no per-letter split) -->
-          <span class="block reveal-instant">Filmmaking is a complex enterprise.</span>
-          <span class="block reveal-instant-delayed-1">It is a business, an artform and a medium —</span>
-          <span class="block reveal-instant-delayed-2">a mass-medium, capable of attracting both niche</span>
-          <span class="block reveal-instant-delayed-3">and diverse audiences.</span>
+          <span class="block reveal-instant">Knotty Oak Pictures is rooted in a lifetime friendship and shared love of
+            and for filmmaking.</span>
         </template>
         <template v-else>
           <!-- desktop: per-letter randomized entrance (existing behavior) -->
           <span class="block">
             <template
-              v-for="(token, ti) in getWordTokens('Filmmaking is a complex enterprise.', 1)"
+              v-for="(token, ti) in getWordTokens('Knotty Oak Pictures is rooted in a lifetime friendship and shared love of and for filmmaking.', 1)"
               :key="`t1-${ti}`"
             >
               <template v-if="token.type === 'space'">
@@ -275,71 +273,10 @@ onUnmounted(() => {
               </template>
             </template>
           </span>
-
-          <span class="block">
-            <template
-              v-for="(token, ti) in getWordTokens('It is a business, an artform and a medium —', 2)"
-              :key="`t2-${ti}`"
-            >
-              <template v-if="token.type === 'space'">
-                <span class="word-space"> </span>
-              </template>
-              <template v-else>
-                <span class="word">
-                  <span
-                    v-for="letter in token.letters"
-                    :key="`l2-${letter.i}`"
-                    :class="['hero-letter', animateEntrance ? 'hero-letter-in' : '']"
-                    :style="{ animationDelay: letter.delay + 200 + 'ms' }"
-                  >{{ letter.char }}</span>
-                </span>
-              </template>
-            </template>
-          </span>
-
-          <span class="block">
-            <template
-              v-for="(token, ti) in getWordTokens('a mass-medium, capable of attracting both niche', 3)"
-              :key="`t3-${ti}`"
-            >
-              <template v-if="token.type === 'space'">
-                <span class="word-space"> </span>
-              </template>
-              <template v-else>
-                <span class="word">
-                  <span
-                    v-for="letter in token.letters"
-                    :key="`l3-${letter.i}`"
-                    :class="['hero-letter', animateEntrance ? 'hero-letter-in' : '']"
-                    :style="{ animationDelay: letter.delay + 420 + 'ms' }"
-                  >{{ letter.char }}</span>
-                </span>
-              </template>
-            </template>
-          </span>
-
-          <span class="block">
-            <template
-              v-for="(token, ti) in getWordTokens('and diverse audiences.', 4)"
-              :key="`t4-${ti}`"
-            >
-              <template v-if="token.type === 'space'">
-                <span class="word-space"> </span>
-              </template>
-              <template v-else>
-                <span class="word">
-                  <span
-                    v-for="letter in token.letters"
-                    :key="`l4-${letter.i}`"
-                    :class="['hero-letter', animateEntrance ? 'hero-letter-in' : '']"
-                    :style="{ animationDelay: letter.delay + 640 + 'ms' }"
-                  >{{ letter.char }}</span>
-                </span>
-              </template>
-            </template>
-          </span>
         </template>
       </h1>
+
+      <SharedScrollDownArrow />
     </div>
   </AboutWrapper>
 </template>

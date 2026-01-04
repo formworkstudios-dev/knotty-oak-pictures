@@ -52,7 +52,7 @@ const slides = [
       'authenticity is our original thought.'
     ],
     bg: 'bg-red-950',
-    img: '/ship.jpg'
+    img: '/little.png'
   }
 ]
 
@@ -107,12 +107,6 @@ onMounted(() => {
 onUnmounted(() => {
   if (cycleTimeout) window.clearTimeout(cycleTimeout)
 })
-
-function scrollDownOneViewport(): void {
-  if (typeof window !== 'undefined') {
-    window.scrollBy({ top: window.innerHeight, behavior: 'smooth' })
-  }
-}
 </script>
 
 <template>
@@ -133,8 +127,9 @@ function scrollDownOneViewport(): void {
         class="hero-bg-image"
         :style="{
           backgroundImage: `linear-gradient(rgba(30,30,30,0.55), rgba(30,30,30,0.55)), url('${slide.img}')`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
+          // Fit full image width inside the viewport; letterbox vertically if needed.
+          backgroundSize: '100% auto',
+          backgroundPosition: 'center center',
           backgroundRepeat: 'no-repeat',
           zIndex: 0
         }"
@@ -193,47 +188,7 @@ function scrollDownOneViewport(): void {
       />
     </div>
 
-    <!-- Scroll indicator button: thin V arrow with tail -->
-    <button
-      type="button"
-      class="absolute left-1/2 bottom-6 -translate-x-1/2 z-20 text-white/85 cursor-pointer bg-transparent border-0 p-2"
-      aria-label="Scroll down"
-      @click="scrollDownOneViewport"
-    >
-      <span class="scroll-indicator-icon inline-flex">
-        <svg
-          width="80"
-          height="80"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <!-- thin tail -->
-          <path
-            d="M12 5 V13"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="butt"
-            vector-effect="non-scaling-stroke"
-          />
-          <!-- two-line arrow head (V shape) -->
-          <path
-            d="M8 16 L12 20"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="butt"
-            vector-effect="non-scaling-stroke"
-          />
-          <path
-            d="M16 16 L12 20"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="butt"
-            vector-effect="non-scaling-stroke"
-          />
-        </svg>
-      </span>
-    </button>
+    <SharedScrollDownArrow />
   </div>
 </template>
 
@@ -338,24 +293,6 @@ function scrollDownOneViewport(): void {
 /* ensure outgoing layer appears above incoming during fade */
 .hero-outgoing {
   z-index: 20;
-}
-
-/* Scroll indicator bounce (animate translateY only to avoid overriding centering) */
-.scroll-indicator-icon {
-  animation: scrollBounce 1.6s ease-in-out infinite;
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.6));
-}
-
-@keyframes scrollBounce {
-
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-8px);
-  }
 }
 
 /* Lines */

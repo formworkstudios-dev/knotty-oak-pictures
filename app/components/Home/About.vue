@@ -60,8 +60,7 @@ onUnmounted(() => {
       <div
         class="absolute left-4 right-4 bottom-4 md:left-6 md:right-6 md:bottom-6 text-stone-50 text-base md:text-lg leading-snug md:leading-normal drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)] text-center"
       >
-        Knotty Oak Pictures is rooted in a dream shared by two people who believe that authenticity and imagination are
-        at the heart of every great story.
+        Authenticity and Imagination are at the Heart of the Stories We Tell.
       </div>
     </div>
     <Nuxt-Link to="/about">

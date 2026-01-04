@@ -24,15 +24,19 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div :class="{ 'text-black': isScrolledPastFirstScreen, 'text-white': !isScrolledPastFirstScreen }">
+  <div
+    class="relative z-[110]"
+    :class="{ 'text-black': isScrolledPastFirstScreen, 'text-white': !isScrolledPastFirstScreen }"
+  >
     <div class="first-screen relative">
       <AboutHero />
     </div>
+    <AboutUs />
     <!-- <AboutInfo /> -->
     <AboutText />
     <AboutText2 />
     <!-- <AboutContent /> -->
-    <AboutUs />
+
   </div>
 </template>
 

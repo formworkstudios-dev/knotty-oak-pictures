@@ -120,7 +120,7 @@ onUnmounted(() => {
       @click="closeMenu"
     >
       <div class="h-full flex flex-col items-end justify-center pr-6 md:pr-16">
-        <nav class="flex flex-col gap-6 text-right max-w-xs w-full ml-auto">
+        <nav class="flex flex-col gap-6 text-right max-w-lgshiop w-full ml-auto">
           <NuxtLink
             to="/"
             @click="closeMenu"
@@ -141,7 +141,19 @@ onUnmounted(() => {
             <span
               class="inline-block text-4xl md:text-5xl font-light hover:font-normal transition-all cursor-pointer relative pl-4 before:content-[''] before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-2 before:h-2 before:rounded-full before:bg-[#FFFBEB] before:opacity-0 before:transition-all hover:before:opacity-100 hover:before:-translate-x-2"
             >
-              About
+              About Us
+            </span>
+          </NuxtLink>
+
+          <NuxtLink
+            to="/company-reel"
+            @click="closeMenu"
+            class="text-white"
+          >
+            <span
+              class="inline-block text-4xl md:text-5xl font-light hover:font-normal transition-all cursor-pointer relative pl-4 before:content-[''] before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-2 before:h-2 before:rounded-full before:bg-[#FFFBEB] before:opacity-0 before:transition-all hover:before:opacity-100 hover:before:-translate-x-2"
+            >
+              Company Reel
             </span>
           </NuxtLink>
 
