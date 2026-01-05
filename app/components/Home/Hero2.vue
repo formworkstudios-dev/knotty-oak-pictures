@@ -48,8 +48,8 @@ const slides = [
   },
   {
     lines: [
-      'Rooted by the belief that',
-      'authenticity is our original thought.'
+
+      'Authenticity is our original thought.'
     ],
     bg: 'bg-red-950',
     img: '/little.png'
@@ -62,7 +62,7 @@ let cycleTimeout: number | null = null
 
 
 // Timings (ms)
-const bgFadeMs = 1200;
+const bgFadeMs = 2700;
 const lettersInMs = 900; // covers staggered delays and animation
 const lettersVisibleMs = 4100; // time letters are fully visible before fading out
 const lettersOutMs = 700;
@@ -163,9 +163,9 @@ onUnmounted(() => {
               'hero'
             ]"
             :style="slideState === 'letters-in'
-              ? `animation-delay: ${letter.delay}ms; animation-duration: 0.5s;`
+              ? `animation-delay: ${letter.delay}ms; animation-duration: 1.3s;`
               : slideState === 'letters-out'
-                ? `animation-delay: ${letter.delay}ms; animation-duration: 0.4s;`
+                ? `animation-delay: ${letter.delay}ms; animation-duration: 1.2s;`
                 : ''"
           >
             {{ letter.char }}
@@ -194,7 +194,7 @@ onUnmounted(() => {
 /* Background fade */
 .bg-fade-enter-active,
 .bg-fade-leave-active {
-  transition: opacity 1.2s cubic-bezier(.77, .2, .32, 1);
+  transition: opacity 2.7s cubic-bezier(.77, .2, .32, 1);
 }
 
 .bg-fade-enter-from,
@@ -264,12 +264,12 @@ onUnmounted(() => {
 }
 
 .hero-letter-in {
-  animation: letterFadeIn 0.5s cubic-bezier(.77, .2, .32, 1) forwards;
+  animation: letterFadeIn 1.3s cubic-bezier(.77, .2, .32, 1) forwards;
   animation-fill-mode: both;
 }
 
 .hero-letter-out {
-  animation: letterFadeOut 0.5s cubic-bezier(.77, .2, .32, 1) forwards;
+  animation: letterFadeOut 1.2s cubic-bezier(.77, .2, .32, 1) forwards;
   animation-fill-mode: both;
 }
 

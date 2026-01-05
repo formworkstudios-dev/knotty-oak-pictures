@@ -25,8 +25,8 @@ const team = [
   >
     <div class="flex items-center justify-center min-h-screen py-20 pt-36">
       <div class="max-w-6xl px-8 w-full text-black">
-        <h1 class="text-5xl font-bold text-center !mb-18">
-          Our Story
+        <h1 class="text-5xl font-bold text-center !mb-12">
+          About Us
         </h1>
 
         <div class="flex flex-col md:flex-row gap-10 max-w-3xl mx-auto">
@@ -36,12 +36,12 @@ const team = [
               <img
                 src="/tom.webp"
                 alt="Tom Currà"
-                class="w-full md:w-72 h-[400px] md:h-[400px] mx-0 md:mx-auto object-cover shadow-lg"
+                class="w-full md:w-80 h-[400px] md:h-[400px] mx-0 md:mx-auto object-cover shadow-lg"
               />
             </div>
             <div
               class="mx-0 md:mx-auto flex-1 flex flex-col justify-start pt-1 md:pt-0 text-center"
-              style="max-width: 288px;"
+              style="max-width: 330px;"
             >
               <h2 class="text-3xl font-bold !mb-1 text-center">Tom Currà</h2>
               <p class="text-xl font-semibold mb-4 opacity-50 text-center">President & Executive Producer</p>
@@ -58,17 +58,17 @@ const team = [
               <img
                 src="/greg-bio.jpg"
                 alt="Greg Matkosky"
-                class="w-full md:w-72 h-[400px] md:h-[400px] object-cover object-center shadow-lg"
+                class="w-full md:w-80 h-[400px] md:h-[400px] object-cover object-center shadow-lg"
                 style="margin-right:0;"
               />
             </div>
             <div
               class="mx-0 md:mx-0 flex-1 flex flex-col justify-start pt-1 md:pt-0 items-center text-center"
-              style="max-width: 288px;"
+              style="max-width: 330px;"
             >
               <h2 class="text-3xl font-bold !mb-1 text-center">Greg Matkosky</h2>
               <p class="text-xl font-semibold mb-4 opacity-50 text-center">Director & Cinematographer</p>
-              <p class="text-lg opacity-80 text-center">Greg Matkosky is an Emmy and Cine Golden
+              <p class="text-lg opacity-80 text-center">Greg Matkosky is an Emmy and Golden
                 Eagle Award-winning writer/director with nearly 40
                 years experience in national commercial,
                 international documentary, giant-screen and

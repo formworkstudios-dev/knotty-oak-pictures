@@ -60,7 +60,7 @@ const navBackground = computed(() => {
 });
 
 const handleScroll = () => {
-  hasScrolled.value = window.scrollY > window.innerHeight;
+  hasScrolled.value = window.scrollY > window.innerHeight * 0.9;
 };
 
 onMounted(() => {
@@ -76,7 +76,7 @@ onUnmounted(() => {
 
 <template>
   <div
-    class="fixed top-0 left-0 right-0 flex justify-center items-center p-2.5 z-[120] transition-colors duration-300 bg-stone-950/80"
+    class="fixed top-0 left-0 right-0 flex justify-center items-center p-2.5 z-[1000] transition-colors duration-300 bg-stone-950/80"
     :class="[navBackground, { 'border-b border-stone-700': isMenuOpen, 'border-transparent': !isMenuOpen }]"
   >
     <div class="absolute left-1/2 transform -translate-x-1/2 z-[130]">
@@ -119,7 +119,7 @@ onUnmounted(() => {
   <Transition name="slide">
     <div
       v-if="isMenuOpen"
-      class="fixed inset-0 bg-stone-950 z-[100]"
+      class="fixed inset-0 bg-stone-950 z-[990]"
       @click="closeMenu"
     >
       <div class="h-full flex flex-col items-end justify-center pr-6 md:pr-16">
@@ -183,9 +183,9 @@ onUnmounted(() => {
           </div>
           <div>
             <NuxtLink
-              to="tel:+1234567890"
+              to="tel:+15705753787"
               class="underline hover:no-underline"
-            >(123) 456-7890</NuxtLink>
+            >1-570-575-3787</NuxtLink>
           </div>
           <div>
             <NuxtLink

@@ -208,7 +208,7 @@ onUnmounted(() => {
   >
     <div
       id="about-hero-bg"
-      class="relative flex items-start justify-start h-screen px-4 pt-4 pb-12 md:pb-10 md:pl-10 overflow-hidden w-full"
+      class="relative flex flex-col items-center justify-center h-screen px-4 pb-12 md:pb-10 overflow-hidden w-full"
     >
       <!-- fade-to-black overlay controlled by scroll -->
       <div
@@ -240,7 +240,7 @@ onUnmounted(() => {
       </div>
 
       <h1
-        class="!text-4xl lg:!text-5xl text-left self-end relative z-10 cursor-default about-hero-title leading-normal"
+        class="!text-4xl lg:!text-5xl text-center relative z-10 cursor-default about-hero-title leading-normal"
         :style="`--gc: ${gradientCenter}%; opacity: 0.85;`"
       >
         <template v-if="isMobile">
@@ -276,7 +276,7 @@ onUnmounted(() => {
         </template>
       </h1>
 
-      <SharedScrollDownArrow />
+      <SharedScrollDownArrow class="absolute bottom-6 left-1/2 -translate-x-1/2 z-20" />
     </div>
   </AboutWrapper>
 </template>

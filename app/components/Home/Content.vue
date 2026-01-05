@@ -11,7 +11,7 @@ const items = [
     title: 'Expedition Chesapeake',
     year: '',
     image: '/panel/ship-clipped.jpg',
-    desc: 'Expedition Chesapeake is a giant-screen journey of discovery that follows Emmy-Award winning wildlife biologist and conservationist Jeff Corwin as he navigates on, above and below the bay’s astonishingly diverse environment and celebrates the human history that has imbued this body of water with a soul. <strong>IMAX theaters nationally.</strong>',
+    desc: 'Expedition Chesapeake is a giant-screen journey of discovery that follows Emmy-Award winning wildlife biologist and conservationist Jeff Corwin as he navigates on, above and below the bay’s astonishingly diverse environment and celebrates the human history that has imbued this body of water with a soul. <strong>Distributed to IMAX theaters internationally.</strong>',
     length: ''
   },
   {
@@ -151,7 +151,7 @@ function getSlideStyle(item: { image?: string; id: number }) {
   }
 }
 
-// visible count responsive: desktop 3, mobile 2 (will be updated on mount)
+// visible count responsive: desktop 3, mobile 1 (will be updated on mount)
 const visibleCount = ref(3)
 // percent width per item (responsive to container size)
 const itemWidthPercent = computed(() => 100 / visibleCount.value)
@@ -267,13 +267,11 @@ let resyncTimeout: number | null = null
 
 function updateVisibleCount() {
   // responsive breakpoints:
-  // - <420px: 1 slide
-  // - 420px <= width < 768px: 2 slides
-  // - >=768px: 3 slides
+  // - <768px: 1 slide (mobile)
+  // - >=768px: 3 slides (desktop)
   const w = (typeof window !== 'undefined') ? window.innerWidth : 1024
   let newCount = 3
-  if (w < 420) newCount = 1
-  else if (w < 768) newCount = 2
+  if (w < 768) newCount = 1
   if (visibleCount.value !== newCount) {
     visibleCount.value = newCount
     // clamp currentIndex so it doesn't exceed new max
@@ -466,6 +464,8 @@ onUnmounted(() => {
           </div>
         </div>
       </div>
+
+      <SharedScrollDownArrow class="!z-[80]" />
     </div>
   </div>
 </template>
@@ -582,10 +582,7 @@ onUnmounted(() => {
 /* description reveal on hover: hidden by default, fades/slides up on hover */
 .desc {
   opacity: 0;
-  transform: translateY(8px);
-  max-height: 0;
-  overflow: hidden;
-  transition: opacity 220ms ease, transform 220ms ease, max-height 280ms ease;
+  transition: opacity 380ms ease;
   pointer-events: none;
   max-width: 56ch;
   /* limit description width to avoid stretching on hover */
@@ -597,47 +594,34 @@ onUnmounted(() => {
 @media (hover: none) and (pointer: coarse) {
   .desc {
     opacity: 1;
-    transform: translateY(0);
-    max-height: 20rem;
     pointer-events: auto;
   }
 }
 
 .carousel-item:hover .desc {
   opacity: 1;
-  transform: translateY(0);
-  max-height: 10rem;
   pointer-events: auto;
 }
 
 .carousel-item:focus-within .desc {
   opacity: 1;
-  transform: translateY(0);
-  max-height: 12rem;
   pointer-events: auto;
 }
 
 /* length behaves like description: hidden by default, reveals on hover/focus */
 .length {
   opacity: 0;
-  transform: translateY(6px);
-  max-height: 0;
-  overflow: hidden;
-  transition: opacity 200ms ease, transform 200ms ease, max-height 240ms ease;
+  transition: opacity 320ms ease;
   pointer-events: none;
 }
 
 .carousel-item:hover .length {
   opacity: 1;
-  transform: translateY(0);
-  max-height: 6rem;
   pointer-events: auto;
 }
 
 .carousel-item:focus-within .length {
   opacity: 1;
-  transform: translateY(0);
-  max-height: 8rem;
   pointer-events: auto;
 }
 
