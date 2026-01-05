@@ -113,7 +113,7 @@ onUnmounted(() => {
   <div
     id="home-hero-bg"
     :class="`min-h-screen flex flex-col items-center justify-center gap-6 w-full transition-colors duration-700 ${slides[currentSlide]?.bg ?? 'bg-stone-950'}`"
-    style="position: relative;"
+    style="position: relative; min-height: 100dvh;"
   >
     <!-- Background images -->
     <transition-group
@@ -127,8 +127,6 @@ onUnmounted(() => {
         class="hero-bg-image"
         :style="{
           backgroundImage: `linear-gradient(rgba(30,30,30,0.55), rgba(30,30,30,0.55)), url('${slide.img}')`,
-          // Fit full image width inside the viewport; letterbox vertically if needed.
-          backgroundSize: '100% auto',
           backgroundPosition: 'center center',
           backgroundRepeat: 'no-repeat',
           zIndex: 0
@@ -213,8 +211,17 @@ onUnmounted(() => {
   position: absolute;
   inset: 0;
   width: 100vw;
-  height: 100vh;
+  height: 100dvh;
   pointer-events: none;
+  /* Default: fit full image width; letterbox vertically if needed */
+  background-size: 100% auto;
+}
+
+@media (max-width: 640px) {
+  .hero-bg-image {
+    /* Mobile: fill the viewport */
+    background-size: cover;
+  }
 }
 
 /* Overlays */

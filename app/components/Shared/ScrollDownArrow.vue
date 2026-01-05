@@ -34,8 +34,7 @@ function scrollDownOneViewport(): void {
   >
     <span class="scroll-indicator-icon inline-flex">
       <svg
-        width="80"
-        height="80"
+        class="w-12 h-12 md:w-20 md:h-20"
         viewBox="0 0 24 24"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
