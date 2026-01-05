@@ -20,11 +20,11 @@ const team = [
 
 <template>
   <AboutWrapper
-    bg-color="bg-stone-900"
+    bg-color="bg-amber-50"
     :z-index="50"
   >
     <div class="flex items-center justify-center min-h-screen py-20 pt-36">
-      <div class="max-w-6xl px-8 w-full text-white">
+      <div class="max-w-6xl px-8 w-full text-black">
         <h1 class="text-5xl font-bold text-center !mb-18">
           Our Story
         </h1>

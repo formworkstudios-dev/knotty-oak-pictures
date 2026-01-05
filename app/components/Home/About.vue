@@ -40,10 +40,10 @@ onUnmounted(() => {
 <template>
   <div
     ref="rootEl"
-    class="h-screen flex items-center justify-center bg-stone-950 relative z-20 shadow-2xl flex-col gap-10 fade-in-section px-4"
+    class="h-screen flex items-center justify-center bg-amber-50 relative z-20 shadow-2xl flex-col gap-10 fade-in-section px-4"
     :class="{ 'is-visible': isVisible }"
   >
-    <div class="w-full max-w-3xl pt-20 overflow-hidden h-[54vh] md:h-auto relative">
+    <div class="w-full max-w-3xl mt-20 overflow-hidden h-[54vh] md:h-auto relative">
       <Nuxt-Img
         src="/knotty-oak-office.jpg"
         alt="Tom and Greg 35 years ago"
@@ -64,7 +64,7 @@ onUnmounted(() => {
       </div>
     </div>
     <Nuxt-Link to="/about">
-      <div class="text-xl text-stone-50 flex items-center gap-2 group">
+      <div class="text-xl text-stone-950 flex items-center gap-2 group">
         LEARN ABOUT US
         <UIcon
           name="i-mdi-chevron-right"

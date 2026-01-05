@@ -208,7 +208,7 @@ onUnmounted(() => {
   >
     <div
       id="about-hero-bg"
-      class="relative flex items-start justify-start min-h-screen px-4 pt-4 pb-12 md:pb-10 md:pl-10 overflow-x-hidden w-full"
+      class="relative flex items-start justify-start h-screen px-4 pt-4 pb-12 md:pb-10 md:pl-10 overflow-hidden w-full"
     >
       <!-- fade-to-black overlay controlled by scroll -->
       <div
@@ -218,7 +218,7 @@ onUnmounted(() => {
       <!-- Full background image with transparency, matching Text.vue -->
       <!-- Crossfading background images -->
       <div
-        class="absolute inset-0 w-full h-full z-0 pointer-events-none opacity-40 will-change-opacity"
+        class="absolute inset-0 w-full h-full z-0 pointer-events-none will-change-opacity"
         :style="{ '--bg-fade-ms': bgFadeMs + 'ms' }"
       >
         <!-- Layer A -->

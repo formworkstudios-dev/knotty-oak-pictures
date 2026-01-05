@@ -4,6 +4,8 @@
 >
 import { ref, onMounted, onUnmounted, computed } from 'vue';
 
+const route = useRoute();
+
 const appConfig = useAppConfig();
 const siteName = appConfig.siteName;
 const siteLogo = appConfig.siteLogo;
@@ -53,7 +55,8 @@ const titleColor = computed(() => {
 });
 
 const navBackground = computed(() => {
-  return hasScrolled.value ? 'bg-stone-900/80' : 'bg-transparent';
+  const forceSolid = route.path === '/filmography';
+  return (hasScrolled.value || forceSolid) ? 'bg-stone-900/80' : 'bg-transparent';
 });
 
 const handleScroll = () => {
@@ -158,14 +161,14 @@ onUnmounted(() => {
           </NuxtLink>
 
           <NuxtLink
-            to="/content"
+            to="/filmography"
             @click="closeMenu"
             class="text-white"
           >
             <span
               class="inline-block text-4xl md:text-5xl font-light hover:font-normal transition-all cursor-pointer relative pl-4 before:content-[''] before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-2 before:h-2 before:rounded-full before:bg-[#FFFBEB] before:opacity-0 before:transition-all hover:before:opacity-100 hover:before:-translate-x-2"
             >
-              Content
+              Filmography
             </span>
           </NuxtLink>
         </nav>

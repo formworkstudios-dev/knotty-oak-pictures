@@ -188,11 +188,11 @@ const filmography = [
 </script>
 
 <template>
-  <div class="min-h-screen bg-stone-900 text-stone-50 py-24 md:py-38 px-6">
+  <div class="min-h-screen bg-stone-100 text-stone-900 py-24 md:py-38 px-6">
     <div class="w-full max-w-6xl mx-auto">
       <h1 class="text-4xl font-bold mb-10">Filmography</h1>
 
-      <div class="space-y-6 text-sm leading-relaxed text-stone-200">
+      <div class="space-y-6 text-sm leading-relaxed text-stone-700">
         <p
           v-for="(paragraph, index) in introParagraphs"
           :key="index"
@@ -206,31 +206,31 @@ const filmography = [
         <article
           v-for="row in filmography"
           :key="`${row.released}-${row.title}`"
-          class="border border-stone-800 bg-stone-900/40 p-5"
+          class="border border-stone-200 bg-stone-50 p-5"
         >
-          <h2 class="text-lg font-semibold text-stone-50">
+          <h2 class="text-lg font-semibold text-stone-900">
             {{ row.title }}
           </h2>
-          <p class="mt-2 text-sm leading-relaxed text-stone-200">
+          <p class="mt-2 text-sm leading-relaxed text-stone-700">
             {{ row.story }}
           </p>
 
           <div class="mt-4 grid grid-cols-2 gap-x-6 gap-y-3 text-sm">
             <div>
-              <div class="text-xs uppercase tracking-wide text-stone-400">Genre</div>
-              <div class="text-stone-200">{{ row.genre }}</div>
+              <div class="text-xs uppercase tracking-wide text-stone-500">Genre</div>
+              <div class="text-stone-700">{{ row.genre }}</div>
             </div>
             <div>
-              <div class="text-xs uppercase tracking-wide text-stone-400">Released</div>
-              <div class="text-stone-200">{{ row.released }}</div>
+              <div class="text-xs uppercase tracking-wide text-stone-500">Released</div>
+              <div class="text-stone-700">{{ row.released }}</div>
             </div>
             <div>
-              <div class="text-xs uppercase tracking-wide text-stone-400">Tom</div>
-              <div class="text-stone-200">{{ row.tom }}</div>
+              <div class="text-xs uppercase tracking-wide text-stone-500">Tom</div>
+              <div class="text-stone-700">{{ row.tom }}</div>
             </div>
             <div>
-              <div class="text-xs uppercase tracking-wide text-stone-400">Greg</div>
-              <div class="text-stone-200">{{ row.greg }}</div>
+              <div class="text-xs uppercase tracking-wide text-stone-500">Greg</div>
+              <div class="text-stone-700">{{ row.greg }}</div>
             </div>
           </div>
         </article>
@@ -241,27 +241,27 @@ const filmography = [
         <div class="overflow-x-auto">
           <table class="min-w-full border-collapse">
             <thead>
-              <tr class="border-b border-stone-500/40">
-                <th class="py-3 pr-4 text-left text-xs uppercase tracking-wide text-stone-300">Title</th>
-                <th class="py-3 pr-4 text-left text-xs uppercase tracking-wide text-stone-300">Genre</th>
-                <th class="py-3 pr-4 text-left text-xs uppercase tracking-wide text-stone-300">Released</th>
-                <th class="py-3 pr-4 text-left text-xs uppercase tracking-wide text-stone-300">Tom</th>
-                <th class="py-3 pr-4 text-left text-xs uppercase tracking-wide text-stone-300">Greg</th>
-                <th class="py-3 text-left text-xs uppercase tracking-wide text-stone-300">The Story</th>
+              <tr class="border-b border-stone-300">
+                <th class="py-3 pr-4 text-left text-xs uppercase tracking-wide text-stone-600">Title</th>
+                <th class="py-3 pr-4 text-left text-xs uppercase tracking-wide text-stone-600">Genre</th>
+                <th class="py-3 pr-4 text-left text-xs uppercase tracking-wide text-stone-600">Released</th>
+                <th class="py-3 pr-4 text-left text-xs uppercase tracking-wide text-stone-600">Tom</th>
+                <th class="py-3 pr-4 text-left text-xs uppercase tracking-wide text-stone-600">Greg</th>
+                <th class="py-3 text-left text-xs uppercase tracking-wide text-stone-600">The Story</th>
               </tr>
             </thead>
             <tbody>
               <tr
                 v-for="row in filmography"
                 :key="`${row.released}-${row.title}`"
-                class="border-b border-stone-800"
+                class="border-b border-stone-200"
               >
-                <td class="py-3 pr-4 align-top text-sm font-medium text-stone-50">{{ row.title }}</td>
-                <td class="py-3 pr-4 align-top text-sm text-stone-200">{{ row.genre }}</td>
-                <td class="py-3 pr-4 align-top text-sm text-stone-200">{{ row.released }}</td>
-                <td class="py-3 pr-4 align-top text-sm text-stone-200">{{ row.tom }}</td>
-                <td class="py-3 pr-4 align-top text-sm text-stone-200">{{ row.greg }}</td>
-                <td class="py-3 align-top text-sm text-stone-200">{{ row.story }}</td>
+                <td class="py-3 pr-4 align-top text-sm font-medium text-stone-900">{{ row.title }}</td>
+                <td class="py-3 pr-4 align-top text-sm text-stone-700">{{ row.genre }}</td>
+                <td class="py-3 pr-4 align-top text-sm text-stone-700">{{ row.released }}</td>
+                <td class="py-3 pr-4 align-top text-sm text-stone-700">{{ row.tom }}</td>
+                <td class="py-3 pr-4 align-top text-sm text-stone-700">{{ row.greg }}</td>
+                <td class="py-3 align-top text-sm text-stone-700">{{ row.story }}</td>
               </tr>
             </tbody>
           </table>
