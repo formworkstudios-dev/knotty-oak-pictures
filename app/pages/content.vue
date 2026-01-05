@@ -2,158 +2,273 @@
   setup
   lang="ts"
 >
-const items = [
-  // previously last two items moved to the front
-  {
-    id: 1,
-    title: 'Expedition Chesapeake',
-    year: '',
-    image: '/panel/ship.jpg',
-    desc: 'Expedition Chesapeake is a giant-screen journey of discovery that follows Emmy-Award winning wildlife biologist and conservationist Jeff Corwin as he navigates on, above and below the bay’s astonishingly diverse environment and celebrates the human history that has imbued this body of water with a soul. <strong>IMAX theaters nationally.</strong>',
-    length: ''
-  },
-  {
-    id: 2,
-    title: 'Ubaldo',
-    year: '',
-    image: '/panel/ubaldo-full.webp',
-    desc: 'Shot on location in Italy. A cinematic rendition of the nearly millennium-old epic Italian cultural festival “La Festa Dei Ceri”, and its recreation in a small town in the United States. <strong>Nationally distributed</strong>.',
-    length: '57 minutes'
-  },
-  {
-    id: 3,
-    title: 'Remembering The Sirens',
-    year: '',
-    image: '/panel/sirens.webp',
-    desc: '<strong>Emmy Award winning</strong> and <strong>nationally distributed</strong> film narrated by Leon Redbone that explores the early history of Jazz legends Tommy and Jimmy Dorsey and how their musical vision catalyzed Jazz from its improvisational roots into the Big Band sound.',
-    length: '57 minutes'
-  },
-  {
-    id: 4,
-    title: 'Little League: A History',
-    year: '',
-    image: '/panel/little.webp',
-    desc: '<strong>Nationally distributed</strong> and presented on ESPN during the Little League World Series broadcast. Narrated by Vin Scully, this documentary is the authorized cinematic biography of one of America’s iconic institutions. Shot on location in Japan.',
-    length: '57 minutes'
-  },
+const introParagraphs = [
+  'The friendship and collaboration between Tom Curra and Greg Matkosky began in Pennsylvania, where Tom formed United Studios in the mid-1990s and invited Greg to return home after living and working in Los Angeles for 14 years as a Director/Cameraman to collaborate on uniquely visual documentaries that chronicled and celebrated the Commonwealth’s nationally resonant social and cultural history. In 2004, their collaboration moved to PBS WVIA Public Media, where Tom was hired first as Executive in Charge of Production, and then as CEO, and invited Greg to join the production team as the Creative Director for Documentary Films.',
+  'In a 15-year period, they produced more than 20 documentaries, including six feature-length and one giant-screen, that secured both national carriage and international distribution and which received two Emmy Award nominations, won one Emmy as well as a Cine Golden Eagle award. Their films inspired the creation of an original symphony that musically rendered the historical stories their films visualized. Many of their docs have been repurposed into K-12 Pennsylvania history curriculum, and they have been invited to speak at colleges, universities and historical societies about the “making of” their unparalleled body of work.'
+]
 
+const filmography = [
   {
-    id: 5,
-    title: 'Frank Schoonover: The Authentic Artist',
-    year: '',
-    image: '/panel/frank.webp',
-    desc: 'A <strong>Cine Golden Eagle winner</strong> that recounts the creative adventures of the master American illustrator. Shot in the wilderness environs of northern Quebec Province and Wyoming’s Bighorn Mountains.',
-    length: '57 minutes'
-  },
-  {
-    id: 6,
-    title: 'An Empty Place At The Table',
-    year: '',
-    image: '/panel/table.webp',
-    desc: 'Susan Sarandon narrates this New York Film and Video Festival winner for <strong>Best Social Documentary</strong> about an art exhibit that memorializes women and children murdered in acts of domestic violence. <strong>Nationally distributed</strong>.',
-    length: '28 minutes'
-  },
-  {
-    id: 7,
     title: 'Stories From The Mines',
-    year: 2001,
-    image: '/panel/mines.webp',
-    desc: '<strong>Nationally distributed</strong>, 2001 feature-length <strong>Emmy-nominated</strong> dramatized documentary narrated by Academy Award winner Jason Miller that presents the epic struggle between early 20th century immigrant coal miners and American industrialists.',
-    length: '143 minutes'
+    genre: 'Dramatized doc',
+    released: '2000',
+    tom: 'Producer, EP',
+    greg: 'Dir, Writer',
+    story: 'Emmy-nominated dramatic reenactments visualize immigrant miners working in early 20th century anthracite coal mines.'
   },
   {
-    id: 8,
-    title: 'Hearth & Harvest',
-    year: '',
-    image: '/panel/harvest.webp',
-    desc: '<strong>Feature-length</strong> visual tone poem that blends the story of agricultural heritage with contemporary issues that challenge farmers. Broadcast throughout Pennsylvania on the Pennsylvania Public Television network.',
-    length: '86 minutes'
+    title: 'Dying Breath',
+    genre: 'Cultural doc',
+    released: '2003',
+    tom: 'Producer, EP',
+    greg: 'Dir, Writer, DP',
+    story: 'First-person storytelling about old-time miners dying of black-lung disease.'
   },
   {
-    id: 9,
-    title: 'Spirit & Speed',
-    year: '',
-    image: '/panel/spirit.webp',
-    desc: 'A behind-the-scenes look at the sport, art, industry and controversies of thoroughbred horse racing. Broadcast throughout Pennsylvania on the Pennsylvania Public Television network.',
-    length: '57 minutes'
+    title: 'Empty Place At The Table',
+    genre: 'Social doc',
+    released: '2004',
+    tom: 'Producer, EP',
+    greg: 'Dir, Writer, DP',
+    story: 'Best Social doc, New York Film & Video Awards.'
   },
   {
-    id: 10,
+    title: 'In A Clear Light',
+    genre: 'biopic',
+    released: '2005',
+    tom: 'Producer, EP',
+    greg: 'Dir, Writer, DP',
+    story: 'Story about William Scranton’s effort to challenge Barry Goldwater’s 1964 presidential campaign rooted in denying passage of the Civil Rights act.'
+  },
+  {
+    title: 'Looking To The River',
+    genre: 'environmental',
+    released: '2006',
+    tom: 'Producer, EP',
+    greg: 'Dir, Writer, DP',
+    story: 'Feature-length presentation of the history and heritage of the Susquehanna River, the main tributary of the Chesapeake Bay.'
+  },
+  {
+    title: 'The Extraordinary Journey',
+    genre: 'Cultural doc',
+    released: '2006',
+    tom: 'Producer, EP',
+    greg: 'Dir, Writer, DP',
+    story: 'Feature-length recounting of the Atlantic migration of millions of eastern Europeans to the US in the early 20th century.'
+  },
+  {
     title: 'The Healing Hero',
-    year: '',
-    image: '/panel/healing.webp',
-    desc: '<strong>Docudrama</strong> that reenacts Medal of Honor recipient Gino Merli’s amazing story of one night during World War II when he killed 51 German soldiers.',
-    length: '28 minutes'
+    genre: 'Dramatized doc',
+    released: '2007',
+    tom: 'Producer, EP',
+    greg: 'Dir, Writer, DP',
+    story: 'Adapted from the stage play about a medal of honor recipient’s incredible WWII experience.'
   },
   {
-    id: 11,
-    title: 'Fit Club',
-    year: '',
-    image: '/panel/fit.png',
-    desc: 'Short film about the competitive martial artist and wrestling coach Matt Marcinek, who was born with cerebral palsy but has defined his life by a commitment to excellence.',
-    length: ''
+    title: 'Expedition Chesapeake',
+    genre: 'Environmental',
+    released: '2007',
+    tom: 'Producer, EP',
+    greg: 'Dir, Writer, DP',
+    story: 'Follow a youth camp’s environmental adventures on a canoe trip on the Chesapeake Bay’s largest tributary.'
   },
-
-  // {
-  //   id: 3,
-  //   title: 'Looking to the River',
-  //   year: '',
-  //   image: '',
-  //   desc: 'Description'
-  // },
-
-  // remaining items
-
-  // {
-  //   id: 7,
-  //   title: 'Paesani',
-  //   year: '',
-  //   image: '/italian.png',
-  //   desc: 'An intimate portrait of Italian-American roots, traditions, and the ties that bind families across generations.'
-  // },
-
-  // {
-  //   id: 8,
-  //   title: 'Chocolate Dreams',
-  //   year: '',
-  //   image: '',
-  //   desc: 'Description'
-  // },
-
-  // move Little League & Ubaldo to the end and remove images (black bg)
-];
+  {
+    title: 'An Uncommon Conscience',
+    genre: 'Biopic',
+    released: '2008',
+    tom: 'Producer, EP',
+    greg: 'Dir, Writer, DP',
+    story: 'Biopic charting the career of US Federal judge Max Rosenn and his remarkable judicial vision.'
+  },
+  {
+    title: 'Ubaldo',
+    genre: 'Cultural doc',
+    released: '2009',
+    tom: 'Producer, EP',
+    greg: 'Dir, Writer, DP',
+    story: 'Shot on location in Italy, the story of a millennium-old cultural tradition celebrated in only two towns in the world, one in Italy and another in the US.'
+  },
+  {
+    title: 'Bread Upon The Water',
+    genre: 'Biopic',
+    released: '2010',
+    tom: 'Producer, EP',
+    greg: 'Dir, Writer, DP',
+    story: 'A priest’s life of faith and his efforts to embrace the modern world’s challenges to his parishioners.'
+  },
+  {
+    title: 'Paesani',
+    genre: 'Cultural doc',
+    released: '2011',
+    tom: 'Producer, EP',
+    greg: 'Dir, Writer, DP',
+    story: 'The story of the immigration of Italians to the US in the early 1900s.'
+  },
+  {
+    title: 'Remembering The Sirens',
+    genre: 'Cultural doc',
+    released: '2011',
+    tom: 'Producer, EP',
+    greg: 'Dir, Writer, DP',
+    story: 'Emmy Award-winning dramatized doc about how jazz evolved from its improvisational roots into the Big-Band sound.'
+  },
+  {
+    title: 'En Pointe',
+    genre: 'Biopic',
+    released: '2011',
+    tom: 'Producer, EP',
+    greg: 'Dir, Writer, DP',
+    story: 'The story of the founding of the Pennsylvania Ballet and how it galvanized the evolution of ballet in the US.'
+  },
+  {
+    title: 'Camp Victory',
+    genre: 'Documentary',
+    released: '2012',
+    tom: 'Producer, EP',
+    greg: 'Dir, Writer, DP',
+    story: 'Story about a summer camp for kids with life-threatening physical challenges.'
+  },
+  {
+    title: 'Chocolate Dreams',
+    genre: 'Biopic',
+    released: '2012',
+    tom: 'Producer, EP',
+    greg: 'Dir, Writer, DP',
+    story: 'Shot on location in Indonesia. How a little chocolate store grew into a $125 million-dollar international candy manufacturer.'
+  },
+  {
+    title: 'Spirit and Speed',
+    genre: 'Cultural doc',
+    released: '2013',
+    tom: 'Producer, EP',
+    greg: 'Dir, Writer, DP',
+    story: 'The history and heritage of the sport, industry and challenges of thoroughbred horse racing in Pennsylvania.'
+  },
+  {
+    title: 'The Authentic Artist',
+    genre: 'Biopic',
+    released: '2014',
+    tom: 'Producer, EP',
+    greg: 'Dir, Writer, DP',
+    story: 'Recalls the real-life adventures that formed the inspiration for the work of the great American illustrator.'
+  },
+  {
+    title: 'Little League: A History',
+    genre: 'Cultural doc',
+    released: '2014',
+    tom: 'Producer, EP',
+    greg: 'Dir, Writer, DP',
+    story: 'Authorized biopic of the creation and evolution of one of America’s great cultural rites-of-passage.'
+  },
+  {
+    title: 'Hearth and Harvest',
+    genre: 'Cultural doc',
+    released: '2014',
+    tom: 'Producer, EP',
+    greg: 'Dir, Writer, DP',
+    story: 'Feature-length presentation of the story of agriculture in Pennsylvania.'
+  },
+  {
+    title: 'Knoebels',
+    genre: 'Biopic',
+    released: '2015',
+    tom: 'Producer, EP',
+    greg: 'Dir, Writer, DP',
+    story: 'How 5 generations of one family grew a beloved amusement park from a potato farm they started in 1767.'
+  },
+  {
+    title: 'Expedition Chesapeake',
+    genre: 'Environmental',
+    released: '2019',
+    tom: 'Producer, EP',
+    greg: 'Dir, Writer',
+    story: 'Giant-screen presentation of the social and cultural history of the largest estuary in North America.'
+  }
+]
 </script>
 
 <template>
-  <div class="min-h-screen bg-stone-900 text-stone-50 flex flex-col items-center justify-center py-24 md:py-38 px-6">
-    <h1 class="text-4xl font-bold mb-10 pb-10">Our Work</h1>
-    <div class="flex flex-col gap-8 w-full max-w-4xl">
-      <div
-        v-for="movie in items"
-        :key="`${movie.id}-${movie.title}`"
-        class="flex flex-col md:flex-row items-start gap-4 md:gap-6 py-4"
-      >
-        <div class="w-full md:w-1/3 h-56 md:h-48 bg-stone-800 flex items-center justify-center overflow-hidden">
-          <img
-            :src="movie.image"
-            :alt="movie.title"
-            class="object-cover h-full w-full"
-          />
-        </div>
-        <div class="flex flex-col w-full md:w-2/3">
-          <h2 class="text-xl md:text-lg font-semibold">{{ movie.title }}</h2>
-          <p
-            class="text-sm mt-2"
-            v-html="movie.desc"
-          ></p>
+  <div class="min-h-screen bg-stone-900 text-stone-50 py-24 md:py-38 px-6">
+    <div class="w-full max-w-6xl mx-auto">
+      <h1 class="text-4xl font-bold mb-10">Filmography</h1>
+
+      <div class="space-y-6 text-sm leading-relaxed text-stone-200">
+        <p
+          v-for="(paragraph, index) in introParagraphs"
+          :key="index"
+        >
+          {{ paragraph }}
+        </p>
+      </div>
+
+      <!-- Mobile layout: cards (no horizontal scrolling) -->
+      <div class="mt-12 space-y-6 md:hidden">
+        <article
+          v-for="row in filmography"
+          :key="`${row.released}-${row.title}`"
+          class="border border-stone-800 bg-stone-900/40 p-5"
+        >
+          <h2 class="text-lg font-semibold text-stone-50">
+            {{ row.title }}
+          </h2>
+          <p class="mt-2 text-sm leading-relaxed text-stone-200">
+            {{ row.story }}
+          </p>
+
+          <div class="mt-4 grid grid-cols-2 gap-x-6 gap-y-3 text-sm">
+            <div>
+              <div class="text-xs uppercase tracking-wide text-stone-400">Genre</div>
+              <div class="text-stone-200">{{ row.genre }}</div>
+            </div>
+            <div>
+              <div class="text-xs uppercase tracking-wide text-stone-400">Released</div>
+              <div class="text-stone-200">{{ row.released }}</div>
+            </div>
+            <div>
+              <div class="text-xs uppercase tracking-wide text-stone-400">Tom</div>
+              <div class="text-stone-200">{{ row.tom }}</div>
+            </div>
+            <div>
+              <div class="text-xs uppercase tracking-wide text-stone-400">Greg</div>
+              <div class="text-stone-200">{{ row.greg }}</div>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- Desktop/tablet layout: full table -->
+      <div class="mt-12 hidden md:block">
+        <div class="overflow-x-auto">
+          <table class="min-w-full border-collapse">
+            <thead>
+              <tr class="border-b border-stone-500/40">
+                <th class="py-3 pr-4 text-left text-xs uppercase tracking-wide text-stone-300">Title</th>
+                <th class="py-3 pr-4 text-left text-xs uppercase tracking-wide text-stone-300">Genre</th>
+                <th class="py-3 pr-4 text-left text-xs uppercase tracking-wide text-stone-300">Released</th>
+                <th class="py-3 pr-4 text-left text-xs uppercase tracking-wide text-stone-300">Tom</th>
+                <th class="py-3 pr-4 text-left text-xs uppercase tracking-wide text-stone-300">Greg</th>
+                <th class="py-3 text-left text-xs uppercase tracking-wide text-stone-300">The Story</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                v-for="row in filmography"
+                :key="`${row.released}-${row.title}`"
+                class="border-b border-stone-800"
+              >
+                <td class="py-3 pr-4 align-top text-sm font-medium text-stone-50">{{ row.title }}</td>
+                <td class="py-3 pr-4 align-top text-sm text-stone-200">{{ row.genre }}</td>
+                <td class="py-3 pr-4 align-top text-sm text-stone-200">{{ row.released }}</td>
+                <td class="py-3 pr-4 align-top text-sm text-stone-200">{{ row.tom }}</td>
+                <td class="py-3 pr-4 align-top text-sm text-stone-200">{{ row.greg }}</td>
+                <td class="py-3 align-top text-sm text-stone-200">{{ row.story }}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
   </div>
 </template>
 
-<style scoped>
-img {
-  object-fit: cover;
-}
-</style>
+<style scoped></style>

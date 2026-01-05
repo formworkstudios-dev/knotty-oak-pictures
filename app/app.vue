@@ -1,4 +1,6 @@
 <script setup>
+const route = useRoute()
+
 onMounted(async () => {
   await nextTick()
 
@@ -36,7 +38,7 @@ onMounted(async () => {
     <main>
       <NuxtPage />
     </main>
-    <footer>
+    <footer v-if="route.name !== 'company-reel'">
       <SharedFooter />
     </footer>
   </UApp>
