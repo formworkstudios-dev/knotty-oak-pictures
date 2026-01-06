@@ -6,7 +6,7 @@ const team = [
   {
     name: 'Tom Currà',
     role: 'President & Executive Producer',
-    description: 'Tom is a storyteller and executive producer who enjoys delivering exceptional documentary, television, and film projects through creative vision, careful management, and collaboration.',
+    description: 'Tom Curra was CEO of PBS’s WVIA Public Media, where he served as executive producer for the studio’s film and television production, which include 11 Emmy nominations and four awards.',
     image: '/tom.webp'
   },
   {
@@ -20,8 +20,10 @@ const team = [
 
 <template>
   <AboutWrapper
+    id="us"
     bg-color="bg-amber-50"
-    :z-index="50"
+    :z-index="110"
+    class="border-t border-stone-200"
   >
     <div class="flex items-center justify-center min-h-screen py-20 pt-36">
       <div class="max-w-6xl px-8 w-full text-black">
@@ -45,10 +47,10 @@ const team = [
             >
               <h2 class="text-3xl font-bold !mb-1 text-center">Tom Currà</h2>
               <p class="text-xl font-semibold mb-4 opacity-50 text-center">President & Executive Producer</p>
-              <p class="text-lg opacity-80 text-center">Tom is a storyteller and executive producer who enjoys
-                delivering
-                exceptional documentary, television, and film projects through creative vision, careful management, and
-                collaboration.</p>
+              <p class="text-lg opacity-80 text-center">Tom Curra was CEO of PBS’s WVIA Public
+                Media, where he served as executive producer
+                for the studio’s film and television production,
+                which include 11 Emmy nominations and four awards, and two Cine Golden Eagle awards.</p>
             </div>
           </div>
 

@@ -3,7 +3,40 @@
   lang="ts"
 >
 
+import { ref, onMounted, onUnmounted } from 'vue'
+
 const { reveal } = useScrollReveal()
+
+const isMobile = ref(false)
+
+let mediaQueryList: MediaQueryList | null = null
+
+const updateIsMobile = () => {
+  // Tailwind `md` breakpoint is 768px
+  isMobile.value = !(mediaQueryList?.matches ?? false)
+}
+
+onMounted(() => {
+  mediaQueryList = window.matchMedia('(min-width: 768px)')
+  updateIsMobile()
+
+  if (typeof mediaQueryList.addEventListener === 'function') {
+    mediaQueryList.addEventListener('change', updateIsMobile)
+  } else {
+    // Safari < 14
+    mediaQueryList.addListener(updateIsMobile)
+  }
+})
+
+onUnmounted(() => {
+  if (!mediaQueryList) return
+
+  if (typeof mediaQueryList.removeEventListener === 'function') {
+    mediaQueryList.removeEventListener('change', updateIsMobile)
+  } else {
+    mediaQueryList.removeListener(updateIsMobile)
+  }
+})
 
 </script>
 
@@ -26,7 +59,7 @@ const { reveal } = useScrollReveal()
 
       <!-- Right Column - Text -->
       <div
-        class="w-full md:w-1/2 flex flex-col justify-center px-6 md:px-16 py-10 md:py-0 h-[50vh] md:h-auto snap-start"
+        class="w-full md:w-1/2 flex flex-col justify-center items-center md:items-start text-center md:text-left px-6 md:px-16 py-10 md:py-0 h-[50vh] md:h-auto snap-start"
       >
         <svg
           class="absolute inset-0 w-full h-full pointer-events-none"
@@ -59,14 +92,23 @@ const { reveal } = useScrollReveal()
         </svg>
         <div class="flex flex-col">
           <h2
+            v-if="isMobile"
             :ref="reveal"
-            class="!text-3xl md:text-4xl reveal block !m-0 !pb-0 text-stone-900"
+            class="text-3xl md:text-4xl max-w-sm md:max-w-none !leading-normal reveal block !m-0 !pb-0 text-stone-900"
+          >
+            Our company is rooted in a 30-year collaboration rooted in friendship and a love of and for filmmaking.
+          </h2>
+          <h2
+            v-else
+            :ref="reveal"
+            class="text-3xl md:text-4xl max-w-sm md:max-w-none !leading-normal reveal block !m-0 !pb-0 text-stone-900"
           >
             Our company is rooted in a 30-year collaboration
           </h2>
           <h2
+            v-if="!isMobile"
             :ref="reveal"
-            class="!text-3xl md:text-4xl reveal reveal-delay-200 block !m-0 !pb-0 text-stone-900"
+            class="text-3xl md:text-4xl max-w-sm md:max-w-none !leading-normal reveal reveal-delay-200 block !m-0 !pb-0 text-stone-900"
           >
             rooted in friendship and a love of and for filmmaking.
           </h2>

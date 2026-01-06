@@ -31,11 +31,12 @@ onUnmounted(() => {
     <div class="first-screen relative">
       <AboutHero />
     </div>
-    <AboutUs />
+
     <!-- <AboutInfo /> -->
     <AboutText />
     <AboutText2 />
     <!-- <AboutContent /> -->
+    <AboutUs />
 
   </div>
 </template>

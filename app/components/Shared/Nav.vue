@@ -76,7 +76,7 @@ onUnmounted(() => {
 
 <template>
   <div
-    class="fixed top-0 left-0 right-0 flex justify-center items-center p-2.5 z-[1000] transition-colors duration-300 bg-stone-950/80"
+    class="fixed top-0 left-0 right-0 flex justify-center items-center p-2.5 z-[1000] transition-colors duration-300 bg-stone-950"
     :class="[navBackground, { 'border-b border-stone-700': isMenuOpen, 'border-transparent': !isMenuOpen }]"
   >
     <div class="absolute left-1/2 transform -translate-x-1/2 z-[130]">

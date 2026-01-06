@@ -45,15 +45,17 @@ onBeforeUnmount(() => {
   >
     <span class="text-sm text-stone-700">&copy; Knotty Oak Pictures {{ new Date().getFullYear() }}</span>
     <span class="hidden md:inline-block text-sm">|</span>
-    <NuxtLink
-      to="/privacy"
-      class="text-sm text-stone-700 hover:text-stone-900 transition-colors"
-    >Privacy</NuxtLink>
-    <span class="hidden md:inline-block text-sm">|</span>
-    <NuxtLink
-      to="/tos"
-      class="text-sm text-stone-700 hover:text-stone-900 transition-colors"
-    >Terms</NuxtLink>
+    <div class="flex flex-row items-center justify-center gap-3">
+      <NuxtLink
+        to="/privacy"
+        class="text-sm text-stone-700 hover:text-stone-900 transition-colors"
+      >Privacy</NuxtLink>
+      <span class="text-sm">|</span>
+      <NuxtLink
+        to="/tos"
+        class="text-sm text-stone-700 hover:text-stone-900 transition-colors"
+      >Terms</NuxtLink>
+    </div>
   </div>
 </template>
 

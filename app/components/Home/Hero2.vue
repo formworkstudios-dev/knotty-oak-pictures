@@ -11,11 +11,12 @@ defineProps({
   }
 })
 
+const letterDelays = [200, 250, 300, 350, 400, 450, 500, 600]
+
 function getStaggeredSpans(text: string) {
-  const delays = [200, 250, 300, 350, 400, 450, 500, 600];
   return text.split('').map((char, i) => ({
     char: char === ' ' ? '\u00A0' : char,
-    delay: delays[i % delays.length], // Deterministic delay
+    delay: letterDelays[i % letterDelays.length], // Deterministic delay
     i
   }));
 }
@@ -63,9 +64,14 @@ let cycleTimeout: number | null = null
 
 // Timings (ms)
 const bgFadeMs = 2700;
-const lettersInMs = 900; // covers staggered delays and animation
+const lettersInAnimationMs = 1300
 const lettersVisibleMs = 4100; // time letters are fully visible before fading out
-const lettersOutMs = 700;
+const lettersOutAnimationMs = 1200
+
+const maxLetterDelayMs = Math.max(...letterDelays)
+// Phase duration must cover delay + animation, otherwise the class is removed mid-animation.
+const lettersInMs = maxLetterDelayMs + lettersInAnimationMs + 100
+const lettersOutMs = maxLetterDelayMs + lettersOutAnimationMs + 100
 
 function runSlideCycle() {
   // 1. Fade in background (no letters)
