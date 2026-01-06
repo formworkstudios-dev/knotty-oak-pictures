@@ -122,15 +122,15 @@ onUnmounted(() => {
       class="fixed inset-0 bg-stone-950 z-[990]"
       @click="closeMenu"
     >
-      <div class="h-full flex flex-col items-end justify-center pr-6 md:pr-16">
-        <nav class="flex flex-col gap-6 text-right max-w-lgshiop w-full ml-auto">
+      <div class="h-full flex flex-col items-start md:items-end justify-center pl-6 pr-6 md:pl-0 md:pr-16">
+        <nav class="flex flex-col gap-6 text-left md:text-right max-w-lgshiop w-full ml-0 md:ml-auto">
           <NuxtLink
             to="/"
             @click="closeMenu"
             class="text-white"
           >
             <span
-              class="inline-block text-4xl md:text-5xl font-light hover:font-normal transition-all cursor-pointer relative pl-4 before:content-[''] before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-2 before:h-2 before:rounded-full before:bg-[#FFFBEB] before:opacity-0 before:transition-all hover:before:opacity-100 hover:before:-translate-x-2"
+              class="inline-block text-4xl md:text-5xl font-light md:hover:font-normal transition-all cursor-pointer relative pl-0 md:pl-4 before:hidden md:before:block before:content-[''] before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-2 before:h-2 before:rounded-full before:bg-[#FFFBEB] before:opacity-0 before:transition-all md:hover:before:opacity-100 md:hover:before:-translate-x-2"
             >
               Home
             </span>
@@ -142,7 +142,7 @@ onUnmounted(() => {
             class="text-white"
           >
             <span
-              class="inline-block text-4xl md:text-5xl font-light hover:font-normal transition-all cursor-pointer relative pl-4 before:content-[''] before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-2 before:h-2 before:rounded-full before:bg-[#FFFBEB] before:opacity-0 before:transition-all hover:before:opacity-100 hover:before:-translate-x-2"
+              class="inline-block text-4xl md:text-5xl font-light md:hover:font-normal transition-all cursor-pointer relative pl-0 md:pl-4 before:hidden md:before:block before:content-[''] before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-2 before:h-2 before:rounded-full before:bg-[#FFFBEB] before:opacity-0 before:transition-all md:hover:before:opacity-100 md:hover:before:-translate-x-2"
             >
               About Us
             </span>
@@ -154,7 +154,7 @@ onUnmounted(() => {
             class="text-white"
           >
             <span
-              class="inline-block text-4xl md:text-5xl font-light hover:font-normal transition-all cursor-pointer relative pl-4 before:content-[''] before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-2 before:h-2 before:rounded-full before:bg-[#FFFBEB] before:opacity-0 before:transition-all hover:before:opacity-100 hover:before:-translate-x-2"
+              class="inline-block text-4xl md:text-5xl font-light md:hover:font-normal transition-all cursor-pointer relative pl-0 md:pl-4 before:hidden md:before:block before:content-[''] before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-2 before:h-2 before:rounded-full before:bg-[#FFFBEB] before:opacity-0 before:transition-all md:hover:before:opacity-100 md:hover:before:-translate-x-2"
             >
               Company Reel
             </span>
@@ -166,14 +166,14 @@ onUnmounted(() => {
             class="text-white"
           >
             <span
-              class="inline-block text-4xl md:text-5xl font-light hover:font-normal transition-all cursor-pointer relative pl-4 before:content-[''] before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-2 before:h-2 before:rounded-full before:bg-[#FFFBEB] before:opacity-0 before:transition-all hover:before:opacity-100 hover:before:-translate-x-2"
+              class="inline-block text-4xl md:text-5xl font-light md:hover:font-normal transition-all cursor-pointer relative pl-0 md:pl-4 before:hidden md:before:block before:content-[''] before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-2 before:h-2 before:rounded-full before:bg-[#FFFBEB] before:opacity-0 before:transition-all md:hover:before:opacity-100 md:hover:before:-translate-x-2"
             >
               Filmography
             </span>
           </NuxtLink>
         </nav>
         <div
-          class="flex flex-col border-t border-stone-700 pt-6 mt-6 text-sm text-mono text-stone-300 space-y-1.5 max-w-content text-right font-mono"
+          class="flex flex-col border-t border-stone-700 pt-6 mt-6 text-sm text-mono text-stone-300 space-y-1.5 max-w-content text-left md:text-right font-mono"
         >
           <div class="">
             <NuxtLink
@@ -199,7 +199,7 @@ onUnmounted(() => {
         </div>
       </div>
       <div
-        class="flex flex-col border-t border-stone-700 pt-6 mt-6 text-xs text-stone-300 text-right space-y-1 max-w-xs w-full ml-auto"
+        class="flex flex-col border-t border-stone-700 pt-6 mt-6 text-xs text-stone-300 text-left md:text-right space-y-1 max-w-xs w-full ml-0 md:ml-auto"
       >
       </div>
 

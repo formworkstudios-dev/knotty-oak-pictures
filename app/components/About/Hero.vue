@@ -261,7 +261,7 @@ onUnmounted(() => {
         class="sticky top-0 z-20 flex flex-col items-center justify-center h-screen px-6 md:px-4 pb-12 md:pb-10 overflow-hidden w-full"
       >
         <h1
-          class="!text-4xl lg:!text-5xl text-center relative z-30 cursor-default about-hero-title leading-normal w-full max-w-3xl mx-auto"
+          class="!text-4xl lg:!text-5xl text-center relative z-30 cursor-default about-hero-title leading-normal w-full max-w-[68rem] mx-auto"
           :style="`--gc: ${gradientCenter}%; opacity: 0.85;`"
         >
           <template v-if="isMobile">

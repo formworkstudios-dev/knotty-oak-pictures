@@ -186,16 +186,16 @@ onUnmounted(() => {
       </div>
     </div>
 
-    <!-- Mobile: render only on small screens and keep above overlays -->
+    <!-- Mobile: centered text with no manual line breaks -->
     <div
-      class="md:hidden absolute left-4 bottom-4 z-10 !pb-20"
+      class="md:hidden absolute inset-0 z-10 flex items-center justify-center px-6 text-center"
       :style="{ opacity: textOpacity }"
     >
-      <HomeMobileHero
-        :lines="slides[currentSlide]?.lines ?? []"
-        :text-opacity="textOpacity"
-        :slide-state="slideState as any"
-      />
+      <div class="w-full max-w-sm">
+        <div class="hero-fixed-line">
+          {{ (slides[currentSlide]?.lines ?? []).join(' ') }}
+        </div>
+      </div>
     </div>
 
     <SharedScrollDownArrow />
@@ -356,8 +356,8 @@ onUnmounted(() => {
 @media (max-width:640px) {
   .hero-fixed-line {
     height: unset;
-    line-height: 1.2rem !important;
-    font-size: 1.1rem;
+    line-height: 2.2rem !important;
+    font-size: 1.6rem;
     margin-bottom: 0;
     padding: 0.5rem 1rem;
     white-space: normal;

@@ -16,7 +16,7 @@ const props = withDefaults(
 
 <template>
   <div
-    class="min-h-screen border-b"
+    class="relative min-h-screen border-b"
     :class="[
       props.bgColor,
       props.sticky === 'always'
