@@ -10,7 +10,8 @@ const heroOverlayOpacity = ref(0)
 const textOpacity = computed(() => 1 - heroOverlayOpacity.value)
 
 const handleScroll = () => {
-  const scrollY = window.scrollY
+  const scrollingEl = document.scrollingElement || document.documentElement
+  const scrollY = window.scrollY || scrollingEl.scrollTop || 0
   const viewportHeight = window.innerHeight
 
   // Calculate opacity based on scrolling through the first viewport height.
@@ -20,11 +21,16 @@ const handleScroll = () => {
 }
 
 onMounted(() => {
-  window.addEventListener('scroll', handleScroll)
+  handleScroll()
+  window.addEventListener('scroll', handleScroll, { passive: true })
+  document.addEventListener('scroll', handleScroll, { passive: true })
+  window.addEventListener('resize', handleScroll, { passive: true })
 })
 
 onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll)
+  document.removeEventListener('scroll', handleScroll)
+  window.removeEventListener('resize', handleScroll)
 })
 </script>
 

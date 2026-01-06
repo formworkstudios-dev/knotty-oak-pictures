@@ -192,8 +192,17 @@ onUnmounted(() => {
       :style="{ opacity: textOpacity }"
     >
       <div class="w-full max-w-sm">
-        <div class="hero-fixed-line">
-          {{ (slides[currentSlide]?.lines ?? []).join(' ') }}
+        <div class="hero-mobile-text">
+          <span
+            :class="[
+              'hero-mobile-anim',
+              slideState === 'letters-in' && 'hero-mobile-in',
+              slideState === 'letters-visible' && 'hero-mobile-visible',
+              slideState === 'letters-out' && 'hero-mobile-out'
+            ]"
+          >
+            {{ (slides[currentSlide]?.lines ?? []).join(' ') }}
+          </span>
         </div>
       </div>
     </div>
@@ -222,7 +231,7 @@ onUnmounted(() => {
 .hero-bg-image {
   position: absolute;
   inset: 0;
-  width: 100vw;
+  width: 100%;
   height: 100dvh;
   pointer-events: none;
   /* Default: fit full image width; letterbox vertically if needed */
@@ -240,8 +249,8 @@ onUnmounted(() => {
 .hero-conical-overlay {
   position: absolute;
   inset: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   z-index: 2;
   opacity: 0.32;
   background: conic-gradient(at 50% 50%,
@@ -318,8 +327,8 @@ onUnmounted(() => {
 .hero-line-container {
   position: relative;
   height: 3.5rem;
-  width: 100vw;
-  max-width: 100vw;
+  width: 100%;
+  max-width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -354,14 +363,39 @@ onUnmounted(() => {
 }
 
 @media (max-width:640px) {
-  .hero-fixed-line {
-    height: unset;
+  .hero-mobile-text {
     line-height: 2.2rem !important;
     font-size: 1.6rem;
     margin-bottom: 0;
     padding: 0.5rem 1rem;
     white-space: normal;
     word-break: break-word;
+  }
+
+  .hero-mobile-anim {
+    display: inline;
+    opacity: 0;
+    filter: blur(8px);
+    will-change: opacity, filter;
+    background: linear-gradient(45deg, #FFFBEB 0%, #d6ad60 50%, #FFFBEB 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    /* Fallback color for browsers that don't support background-clip/text-fill */
+    color: #fff;
+  }
+
+  .hero-mobile-visible {
+    opacity: 1;
+    filter: blur(0);
+  }
+
+  .hero-mobile-in {
+    animation: letterFadeIn 0.9s cubic-bezier(.77, .2, .32, 1) forwards;
+  }
+
+  .hero-mobile-out {
+    animation: letterFadeOut 0.9s cubic-bezier(.77, .2, .32, 1) forwards;
   }
 
   .hero-letter {

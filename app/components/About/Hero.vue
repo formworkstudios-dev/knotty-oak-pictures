@@ -224,7 +224,7 @@ onUnmounted(() => {
     <!-- Give the hero extra scroll room so the text can stay pinned for a bit -->
     <div
       id="about-hero-wrap"
-      class="relative min-h-[200vh]"
+      class="relative min-h-[140vh] md:min-h-[160vh]"
     >
       <!-- Fixed background image (stays put while page scrolls) -->
       <div
