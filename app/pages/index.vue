@@ -46,7 +46,10 @@ onUnmounted(() => {
         :style="{ opacity: heroOverlayOpacity, zIndex: 1 }"
       ></div>
     </div>
-    <div class="sticky-card bg-black">
+    <div
+      id="home-content"
+      class="sticky-card bg-black"
+    >
       <HomeContent />
     </div>
     <div class="sticky-card bg-stone-900">
@@ -61,7 +64,7 @@ onUnmounted(() => {
   /* For Safari */
   position: sticky;
   top: 0;
-  height: 100vh;
+  height: 100dvh;
   width: 100%;
 }
 </style>

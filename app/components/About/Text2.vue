@@ -124,8 +124,9 @@ onUnmounted(() => {
     </div>
 
     <SharedScrollDownArrow
+      v-if="!isMobile"
       target="#us"
-      class="!text-stone-900/70"
+      class="hidden md:block !text-white"
     />
 
   </AboutWrapper>

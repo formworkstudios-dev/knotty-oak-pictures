@@ -195,7 +195,6 @@ onUnmounted(() => {
               class="underline hover:no-underline"
             >@knottyoakpictures</NuxtLink>
           </div>
-          <Nuxtimg src="" />
         </div>
       </div>
       <div

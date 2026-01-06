@@ -26,7 +26,8 @@ function scrollDownOneViewport(): void {
     }
   }
 
-  window.scrollBy({ top: window.innerHeight, behavior: 'smooth' })
+  const viewportHeight = window.visualViewport?.height ?? window.innerHeight
+  window.scrollBy({ top: viewportHeight, behavior: 'smooth' })
 }
 </script>
 
@@ -36,7 +37,7 @@ function scrollDownOneViewport(): void {
     v-bind="attrs"
     :aria-label="ariaLabel"
     :class="[
-      'absolute left-1/2 bottom-6 -translate-x-1/2 z-20 text-white/85 cursor-pointer bg-transparent border-0 p-2',
+      'absolute left-1/2 bottom-6 -translate-x-1/2 z-20 text-white cursor-pointer bg-transparent border-0 p-2',
       (attrs as any).class
     ]"
     @click="scrollDownOneViewport"

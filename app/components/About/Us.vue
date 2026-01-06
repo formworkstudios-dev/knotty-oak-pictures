@@ -47,7 +47,8 @@ const team = [
             >
               <h2 class="text-3xl font-bold !mb-1 text-center">Tom Currà</h2>
               <p class="text-xl font-semibold mb-4 opacity-50 text-center">President & Executive Producer</p>
-              <p class="text-lg !font-light opacity-80 text-center">Tom served as the President and CEO of PBS/NPR’s WVIA Public
+              <p class="text-lg !font-light opacity-80 text-center">Tom served as the President and CEO of PBS/NPR’s
+                WVIA Public
                 Media, where he acted as executive producer
                 for the studio’s film and television production,
                 which include 11 Emmy nominations and four awards, and two Cine Golden Eagle awards.</p>

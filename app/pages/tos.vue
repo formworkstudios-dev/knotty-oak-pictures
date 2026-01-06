@@ -1,5 +1,7 @@
 <template>
-  <div class="min-h-screen bg-amber-50 text-stone-900 flex justify-center px-8 pt-24 md:pt-32 pb-16 md:pb-24 items-start">
+  <div
+    class="min-h-screen bg-amber-50 text-stone-900 flex justify-center px-8 pt-24 md:pt-32 pb-16 md:pb-24 items-start"
+  >
     <div class="max-w-2xl w-full">
       <h1 class="text-4xl font-bold mb-6">Terms of Service</h1>
 

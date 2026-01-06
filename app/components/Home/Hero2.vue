@@ -193,21 +193,19 @@ onUnmounted(() => {
     >
       <div class="w-full max-w-sm">
         <div class="hero-mobile-text">
-          <span
-            :class="[
-              'hero-mobile-anim',
-              slideState === 'letters-in' && 'hero-mobile-in',
-              slideState === 'letters-visible' && 'hero-mobile-visible',
-              slideState === 'letters-out' && 'hero-mobile-out'
-            ]"
-          >
+          <span :class="[
+            'hero-mobile-anim',
+            slideState === 'letters-in' && 'hero-mobile-in',
+            slideState === 'letters-visible' && 'hero-mobile-visible',
+            slideState === 'letters-out' && 'hero-mobile-out'
+          ]">
             {{ (slides[currentSlide]?.lines ?? []).join(' ') }}
           </span>
         </div>
       </div>
     </div>
 
-    <SharedScrollDownArrow />
+    <SharedScrollDownArrow target="#home-content" />
   </div>
 </template>
 
