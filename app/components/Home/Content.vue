@@ -438,7 +438,7 @@ onUnmounted(() => {
               <div class="header-overlay absolute left-0 right-0 top-0 pointer-events-none"></div>
 
               <!-- bottom title with year (white text); description appears on hover -->
-              <div class="absolute left-4 top-4 text-center pt-20 z-20 align-middle w-full items-center">
+              <div class="absolute top-4 text-center pt-20 z-20 align-middle w-full items-center">
                 <div class="carousel-title text-xl md:text-2xl font-thin text-white leading-tight">
                   <template v-if="splitTitle(item.title).rest">
                     <span class="title-line-1">{{ splitTitle(item.title).first }}</span>

@@ -221,10 +221,10 @@ onUnmounted(() => {
     :z-index="10"
     sticky="never"
   >
-    <!-- Give the hero extra scroll room so the text can stay pinned for a bit -->
+    <!-- Keep the hero to a single viewport height -->
     <div
       id="about-hero-wrap"
-      class="relative min-h-[140vh] md:min-h-[160vh]"
+      class="relative min-h-[100dvh]"
     >
       <!-- Fixed background image (stays put while page scrolls) -->
       <div
@@ -258,7 +258,7 @@ onUnmounted(() => {
       <!-- Pinned viewport panel: keeps hero text in place while scrolling through the hero wrap -->
       <div
         id="about-hero-bg"
-        class="sticky top-0 z-20 flex flex-col items-center justify-center h-screen px-6 md:px-4 pb-12 md:pb-10 overflow-hidden w-full"
+        class="sticky top-0 z-20 flex flex-col items-center justify-center h-[100dvh] px-6 md:px-4 pb-12 md:pb-10 overflow-hidden w-full"
       >
         <h1
           class="!text-4xl lg:!text-5xl text-center relative z-30 cursor-default about-hero-title leading-normal w-full max-w-[68rem] mx-auto"
