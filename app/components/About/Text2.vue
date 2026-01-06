@@ -97,21 +97,22 @@ onUnmounted(() => {
             :ref="reveal"
             class="text-3xl md:text-4xl max-w-sm md:max-w-none !leading-normal reveal block !m-0 !pb-0 text-stone-900"
           >
-            Our company is rooted in a 30-year collaboration rooted in friendship and a love of and for filmmaking.
+            <span class="font-bold">Imaging</span> is our commodity,
+            envisioned from thoughtful scripts that celebrate the human experience.
           </h2>
           <h2
             v-else
             :ref="reveal"
             class="text-3xl md:text-4xl max-w-sm md:max-w-none !leading-normal reveal block !m-0 !pb-0 text-stone-900"
           >
-            Our company is rooted in a 30-year collaboration
+            <span class="font-bold">Imaging</span> is our commodity,
           </h2>
           <h2
             v-if="!isMobile"
             :ref="reveal"
             class="text-3xl md:text-4xl max-w-sm md:max-w-none !leading-normal reveal reveal-delay-200 block !m-0 !pb-0 text-stone-900"
           >
-            rooted in friendship and a love of and for filmmaking.
+            envisioned from thoughtful scripts that celebrate the human experience.
           </h2>
           <!-- <h2
             :ref="reveal"

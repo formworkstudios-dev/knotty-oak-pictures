@@ -57,30 +57,22 @@ onUnmounted(() => {
             :ref="reveal"
             class="text-3xl md:text-4xl max-w-sm md:max-w-none !leading-normal reveal block !m-0 text-stone-900"
           >
-            From this recognition, Knotty Oak Pictures produces films ingrained in 40 years of craft experience
-            <strong>in cinematic storytelling.</strong>
+            This collaboration enriches our films with 40 years of <span class="font-bold">telling stories
+              cinematically</span>.
           </h2>
           <h2
             v-else
             :ref="reveal"
             class="text-3xl md:text-4xl max-w-sm md:max-w-none !leading-normal reveal block !m-0 text-stone-900"
           >
-            From this recognition, Knotty Oak Pictures produces
+            This collaboration enriches our films with 40 years of
           </h2>
           <h2
             v-if="!isMobile"
             :ref="reveal"
             class="text-3xl md:text-4xl max-w-sm md:max-w-none !leading-normal reveal reveal-delay-200 block !m-0 text-stone-900"
           >
-            films ingrained in 40 years of craft experience
-
-          </h2>
-          <h2
-            v-if="!isMobile"
-            :ref="reveal"
-            class="text-3xl md:text-4xl max-w-sm md:max-w-none !leading-normal reveal reveal-delay-400 block !m-0 text-stone-900"
-          >
-            <strong>in cinematic storytelling.</strong>
+            <span class="font-bold">telling stories cinematically</span>.
           </h2>
         </div>
         <svg

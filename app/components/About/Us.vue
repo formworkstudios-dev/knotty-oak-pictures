@@ -12,7 +12,7 @@ const team = [
   {
     name: 'Greg Matkosky',
     role: 'Director & Cinematographer',
-    description: 'Greg Matkosky is an Emmy and Cine Golden Eagle Award-winning writer/director with nearly 40 years experience in national commercial, international documentary, giant-screen and corporate production across five continents. He received his BA in journalism from Penn State and has an MFA in cinematography from AFI.',
+    description: 'Greg is an Emmy and Cine Golden Eagle Award-winning writer/director and cinematographer with nearly 40 years experience in national commercial, international documentary and giant-screen production across five continents. He received his BA in journalism from Penn State and has an MFA in cinematography from AFI.',
     image: '/greg-bio.jpg'
   }
 ]
@@ -47,11 +47,12 @@ const team = [
             >
               <h2 class="text-3xl font-bold !mb-1 text-center">Tom Currà</h2>
               <p class="text-xl font-semibold mb-4 opacity-50 text-center">President & Executive Producer</p>
-              <p class="text-lg !font-light opacity-80 text-center">Tom served as the President and CEO of PBS/NPR’s
+              <p class="text-lg !font-light opacity-80 text-center">Tom served as the President and CEO of PBS/NPRs
                 WVIA Public
                 Media, where he acted as executive producer
                 for the studio’s film and television production,
-                which include 11 Emmy nominations and four awards, and two Cine Golden Eagle awards.</p>
+                which include 11 Emmy nominations and four awards, and two Cine Golden Eagle awards. He founded Knotty
+                Oak Pictures in 2020.</p>
             </div>
           </div>
 
@@ -71,13 +72,10 @@ const team = [
             >
               <h2 class="text-3xl font-bold !mb-1 text-center">Greg Matkosky</h2>
               <p class="text-xl font-semibold mb-4 opacity-50 text-center">Director & Cinematographer</p>
-              <p class="text-lg !font-light opacity-80 text-center">Greg is an Emmy and Golden
-                Eagle Award-winning writer/director with nearly 40
-                years experience in national commercial,
-                international documentary, giant-screen and
-                corporate production across five continents. He
-                received his BA in journalism from Penn State
-                and has an MFA in cinematography from AFI.</p>
+              <p class="text-lg !font-light opacity-80 text-center">Greg is an Emmy and Cine Golden Eagle Award-winning
+                writer/director and cinematographer with nearly 40 years experience in national commercial,
+                international documentary and giant-screen production across five continents. He received his BA in
+                journalism from Penn State and has an MFA in cinematography from AFI.</p>
             </div>
           </div>
         </div>

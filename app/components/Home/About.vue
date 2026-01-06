@@ -24,7 +24,7 @@
         <div
           class="absolute left-4 right-4 bottom-4 md:left-6 md:right-6 md:bottom-6 text-stone-50 text-base md:text-lg leading-snug md:leading-normal drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)] text-center"
         >
-          Authenticity and Imagination are at the Heart of the stories we tell.
+          Authenticity and Imagination are at the heart of the stories we tell.
         </div>
       </div>
 

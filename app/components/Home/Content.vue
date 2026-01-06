@@ -44,7 +44,7 @@ const items = [
     title: 'Frank Schoonover: The Authentic Artist',
     year: '',
     image: '/panel/frank-clipped.webp',
-    desc: 'A <strong>Cine Golden Eagle winner</strong> that recounts the creative adventures of the master American illustrator. Shot in the wilderness environs of northern Quebec Province and Wyoming’s Bighorn Mountains.',
+    desc: 'A <strong>Cine Golden Eagle Award winner</strong> that recounts the creative adventures of the master American illustrator. Shot in the wilderness environs of northern Quebec Province and Wyoming’s Bighorn Mountains.',
     length: '57 minutes'
   },
   {
@@ -60,7 +60,7 @@ const items = [
     title: 'Stories From The Mines',
     year: 2001,
     image: '/panel/mines-clipped.webp',
-    desc: '<strong>Nationally distributed</strong>, 2001 feature-length <strong>Emmy-nominated</strong> dramatized documentary narrated by Academy Award winner Jason Miller that presents the epic struggle between early 20th century immigrant coal miners and American industrialists.',
+    desc: '<strong>Nationally distributed</strong>, 2001 feature-length <strong>Emmy-nominated</strong> dramatized documentary narrated by Academy Award nominee Jason Miller that presents the epic struggle between early 20th century immigrant coal miners and American industrialists.',
     length: '143 minutes'
   },
   {
