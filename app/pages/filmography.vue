@@ -188,7 +188,7 @@ const filmography = [
 </script>
 
 <template>
-  <div class="min-h-screen bg-stone-100 text-stone-900 py-24 md:py-38 px-6">
+  <div class="min-h-screen bg-amber-50 text-stone-900 py-24 md:py-38 px-6">
     <div class="w-full max-w-6xl mx-auto">
       <h1 class="text-4xl font-bold mb-10">Filmography</h1>
 
@@ -206,7 +206,7 @@ const filmography = [
         <article
           v-for="row in filmography"
           :key="`${row.released}-${row.title}`"
-          class="border border-stone-200 bg-stone-50 p-5"
+          class="border border-stone-200 bg-amber-100/30 p-5"
         >
           <h2 class="text-lg font-semibold text-stone-900">
             {{ row.title }}
@@ -254,7 +254,7 @@ const filmography = [
               <tr
                 v-for="row in filmography"
                 :key="`${row.released}-${row.title}`"
-                class="border-b border-stone-200"
+                class="border-b border-stone-200 last:border-b-0"
               >
                 <td class="py-3 pr-4 align-top text-sm font-medium text-stone-900">{{ row.title }}</td>
                 <td class="py-3 pr-4 align-top text-sm text-stone-700">{{ row.genre }}</td>

@@ -129,6 +129,11 @@ onUnmounted(() => {
 
     </div>
 
+    <SharedScrollDownArrow
+      target="#about-text-2"
+      class="!text-stone-900/70"
+    />
+
 
   </AboutWrapper>
 </template>

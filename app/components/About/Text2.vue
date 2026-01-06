@@ -44,6 +44,7 @@ onUnmounted(() => {
   <AboutWrapper
     bg-color="bg-amber-50"
     :z-index="109"
+    id="about-text-2"
   >
     <div class="flex flex-col-reverse md:flex-row min-h-screen snap-y snap-mandatory overflow-y-auto text2-section">
       <!-- Left Column - Fixed Background Image -->
@@ -121,6 +122,11 @@ onUnmounted(() => {
         </div>
       </div>
     </div>
+
+    <SharedScrollDownArrow
+      target="#us"
+      class="!text-stone-900/70"
+    />
 
   </AboutWrapper>
 </template>

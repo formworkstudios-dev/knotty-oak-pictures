@@ -124,7 +124,7 @@ onUnmounted(() => {
 <template>
   <div
     id="home-hero-bg"
-    :class="`min-h-screen flex flex-col items-center justify-center gap-6 w-full transition-colors duration-700 ${slides[currentSlide]?.bg ?? 'bg-stone-950'}`"
+    :class="`min-h-screen flex flex-col items-center justify-center gap-6 w-full overflow-x-hidden transition-colors duration-700 ${slides[currentSlide]?.bg ?? 'bg-stone-950'}`"
     style="position: relative; min-height: 100dvh;"
   >
     <!-- Background images -->
@@ -329,10 +329,12 @@ onUnmounted(() => {
   height: 3.5rem;
   width: 100%;
   max-width: 100%;
+  box-sizing: border-box;
+  padding: 0 1.25rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .hero-absolute {
@@ -352,7 +354,7 @@ onUnmounted(() => {
   font-size: 2.7rem;
   font-weight: 200 !important;
   text-align: center;
-  overflow: hidden;
+  overflow: visible;
   white-space: nowrap;
   /* apply the warm gradient across the entire line (one gradient spanning all letters) */
   background: linear-gradient(45deg, #FFFBEB 0%, #d6ad60 50%, #FFFBEB 100%);
