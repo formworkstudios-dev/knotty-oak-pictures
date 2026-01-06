@@ -7,13 +7,16 @@ import { ref, onMounted, onUnmounted } from 'vue'
 const gradientCenter = ref(50)
 let targetCenter = 50
 let heroDiv: HTMLElement | null = null
+let heroWrap: HTMLElement | null = null
 let mouseHandler: ((e: MouseEvent) => void) | null = null
 let animationFrame: number | null = null
 let lastMouseTime = Date.now()
 let ambientDirection = 1
 
 // overlay opacity controlled by scroll (fade-to-black)
-const heroOverlayOpacity = ref(0)
+const baseOverlayOpacity = 0.65
+const maxOverlayOpacity = 0.95
+const heroOverlayOpacity = ref(baseOverlayOpacity)
 // Crossfade background images among three assets
 const bgImages = [
   '/tom-and-greg-35-years-ago.png',
@@ -130,6 +133,7 @@ function getWordTokens(text: string, seed = 0) {
 }
 
 const animateEntrance = ref(false)
+const isHeroActive = ref(true)
 
 // simple mobile detection so we can render a non-split, line-based reveal on small screens
 const isMobile = ref(false)
@@ -138,16 +142,23 @@ function updateIsMobile() {
 }
 
 const handleScroll = () => {
-  if (!heroDiv) return
-  const rect = heroDiv.getBoundingClientRect()
+  if (!heroWrap) return
+  const rect = heroWrap.getBoundingClientRect()
   const viewportHeight = window.innerHeight || 800
+
+  // Show fixed background/overlay only while the hero section is on screen
+  isHeroActive.value = rect.bottom > 0 && rect.top < viewportHeight
+
   // compute how far the hero has moved up (positive when scrolled past top)
   const scrolledUp = Math.max(0, -rect.top)
   // stronger, more pronounced fade: reach near-full within ~60% of viewport
   const normalized = Math.min(1, scrolledUp / (viewportHeight * 0.6))
   // slight easing so it ramps up
   const eased = Math.pow(normalized, 1.05)
-  heroOverlayOpacity.value = Math.min(0.95, eased * 1.05)
+  heroOverlayOpacity.value = Math.min(
+    maxOverlayOpacity,
+    baseOverlayOpacity + (maxOverlayOpacity - baseOverlayOpacity) * Math.min(1, eased * 1.05)
+  )
 }
 
 function animateGradient() {
@@ -168,6 +179,7 @@ function animateGradient() {
 
 onMounted(() => {
   heroDiv = document.getElementById('about-hero-bg')
+  heroWrap = document.getElementById('about-hero-wrap')
   mouseHandler = (e: MouseEvent) => {
     lastMouseTime = Date.now()
     if (!heroDiv) return
@@ -180,6 +192,8 @@ onMounted(() => {
   window.addEventListener('mousemove', mouseHandler)
   if (!animationFrame) animateGradient()
   window.addEventListener('scroll', handleScroll)
+  // set initial overlay based on current scroll position
+  handleScroll()
   // trigger per-letter entrance after a short tick
   window.setTimeout(() => { animateEntrance.value = true }, 60)
   // set mobile state and listen for resize to toggle rendering mode
@@ -205,21 +219,17 @@ onUnmounted(() => {
   <AboutWrapper
     bg-color="bg-stone-900"
     :z-index="10"
+    sticky="never"
   >
+    <!-- Give the hero extra scroll room so the text can stay pinned for a bit -->
     <div
-      id="about-hero-bg"
-      class="relative flex flex-col items-center justify-center h-screen px-6 md:px-4 pb-12 md:pb-10 overflow-hidden w-full"
+      id="about-hero-wrap"
+      class="relative min-h-[200vh]"
     >
-      <!-- fade-to-black overlay controlled by scroll -->
+      <!-- Fixed background image (stays put while page scrolls) -->
       <div
-        class="absolute inset-0 bg-black pointer-events-none about-hero-overlay"
-        :style="{ opacity: heroOverlayOpacity }"
-      ></div>
-      <!-- Full background image with transparency, matching Text.vue -->
-      <!-- Crossfading background images -->
-      <div
-        class="absolute inset-0 w-full h-full z-0 pointer-events-none will-change-opacity"
-        :style="{ '--bg-fade-ms': bgFadeMs + 'ms' }"
+        class="fixed inset-0 w-full h-full z-0 pointer-events-none will-change-opacity"
+        :style="{ '--bg-fade-ms': bgFadeMs + 'ms', opacity: isHeroActive ? 1 : 0 }"
       >
         <!-- Layer A -->
         <div
@@ -239,44 +249,56 @@ onUnmounted(() => {
         ></div>
       </div>
 
-      <h1
-        class="!text-4xl lg:!text-5xl text-center relative z-10 cursor-default about-hero-title leading-normal"
-        :style="`--gc: ${gradientCenter}%; opacity: 0.85;`"
+      <!-- Fixed dark overlay (only visible while hero is on screen) -->
+      <div
+        class="fixed inset-0 z-10 bg-black pointer-events-none about-hero-overlay"
+        :style="{ opacity: (isHeroActive ? heroOverlayOpacity : 0) }"
+      ></div>
+
+      <!-- Pinned viewport panel: keeps hero text in place while scrolling through the hero wrap -->
+      <div
+        id="about-hero-bg"
+        class="sticky top-0 z-20 flex flex-col items-center justify-center h-screen px-6 md:px-4 pb-12 md:pb-10 overflow-hidden w-full"
       >
-        <template v-if="isMobile">
-
-
-
-          <!-- mobile: render four line-based reveals (no per-letter split) -->
-          <span class="block reveal-instant">Knotty Oak Pictures is rooted in a lifetime friendship and shared love of
-            and for filmmaking.</span>
-        </template>
-        <template v-else>
-          <!-- desktop: per-letter randomized entrance (existing behavior) -->
-          <span class="block">
-            <template
-              v-for="(token, ti) in getWordTokens('Knotty Oak Pictures is rooted in a lifetime friendship and shared love of and for filmmaking.', 1)"
-              :key="`t1-${ti}`"
-            >
-              <template v-if="token.type === 'space'">
-                <span class="word-space"> </span>
+        <h1
+          class="!text-4xl lg:!text-5xl text-center relative z-30 cursor-default about-hero-title leading-normal w-full max-w-3xl mx-auto"
+          :style="`--gc: ${gradientCenter}%; opacity: 0.85;`"
+        >
+          <template v-if="isMobile">
+            <!-- mobile: line-based reveal -->
+            <span class="block reveal-instant">Knotty Oak Pictures is rooted in a lifetime friendship and shared love of
+              and for filmmaking.</span>
+          </template>
+          <template v-else>
+            <!-- desktop: per-letter randomized entrance (existing behavior) -->
+            <span class="block">
+              <template
+                v-for="(token, ti) in getWordTokens('Knotty Oak Pictures is rooted in a lifetime friendship and shared love of and for filmmaking.', 1)"
+                :key="`t1-${ti}`"
+              >
+                <template v-if="token.type === 'space'">
+                  <span class="word-space"> </span>
+                </template>
+                <template v-else>
+                  <span class="word">
+                    <span
+                      v-for="letter in token.letters"
+                      :key="`l1-${letter.i}`"
+                      :class="['hero-letter', animateEntrance ? 'hero-letter-in' : '']"
+                      :style="{ animationDelay: letter.delay + 'ms' }"
+                    >{{ letter.char }}</span>
+                  </span>
+                </template>
               </template>
-              <template v-else>
-                <span class="word">
-                  <span
-                    v-for="letter in token.letters"
-                    :key="`l1-${letter.i}`"
-                    :class="['hero-letter', animateEntrance ? 'hero-letter-in' : '']"
-                    :style="{ animationDelay: letter.delay + 'ms' }"
-                  >{{ letter.char }}</span>
-                </span>
-              </template>
-            </template>
-          </span>
-        </template>
-      </h1>
+            </span>
+          </template>
+        </h1>
 
-      <SharedScrollDownArrow class="absolute bottom-6 left-1/2 -translate-x-1/2 z-20" />
+        <SharedScrollDownArrow
+          target="#about-text-1"
+          class="absolute bottom-6 left-1/2 -translate-x-1/2 z-30"
+        />
+      </div>
     </div>
   </AboutWrapper>
 </template>
@@ -373,8 +395,6 @@ onUnmounted(() => {
 
 /* Constrain title width and wrap to avoid horizontal overflow */
 .about-hero-title {
-  max-width: 48ch;
-  width: min(92vw, 48ch);
   overflow-wrap: normal;
   word-break: normal;
   hyphens: none;

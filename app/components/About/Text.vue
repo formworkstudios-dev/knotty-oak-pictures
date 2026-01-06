@@ -44,6 +44,7 @@ onUnmounted(() => {
   <AboutWrapper
     bg-color="bg-amber-50"
     :z-index="108"
+    id="about-text-1"
   >
     <div class="flex flex-col md:flex-row min-h-screen snap-y snap-mandatory overflow-y-auto text-section">
       <!-- Left Column - Text -->

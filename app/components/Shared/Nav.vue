@@ -55,8 +55,8 @@ const titleColor = computed(() => {
 });
 
 const navBackground = computed(() => {
-  const forceSolid = route.path === '/filmography';
-  return (hasScrolled.value || forceSolid) ? 'bg-stone-900/80' : 'bg-transparent';
+  const forceSolid = route.path === '/filmography' || route.path === '/privacy' || route.path === '/tos';
+  return (hasScrolled.value || forceSolid) ? (forceSolid ? 'bg-stone-950' : 'bg-stone-900/80') : 'bg-transparent';
 });
 
 const handleScroll = () => {

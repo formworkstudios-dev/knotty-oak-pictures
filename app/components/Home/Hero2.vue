@@ -63,7 +63,11 @@ let cycleTimeout: number | null = null
 
 
 // Timings (ms)
-const bgFadeMs = 2700;
+// Background crossfade duration. Keeping this shorter reduces the "gap" before/after text.
+const bgFadeMs = 1600;
+// First run: show initial text sooner.
+const bgFadeFirstMs = 900;
+let isFirstRun = true
 const lettersInAnimationMs = 1300
 const lettersVisibleMs = 4100; // time letters are fully visible before fading out
 const lettersOutAnimationMs = 1200
@@ -76,9 +80,11 @@ const lettersOutMs = maxLetterDelayMs + lettersOutAnimationMs + 100
 function runSlideCycle() {
   // 1. Fade in background (no letters)
   slideState.value = 'fading-in';
+  const fadeInMs = isFirstRun ? bgFadeFirstMs : bgFadeMs
   cycleTimeout = window.setTimeout(() => {
     // 2. Letters fade in
     slideState.value = 'letters-in';
+    isFirstRun = false
     cycleTimeout = window.setTimeout(() => {
       // 3. Letters fully visible (no animation, just visible)
       slideState.value = 'letters-visible';
@@ -95,7 +101,7 @@ function runSlideCycle() {
         }, lettersOutMs);
       }, lettersVisibleMs);
     }, lettersInMs);
-  }, bgFadeMs);
+  }, fadeInMs);
 }
 
 function ensureAnimationStarts() {
@@ -200,7 +206,7 @@ onUnmounted(() => {
 /* Background fade */
 .bg-fade-enter-active,
 .bg-fade-leave-active {
-  transition: opacity 2.7s cubic-bezier(.77, .2, .32, 1);
+  transition: opacity 1.6s cubic-bezier(.77, .2, .32, 1);
 }
 
 .bg-fade-enter-from,

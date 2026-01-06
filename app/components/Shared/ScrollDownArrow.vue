@@ -6,18 +6,27 @@ import { useAttrs } from 'vue'
 
 type Props = {
   ariaLabel?: string
+  target?: string
 }
 
-withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props>(), {
   ariaLabel: 'Scroll down'
 })
 
 const attrs = useAttrs()
 
 function scrollDownOneViewport(): void {
-  if (typeof window !== 'undefined') {
-    window.scrollBy({ top: window.innerHeight, behavior: 'smooth' })
+  if (typeof window === 'undefined') return
+
+  if (props.target) {
+    const el = document.querySelector(props.target)
+    if (el instanceof HTMLElement) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      return
+    }
   }
+
+  window.scrollBy({ top: window.innerHeight, behavior: 'smooth' })
 }
 </script>
 
