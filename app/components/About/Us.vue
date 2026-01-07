@@ -6,7 +6,7 @@ const team = [
   {
     name: 'Tom Currà',
     role: 'President & Executive Producer',
-    description: 'Tom Curra was CEO of PBS’s WVIA Public Media, where he served as executive producer for the studio’s film and television production, which include 11 Emmy nominations and four awards.',
+    description: 'Tom served as the President and CEO of WVIA Public Media (PBS/NPR), where he acted as executive producer for the studio’s film and television production, which include 11 Emmy nominations, 4 awards, and 2 Cine Golden Eagle awards. He founded Knotty Oak Pictures in 2020.',
     image: '/tom.webp'
   },
   {
@@ -25,13 +25,13 @@ const team = [
     :z-index="110"
     class="border-t border-stone-200"
   >
-    <div class="flex items-center justify-center min-h-screen py-20 pt-36">
+    <div class="flex items-center justify-center min-h-screen pt-24 pb-6">
       <div class="max-w-6xl px-8 w-full text-black">
         <h1 class="text-5xl font-bold text-center !mb-12">
           About Us
         </h1>
 
-        <div class="flex flex-col md:flex-row gap-10 max-w-3xl mx-auto pb-20">
+        <div class="flex flex-col md:flex-row gap-10 max-w-3xl mx-auto pb-8">
           <!-- Tom Currà: default alignment -->
           <div class="flex-1 flex flex-col items-center md:items-center">
             <div class="mb-4 flex-shrink-0">
@@ -47,12 +47,11 @@ const team = [
             >
               <h2 class="text-3xl font-bold !mb-1 text-center">Tom Currà</h2>
               <p class="text-xl font-semibold mb-4 opacity-50 text-center">President & Executive Producer</p>
-              <p class="text-lg !font-light opacity-80 text-center">Tom served as the President and CEO of PBS/NPRs
-                WVIA Public
-                Media, where he acted as executive producer
-                for the studio’s film and television production,
-                which include 11 Emmy nominations and four awards, and two Cine Golden Eagle awards. He founded Knotty
-                Oak Pictures in 2020.</p>
+              <p class="text-lg !font-light opacity-80 text-center">
+                Tom served as the President and CEO of WVIA Public Media (PBS/NPR), where he acted as executive producer
+                for the studio’s film and television production, which include 11 Emmy nominations, 4 awards, and 2 Cine
+                Golden Eagle awards. He founded Knotty Oak Pictures in 2020.
+              </p>
             </div>
           </div>
 
@@ -84,7 +83,7 @@ const team = [
           to="/company-reel"
           class="flex justify-center"
         >
-          <div class="text-xl text-stone-950 flex items-center justify-center gap-2 group pb-20">
+          <div class="text-xl text-stone-950 flex items-center justify-center gap-2 group">
             Check Out Our Company Reel
             <UIcon
               name="i-mdi-chevron-right"
