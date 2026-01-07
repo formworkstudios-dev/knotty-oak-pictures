@@ -65,11 +65,16 @@ let cycleTimeout: number | null = null
 // Timings (ms)
 // Background crossfade duration. Keeping this shorter reduces the "gap" before/after text.
 const bgFadeMs = 1600;
+// Lead-in/out are the intentional "no text" gaps around a background change.
+// Set to 0 to eliminate deadspace around the words.
+const bgLeadInMs = 0;
+const bgLeadOutMs = 0;
 // First run: show initial text sooner.
-const bgFadeFirstMs = 900;
+const bgLeadInFirstMs = 0;
 let isFirstRun = true
 const lettersInAnimationMs = 1300
-const lettersVisibleMs = 4100; // time letters are fully visible before fading out
+// With bg lead-in/out set to 0, this sets the per-slide cycle to ~10s total.
+const lettersVisibleMs = 6100; // time letters are fully visible before fading out
 const lettersOutAnimationMs = 1200
 
 const maxLetterDelayMs = Math.max(...letterDelays)
@@ -80,7 +85,7 @@ const lettersOutMs = maxLetterDelayMs + lettersOutAnimationMs + 100
 function runSlideCycle() {
   // 1. Fade in background (no letters)
   slideState.value = 'fading-in';
-  const fadeInMs = isFirstRun ? bgFadeFirstMs : bgFadeMs
+  const fadeInMs = isFirstRun ? bgLeadInFirstMs : bgLeadInMs
   cycleTimeout = window.setTimeout(() => {
     // 2. Letters fade in
     slideState.value = 'letters-in';
@@ -97,7 +102,7 @@ function runSlideCycle() {
           cycleTimeout = window.setTimeout(() => {
             currentSlide.value = (currentSlide.value + 1) % slides.length;
             runSlideCycle();
-          }, bgFadeMs);
+          }, bgLeadOutMs);
         }, lettersOutMs);
       }, lettersVisibleMs);
     }, lettersInMs);
