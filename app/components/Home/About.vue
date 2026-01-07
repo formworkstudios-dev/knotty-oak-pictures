@@ -13,8 +13,15 @@
           alt="Tom and Greg 35 years ago"
           class="w-full h-full md:h-auto object-cover object-center shadow-md md:max-h-[60vh]"
         />
-        <!-- darken entire image for readability -->
-        <div class="absolute inset-0 bg-black/40 md:bg-black/30 pointer-events-none"></div>
+        <!-- vignette + soft darkening for readability -->
+        <div
+          class="absolute inset-0 pointer-events-none md:hidden"
+          style="background: radial-gradient(ellipse at center, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.32) 62%, rgba(0,0,0,0.62) 100%);"
+        ></div>
+        <div
+          class="absolute inset-0 pointer-events-none hidden md:block"
+          style="background: radial-gradient(ellipse at center, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.24) 62%, rgba(0,0,0,0.52) 100%);"
+        ></div>
         <!-- bottom gradient: transparent to darker black for text legibility -->
         <div
           class="absolute inset-x-0 bottom-0 h-28 md:h-36 pointer-events-none"
@@ -29,7 +36,7 @@
       </div>
 
       <Nuxt-Link to="/about">
-        <div class="text-xl text-stone-950 flex items-center gap-2 group">
+        <div class="text-xl text-stone-950 flex items-center gap-2 group pb-20">
           LEARN ABOUT US
           <UIcon
             name="i-mdi-chevron-right"

@@ -41,36 +41,6 @@ function cleanupVideo() {
   }
 }
 
-async function enterFullscreen() {
-  const el = videoEl.value
-  if (!el) return
-
-  // Prefer standard Fullscreen API where available
-  try {
-    const anyEl = el as any
-    if (typeof el.requestFullscreen === 'function') {
-      await el.requestFullscreen()
-      return
-    }
-    if (typeof anyEl.webkitRequestFullscreen === 'function') {
-      await anyEl.webkitRequestFullscreen()
-      return
-    }
-  } catch {
-    // fall through to iOS video fullscreen
-  }
-
-  // iOS Safari: video element fullscreen
-  try {
-    const anyEl = el as any
-    if (typeof anyEl.webkitEnterFullscreen === 'function') {
-      anyEl.webkitEnterFullscreen()
-    }
-  } catch {
-    // no-op
-  }
-}
-
 onBeforeRouteLeave(() => {
   cleanupVideo()
 })
@@ -83,14 +53,7 @@ onUnmounted(() => {
 <template>
   <div class="relative min-h-screen bg-black">
     <!-- Wrapper keeps this route in normal document flow so the footer doesn't jump up -->
-    <div class="fixed inset-0 w-screen h-[100dvh] bg-black">
-      <button
-        type="button"
-        class="md:hidden absolute top-4 right-4 z-10 bg-black/60 text-white text-sm px-3 py-2"
-        @click="enterFullscreen"
-      >
-        Full screen
-      </button>
+    <div class="fixed inset-0 w-screen h-[100dvh] bg-black relative">
       <video
         ref="videoEl"
         class="w-full h-full object-contain md:object-cover"
@@ -101,6 +64,19 @@ onUnmounted(() => {
         playsinline
         controls
       ></video>
+
+      <Nuxt-Link
+        to="/filmography"
+        class="absolute left-0 right-0 bottom-16 flex justify-center z-10"
+      >
+        <div class="text-xl text-stone-50 flex items-center gap-2 group">
+          See Our Filmography
+          <UIcon
+            name="i-mdi-chevron-right"
+            class="transition-transform duration-300 group-hover:translate-x-2"
+          />
+        </div>
+      </Nuxt-Link>
     </div>
   </div>
 </template>

@@ -31,7 +31,7 @@ const team = [
           About Us
         </h1>
 
-        <div class="flex flex-col md:flex-row gap-10 max-w-3xl mx-auto">
+        <div class="flex flex-col md:flex-row gap-10 max-w-3xl mx-auto pb-20">
           <!-- Tom Currà: default alignment -->
           <div class="flex-1 flex flex-col items-center md:items-center">
             <div class="mb-4 flex-shrink-0">
@@ -79,6 +79,19 @@ const team = [
             </div>
           </div>
         </div>
+
+        <Nuxt-Link
+          to="/company-reel"
+          class="flex justify-center"
+        >
+          <div class="text-xl text-stone-950 flex items-center justify-center gap-2 group pb-20">
+            Check Out Our Company Reel
+            <UIcon
+              name="i-mdi-chevron-right"
+              class="transition-transform duration-300 group-hover:translate-x-2"
+            />
+          </div>
+        </Nuxt-Link>
       </div>
     </div>
   </AboutWrapper>
