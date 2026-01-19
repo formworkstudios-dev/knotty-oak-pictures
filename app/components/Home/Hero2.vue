@@ -37,7 +37,10 @@ const slides = [
       'chasing one cinematic vision:',
     ],
     bg: 'bg-stone-950',
-    img: '/tom-and-greg-35-years-ago-2.png'
+    img: {
+      desktop: '/tom-and-greg-35-years-ago-2.png',
+      mobile: '/tom-and-greg-35-years-ago-2-alt.png'
+    }
   },
   {
     lines: [
@@ -45,7 +48,10 @@ const slides = [
       'what it means to be human.'
     ],
     bg: 'bg-amber-950',
-    img: '/slide2.jpg'
+    img: {
+      desktop: '/slide2.jpg',
+      mobile: '/slide2.jpg'
+    }
   },
   {
     lines: [
@@ -53,7 +59,10 @@ const slides = [
       'Authenticity is our original thought.'
     ],
     bg: 'bg-red-950',
-    img: '/little.png'
+    img: {
+      desktop: '/little.png',
+      mobile: '/little.png'
+    }
   }
 ]
 
@@ -73,8 +82,8 @@ const bgLeadOutMs = 0;
 const bgLeadInFirstMs = 0;
 let isFirstRun = true
 const lettersInAnimationMs = 1300
-// With bg lead-in/out set to 0, this sets the per-slide cycle to ~10s total.
-const lettersVisibleMs = 6100; // time letters are fully visible before fading out
+// With bg lead-in/out set to 0, this sets the per-slide cycle to ~8s total.
+const lettersVisibleMs = 4100; // time letters are fully visible before fading out
 const lettersOutAnimationMs = 1200
 
 const maxLetterDelayMs = Math.max(...letterDelays)
@@ -141,14 +150,29 @@ onUnmounted(() => {
         v-for="(slide, idx) in slides"
         v-show="idx === currentSlide"
         :key="`bg-${idx}`"
-        class="hero-bg-image"
-        :style="{
-          backgroundImage: `linear-gradient(rgba(30,30,30,0.55), rgba(30,30,30,0.55)), url('${slide.img}')`,
-          backgroundPosition: 'center center',
-          backgroundRepeat: 'no-repeat',
-          zIndex: 0
-        }"
-      ></div>
+        class="absolute inset-0"
+      >
+        <!-- Desktop Image -->
+        <div
+          class="hero-bg-image hidden md:block"
+          :style="{
+            backgroundImage: `linear-gradient(rgba(30,30,30,0.55), rgba(30,30,30,0.55)), url('${slide.img.desktop}')`,
+            backgroundPosition: 'center center',
+            backgroundRepeat: 'no-repeat',
+            zIndex: 0
+          }"
+        ></div>
+        <!-- Mobile Image -->
+        <div
+          class="hero-bg-image md:hidden"
+          :style="{
+            backgroundImage: `linear-gradient(rgba(30,30,30,0.55), rgba(30,30,30,0.55)), url('${slide.img.mobile}')`,
+            backgroundPosition: 'center center',
+            backgroundRepeat: 'no-repeat',
+            zIndex: 0
+          }"
+        ></div>
+      </div>
     </transition-group>
 
     <!-- Overlay -->

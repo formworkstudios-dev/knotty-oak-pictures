@@ -95,7 +95,7 @@ onUnmounted(() => {
           <h2
             v-if="isMobile"
             :ref="reveal"
-            class="text-3xl md:text-4xl max-w-sm md:max-w-none !leading-normal reveal block !m-0 !pb-0 text-stone-900"
+            class="!text-4xl md:text-4xl max-w-sm md:max-w-none !leading-normal reveal block !m-0 !pb-0 text-stone-900"
           >
             <span class="font-bold">Imaging</span> is our commodity,
             envisioned from thoughtful scripts that celebrate the human experience.

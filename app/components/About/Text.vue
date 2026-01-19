@@ -49,13 +49,13 @@ onUnmounted(() => {
     <div class="flex flex-col md:flex-row min-h-screen snap-y snap-mandatory overflow-y-auto text-section">
       <!-- Left Column - Text -->
       <div
-        class="w-full md:w-1/2 flex flex-col justify-center items-center md:items-start text-center md:text-left px-6 md:px-16 py-10 md:py-0 h-[50vh] md:h-auto snap-start"
+        class="w-full md:w-1/2 flex flex-col justify-center items-center md:items-start text-center md:text-right md:text-left px-6 md:px-16 py-10 md:py-0 h-[50vh] md:h-auto snap-start"
       >
         <div class="flex flex-col">
           <h2
             v-if="isMobile"
             :ref="reveal"
-            class="text-3xl md:text-4xl max-w-sm md:max-w-none !leading-normal reveal block !m-0 text-stone-900"
+            class="!text-4xl md:text-4xl max-w-sm md:max-w-none !leading-normal reveal block !m-0 text-stone-900"
           >
             This collaboration enriches our films with 40 years of <span class="font-bold">telling stories
               cinematically</span>.

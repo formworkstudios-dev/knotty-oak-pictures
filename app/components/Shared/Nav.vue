@@ -187,14 +187,14 @@ onUnmounted(() => {
               class="underline hover:no-underline"
             >1-570-575-3787</NuxtLink>
           </div>
-          <div>
+          <!-- <div>
             <NuxtLink
               to="https://instagram.com/knottyoakpictures"
               target="_blank"
               rel="noopener noreferrer"
               class="underline hover:no-underline"
             >@knottyoakpictures</NuxtLink>
-          </div>
+          </div> -->
         </div>
       </div>
       <div

@@ -17,75 +17,10 @@ let ambientDirection = 1
 const baseOverlayOpacity = 0.65
 const maxOverlayOpacity = 0.95
 const heroOverlayOpacity = ref(baseOverlayOpacity)
-// Crossfade background images among three assets
-const bgImages = [
-  '/tom-and-greg-35-years-ago.png',
-  '/tom-and-greg-35-years-ago-2.png',
-  '/tom-and-greg-35-years-ago-3.png'
-]
-const bgCurrentIndex = ref(0)
-const bgLayerAUrl = ref(bgImages[0] ?? '')
-const bgLayerBUrl = ref(bgImages[1] ?? bgImages[0] ?? '')
-const bgFrontIsA = ref(true)
-// Slightly longer fade and interval to improve perceived smoothness
-const bgFadeMs = 1400
-const bgIntervalMs = 5200
-let bgTimer: number | null = null
-const isBgFading = ref(false)
 
-function preloadBgImages(urls: string[]) {
-  if (typeof window === 'undefined') return
-  urls.forEach((u) => {
-    const img = new Image()
-    img.src = u
-  })
-}
-
-function startBgCrossfade() {
-  if (bgTimer) return
-  // Preload all images to avoid flicker at loop boundaries
-  preloadBgImages(bgImages)
-
-  if (bgImages.length <= 1) return
-
-  // Initialize layers deterministically
-  bgCurrentIndex.value = 0
-  bgLayerAUrl.value = bgImages[0] ?? ''
-  bgLayerBUrl.value = bgImages[1] ?? bgImages[0] ?? ''
-  bgFrontIsA.value = true
-
-  const cycle = () => {
-    if (isBgFading.value) {
-      // In rare cases, ensure we schedule next cycle anyway
-      bgTimer = window.setTimeout(cycle, bgIntervalMs)
-      return
-    }
-    isBgFading.value = true
-
-    // Prepare next index by updating ONLY the hidden layer, then flip opacity.
-    const nextIdx = (bgCurrentIndex.value + 1) % bgImages.length
-    if (bgFrontIsA.value) {
-      // A is currently visible; update hidden B
-      bgLayerBUrl.value = bgImages[nextIdx] ?? ''
-    } else {
-      // B is currently visible; update hidden A
-      bgLayerAUrl.value = bgImages[nextIdx] ?? ''
-    }
-
-    // Trigger crossfade by flipping which layer is front
-    bgFrontIsA.value = !bgFrontIsA.value
-
-    // After fade completes, commit current index and prime the following next image
-    window.setTimeout(() => {
-      bgCurrentIndex.value = nextIdx
-      isBgFading.value = false
-      // Schedule next cycle using setTimeout to avoid setInterval drift/glitch at wrap
-      bgTimer = window.setTimeout(cycle, bgIntervalMs)
-    }, bgFadeMs)
-  }
-
-  // Kick off first cycle using timeout to align timing precisely
-  bgTimer = window.setTimeout(cycle, bgIntervalMs)
+const bgImage = {
+  desktop: '/tom-and-greg-35-years-ago-3.png',
+  mobile: '/tom-and-greg-35-years-ago-3-alt.png'
 }
 
 // per-letter entrance animation (like Home/Hero2)
@@ -199,8 +134,6 @@ onMounted(() => {
   // set mobile state and listen for resize to toggle rendering mode
   updateIsMobile()
   window.addEventListener('resize', updateIsMobile)
-  // start background crossfade cycle
-  startBgCrossfade()
 })
 
 onUnmounted(() => {
@@ -208,10 +141,6 @@ onUnmounted(() => {
   if (animationFrame) cancelAnimationFrame(animationFrame)
   window.removeEventListener('scroll', handleScroll)
   try { window.removeEventListener('resize', updateIsMobile) } catch (e) { }
-  if (bgTimer) {
-    clearTimeout(bgTimer)
-    bgTimer = null
-  }
 })
 </script>
 
@@ -229,23 +158,17 @@ onUnmounted(() => {
       <!-- Fixed background image (stays put while page scrolls) -->
       <div
         class="fixed inset-0 w-full h-full z-0 pointer-events-none will-change-opacity"
-        :style="{ '--bg-fade-ms': bgFadeMs + 'ms', opacity: isHeroActive ? 1 : 0 }"
+        :style="{ opacity: isHeroActive ? 1 : 0 }"
       >
-        <!-- Layer A -->
+        <!-- Desktop Image -->
         <div
-          class="absolute inset-0 w-full h-full bg-cover bg-center bg-layer"
-          :style="{
-            backgroundImage: `url('${bgLayerAUrl}')`,
-            opacity: bgFrontIsA ? 1 : 0
-          }"
+          class="hidden md:block absolute inset-0 w-full h-full bg-cover bg-center"
+          :style="{ backgroundImage: `url('${bgImage.desktop}')` }"
         ></div>
-        <!-- Layer B -->
+        <!-- Mobile Image -->
         <div
-          class="absolute inset-0 w-full h-full bg-cover bg-center bg-layer"
-          :style="{
-            backgroundImage: `url('${bgLayerBUrl}')`,
-            opacity: bgFrontIsA ? 0 : 1
-          }"
+          class="md:hidden absolute inset-0 w-full h-full bg-cover bg-center"
+          :style="{ backgroundImage: `url('${bgImage.mobile}')` }"
         ></div>
       </div>
 
