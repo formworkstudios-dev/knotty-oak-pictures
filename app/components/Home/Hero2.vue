@@ -38,8 +38,8 @@ const slides = [
     ],
     bg: 'bg-stone-950',
     img: {
-      desktop: '/tom-and-greg-35-years-ago-2.png',
-      mobile: '/tom-and-greg-35-years-ago-2-alt.png'
+      desktop: '/fixed/tg2-wide-o.webp',
+      mobile: '/fixed/tg-wide-cropped.webp'
     }
   },
   {
@@ -49,8 +49,8 @@ const slides = [
     ],
     bg: 'bg-amber-950',
     img: {
-      desktop: '/slide2.jpg',
-      mobile: '/slide2.jpg'
+      desktop: '/fixed/matt-o.webp',
+      mobile: '/fixed/matt-o.webp'
     }
   },
   {
@@ -60,8 +60,8 @@ const slides = [
     ],
     bg: 'bg-red-950',
     img: {
-      desktop: '/little.png',
-      mobile: '/little.png'
+      desktop: '/fixed/baseball-o.webp',
+      mobile: '/fixed/baseball-o.webp'
     }
   }
 ]
@@ -82,8 +82,8 @@ const bgLeadOutMs = 0;
 const bgLeadInFirstMs = 0;
 let isFirstRun = true
 const lettersInAnimationMs = 1300
-// With bg lead-in/out set to 0, this sets the per-slide cycle to ~8s total.
-const lettersVisibleMs = 4100; // time letters are fully visible before fading out
+// With bg lead-in/out set to 0, this sets the per-slide cycle to ~7s total.
+const lettersVisibleMs = 3100; // time letters are fully visible before fading out
 const lettersOutAnimationMs = 1200
 
 const maxLetterDelayMs = Math.max(...letterDelays)
@@ -183,7 +183,7 @@ onUnmounted(() => {
 
     <!-- Desktop lines -->
     <div
-      class="w-full max-w-3xl hidden md:flex flex-col items-center justify-center py-16 relative z-10"
+      class="w-full max-w-3xl hidden md:flex flex-col items-center justify-end pb-24 pt-16 relative z-10"
       :style="{ opacity: textOpacity }"
     >
       <div
@@ -217,7 +217,7 @@ onUnmounted(() => {
 
     <!-- Mobile: centered text with no manual line breaks -->
     <div
-      class="md:hidden absolute inset-0 z-10 flex items-center justify-center px-6 text-center"
+      class="md:hidden absolute inset-0 z-10 flex items-end justify-center px-6 pb-24 text-center"
       :style="{ opacity: textOpacity }"
     >
       <div class="w-full max-w-sm">

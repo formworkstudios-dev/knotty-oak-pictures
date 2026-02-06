@@ -53,7 +53,7 @@ onUnmounted(() => {
 <template>
   <div class="relative min-h-screen bg-black">
     <!-- Wrapper keeps this route in normal document flow so the footer doesn't jump up -->
-    <div class="fixed inset-0 w-screen h-[100dvh] bg-black relative">
+    <div class="fixed inset-0 w-screen h-[100dvh] bg-black relative pt-16 md:pt-0">
       <video
         ref="videoEl"
         class="w-full h-full object-contain md:object-cover"
