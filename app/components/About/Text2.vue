@@ -46,6 +46,7 @@ onUnmounted(() => {
     :z-index="109"
     id="about-text-2"
   >
+
     <div class="flex flex-col-reverse md:flex-row min-h-screen snap-y snap-mandatory overflow-y-auto text2-section">
       <!-- Left Column - Fixed Background Image -->
       <div class="w-full md:w-1/2 h-[50vh] md:h-screen sticky top-0 snap-start">

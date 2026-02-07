@@ -83,7 +83,7 @@ const bgLeadInFirstMs = 0;
 let isFirstRun = true
 const lettersInAnimationMs = 1300
 // With bg lead-in/out set to 0, this sets the per-slide cycle to ~7s total.
-const lettersVisibleMs = 3100; // time letters are fully visible before fading out
+const lettersVisibleMs = 1600; // time letters are fully visible before fading out
 const lettersOutAnimationMs = 1200
 
 const maxLetterDelayMs = Math.max(...letterDelays)

@@ -46,7 +46,7 @@ const team = [
               style="max-width: 330px;"
             >
               <h2 class="text-3xl font-bold !mb-1 text-center">Tom Currà</h2>
-              <p class="text-xl font-semibold mb-4 opacity-50 text-center">President & Executive Producer</p>
+              <p class="text-xl font-semibold mb-4 opacity-80 text-center">President & Executive Producer</p>
               <p class="text-lg !font-light opacity-80 text-center">
                 Tom served as the President and CEO of WVIA Public Media (PBS/NPR), where he acted as executive producer
                 for the studio’s film and television production, which include 11 Emmy nominations, 4 awards, and 2 Cine
@@ -70,7 +70,7 @@ const team = [
               style="max-width: 330px;"
             >
               <h2 class="text-3xl font-bold !mb-1 text-center">Greg Matkosky</h2>
-              <p class="text-xl font-semibold mb-4 opacity-50 text-center">Director & Cinematographer</p>
+              <p class="text-xl font-semibold mb-4 opacity-80 text-center">Director & Cinematographer</p>
               <p class="text-lg !font-light opacity-80 text-center">Greg is an Emmy and Cine Golden Eagle Award-winning
                 writer/director and cinematographer with nearly 40 years experience in national commercial,
                 international documentary and giant-screen production across five continents. He received his BA in

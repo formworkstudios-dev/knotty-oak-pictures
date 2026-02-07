@@ -192,7 +192,7 @@ const filmography = [
     <div class="w-full max-w-6xl mx-auto">
       <h1 class="text-4xl font-bold mb-10">Filmography</h1>
 
-      <div class="space-y-6 text-sm leading-relaxed text-stone-700">
+      <div class="space-y-6 text-sm leading-relaxed text-stone-800">
         <p
           v-for="(paragraph, index) in introParagraphs"
           :key="index"
@@ -211,26 +211,26 @@ const filmography = [
           <h2 class="text-lg font-semibold text-stone-900">
             {{ row.title }}
           </h2>
-          <p class="mt-2 text-sm leading-relaxed text-stone-700">
+          <p class="mt-2 text-sm leading-relaxed text-stone-800">
             {{ row.story }}
           </p>
 
           <div class="mt-4 grid grid-cols-2 gap-x-6 gap-y-3 text-sm">
             <div>
-              <div class="text-xs uppercase tracking-wide text-stone-500">Genre</div>
-              <div class="text-stone-700">{{ row.genre }}</div>
+              <div class="text-xs uppercase tracking-wide text-stone-600">Genre</div>
+              <div class="text-stone-800">{{ row.genre }}</div>
             </div>
             <div>
-              <div class="text-xs uppercase tracking-wide text-stone-500">Released</div>
-              <div class="text-stone-700">{{ row.released }}</div>
+              <div class="text-xs uppercase tracking-wide text-stone-600">Released</div>
+              <div class="text-stone-800">{{ row.released }}</div>
             </div>
             <div>
-              <div class="text-xs uppercase tracking-wide text-stone-500">Tom</div>
-              <div class="text-stone-700">{{ row.tom }}</div>
+              <div class="text-xs uppercase tracking-wide text-stone-600">Tom</div>
+              <div class="text-stone-800">{{ row.tom }}</div>
             </div>
             <div>
-              <div class="text-xs uppercase tracking-wide text-stone-500">Greg</div>
-              <div class="text-stone-700">{{ row.greg }}</div>
+              <div class="text-xs uppercase tracking-wide text-stone-600">Greg</div>
+              <div class="text-stone-800">{{ row.greg }}</div>
             </div>
           </div>
         </article>
@@ -242,12 +242,12 @@ const filmography = [
           <table class="min-w-full border-collapse">
             <thead>
               <tr class="border-b border-stone-300">
-                <th class="py-3 pr-4 text-left text-xs uppercase tracking-wide text-stone-600">Title</th>
-                <th class="py-3 pr-4 text-left text-xs uppercase tracking-wide text-stone-600">Genre</th>
-                <th class="py-3 pr-4 text-left text-xs uppercase tracking-wide text-stone-600">Released</th>
-                <th class="py-3 pr-4 text-left text-xs uppercase tracking-wide text-stone-600">Tom</th>
-                <th class="py-3 pr-4 text-left text-xs uppercase tracking-wide text-stone-600">Greg</th>
-                <th class="py-3 text-left text-xs uppercase tracking-wide text-stone-600">The Story</th>
+                <th class="py-3 pr-4 text-left text-xs uppercase tracking-wide text-stone-700">Title</th>
+                <th class="py-3 pr-4 text-left text-xs uppercase tracking-wide text-stone-700">Genre</th>
+                <th class="py-3 pr-4 text-left text-xs uppercase tracking-wide text-stone-700">Released</th>
+                <th class="py-3 pr-4 text-left text-xs uppercase tracking-wide text-stone-700">Tom</th>
+                <th class="py-3 pr-4 text-left text-xs uppercase tracking-wide text-stone-700">Greg</th>
+                <th class="py-3 text-left text-xs uppercase tracking-wide text-stone-700">The Story</th>
               </tr>
             </thead>
             <tbody>
@@ -257,11 +257,11 @@ const filmography = [
                 class="border-b border-stone-200 last:border-b-0"
               >
                 <td class="py-3 pr-4 align-top text-sm font-medium text-stone-900">{{ row.title }}</td>
-                <td class="py-3 pr-4 align-top text-sm text-stone-700">{{ row.genre }}</td>
-                <td class="py-3 pr-4 align-top text-sm text-stone-700">{{ row.released }}</td>
-                <td class="py-3 pr-4 align-top text-sm text-stone-700">{{ row.tom }}</td>
-                <td class="py-3 pr-4 align-top text-sm text-stone-700">{{ row.greg }}</td>
-                <td class="py-3 align-top text-sm text-stone-700">{{ row.story }}</td>
+                <td class="py-3 pr-4 align-top text-sm text-stone-800">{{ row.genre }}</td>
+                <td class="py-3 pr-4 align-top text-sm text-stone-800">{{ row.released }}</td>
+                <td class="py-3 pr-4 align-top text-sm text-stone-800">{{ row.tom }}</td>
+                <td class="py-3 pr-4 align-top text-sm text-stone-800">{{ row.greg }}</td>
+                <td class="py-3 align-top text-sm text-stone-800">{{ row.story }}</td>
               </tr>
             </tbody>
           </table>
