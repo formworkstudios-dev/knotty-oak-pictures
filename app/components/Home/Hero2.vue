@@ -39,12 +39,12 @@ const slides = [
     bg: 'bg-stone-950',
     img: {
       desktop: '/fixed/tg2-wide-o.webp',
-      mobile: '/fixed/tg-wide-cropped.webp'
+      mobile: '/fixed/tg2-cropped-o.webp'
     }
   },
   {
     lines: [
-      'to create films that remind us',
+      'to make films that remind us',
       'what it means to be human.'
     ],
     bg: 'bg-amber-950',
@@ -183,7 +183,7 @@ onUnmounted(() => {
 
     <!-- Desktop lines -->
     <div
-      class="w-full max-w-3xl hidden md:flex flex-col items-center justify-end pb-24 pt-16 relative z-10"
+      class="w-full max-w-3xl hidden md:flex flex-col items-center justify-end pb-0 pt-0 relative z-10 md:absolute md:left-1/2 md:-translate-x-1/2 md:bottom-32"
       :style="{ opacity: textOpacity }"
     >
       <div

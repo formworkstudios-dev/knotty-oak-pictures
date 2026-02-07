@@ -12,15 +12,17 @@ const items = [
     year: '',
     image: '/fixed/ship-o-cropped.webp',
     desc: 'Expedition Chesapeake is a giant-screen journey of discovery that follows Emmy-Award winning wildlife biologist and conservationist Jeff Corwin as he navigates on, above and below the bay’s astonishingly diverse environment and celebrates the human history that has imbued this body of water with a soul. <strong>Distributed to IMAX theaters internationally.</strong>',
-    length: ''
+    length: '',
+    distribution: ''
   },
   {
     id: 2,
     title: 'Ubaldo',
     year: '',
     image: '/fixed/ubaldo-o-cropped.webp',
-    desc: 'Shot on location in Italy. A cinematic rendition of the nearly millennium-old epic Italian cultural festival “La Festa Dei Ceri”, and its recreation in a small town in the United States. <strong>Nationally distributed</strong>.',
-    length: '57 minutes'
+    desc: 'Shot on location in Italy. A cinematic rendition of the nearly millennium-old epic Italian cultural festival “La Festa Dei Ceri”, and its recreation in a small town in the United States.',
+    length: '57 minutes',
+    distribution: 'Nationally distributed.'
   },
   {
     id: 3,
@@ -28,7 +30,8 @@ const items = [
     year: '',
     image: '/fixed/sirens-o-cropped.webp',
     desc: '<strong>Emmy Award winning</strong> and <strong>nationally distributed</strong> film narrated by Leon Redbone that explores the early history of Jazz legends Tommy and Jimmy Dorsey and how their musical vision catalyzed Jazz from its improvisational roots into the Big Band sound.',
-    length: '57 minutes'
+    length: '57 minutes',
+    distribution: ''
   },
   {
     id: 4,
@@ -36,7 +39,8 @@ const items = [
     year: '',
     image: '/fixed/baseball2-o-cropped.webp',
     desc: '<strong>Nationally distributed</strong> and presented on ESPN during the Little League World Series broadcast. Narrated by Vin Scully, this documentary is the authorized cinematic biography of one of America’s iconic institutions. Shot on location in Japan.',
-    length: '57 minutes'
+    length: '57 minutes',
+    distribution: ''
   },
 
   {
@@ -45,7 +49,8 @@ const items = [
     year: '',
     image: '/fixed/frank-o-cropped.webp',
     desc: 'A <strong>Cine Golden Eagle Award winner</strong> that recounts the creative adventures of the master American illustrator. Shot in the wilderness environs of northern Quebec Province and Wyoming’s Bighorn Mountains.',
-    length: '57 minutes'
+    length: '57 minutes',
+    distribution: ''
   },
   {
     id: 6,
@@ -53,7 +58,8 @@ const items = [
     year: '',
     image: '/fixed/table-o-cropped.webp',
     desc: 'Susan Sarandon narrates this New York Film and Video Festival winner for <strong>Best Social Documentary</strong> about an art exhibit that memorializes women and children murdered in acts of domestic violence. <strong>Nationally distributed</strong>.',
-    length: '28 minutes'
+    length: '28 minutes',
+    distribution: ''
   },
   {
     id: 7,
@@ -61,7 +67,8 @@ const items = [
     year: 2001,
     image: '/fixed/mines-o-cropped.webp',
     desc: '<strong>Nationally distributed</strong>, 2001 feature-length <strong>Emmy-nominated</strong> dramatized documentary narrated by Academy Award nominee Jason Miller that presents the epic struggle between early 20th century immigrant coal miners and American industrialists.',
-    length: '143 minutes'
+    length: '143 minutes',
+    distribution: ''
   },
   {
     id: 8,
@@ -69,7 +76,8 @@ const items = [
     year: '',
     image: '/fixed/harvest-o-cropped.webp',
     desc: '<strong>Feature-length</strong> visual tone poem that blends the story of agricultural heritage with contemporary issues that challenge farmers. Broadcast throughout Pennsylvania on the Pennsylvania Public Television network.',
-    length: '86 minutes'
+    length: '86 minutes',
+    distribution: ''
   },
   {
     id: 9,
@@ -77,7 +85,8 @@ const items = [
     year: '',
     image: '/fixed/spirit-o-cropped.webp',
     desc: 'A behind-the-scenes look at the sport, art, industry and controversies of thoroughbred horse racing. Broadcast throughout Pennsylvania on the Pennsylvania Public Television network.',
-    length: '57 minutes'
+    length: '57 minutes',
+    distribution: ''
   },
   {
     id: 10,
@@ -85,7 +94,8 @@ const items = [
     year: '',
     image: '/fixed/healing-o-cropped.webp',
     desc: '<strong>Docudrama</strong> that reenacts Medal of Honor recipient Gino Merli’s amazing story of one night during World War II when he killed 51 German soldiers.',
-    length: '28 minutes'
+    length: '28 minutes',
+    distribution: ''
   },
   {
     id: 11,
@@ -93,7 +103,8 @@ const items = [
     year: '',
     image: '/fixed/fit-o-cropped.webp',
     desc: 'Short film about the competitive martial artist and wrestling coach Matt Marcinek, who was born with cerebral palsy but has defined his life by a commitment to excellence.',
-    length: ''
+    length: '',
+    distribution: ''
   },
 
   // {
@@ -454,6 +465,12 @@ onUnmounted(() => {
                   v-html="item.desc"
                 ></div>
                 <div
+                  v-if="item.distribution"
+                  class="distribution mt-2 text-base md:text-md text-white/90 mx-auto px-4"
+                >
+                  {{ item.distribution }}
+                </div>
+                <div
                   v-if="item.length"
                   class="length mt-2 text-white/80 text-sm md:text-base"
                 >
@@ -590,9 +607,24 @@ onUnmounted(() => {
   text-align: center;
 }
 
+/* distribution reveals like description */
+.distribution {
+  opacity: 0;
+  transition: opacity 380ms ease;
+  pointer-events: none;
+  max-width: 56ch;
+  width: min(92%, 56ch);
+  text-align: center;
+}
+
 /* Mobile/touch: no hover, so show description by default */
 @media (hover: none) and (pointer: coarse) {
   .desc {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .distribution {
     opacity: 1;
     pointer-events: auto;
   }
@@ -603,7 +635,17 @@ onUnmounted(() => {
   pointer-events: auto;
 }
 
+.carousel-item:hover .distribution {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 .carousel-item:focus-within .desc {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.carousel-item:focus-within .distribution {
   opacity: 1;
   pointer-events: auto;
 }

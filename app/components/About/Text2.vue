@@ -60,7 +60,7 @@ onUnmounted(() => {
 
       <!-- Right Column - Text -->
       <div
-        class="w-full md:w-1/2 flex flex-col justify-center items-center md:items-start text-center md:text-left px-6 md:px-16 py-10 md:py-0 h-[50vh] md:h-auto snap-start"
+        class="w-full md:w-1/2 flex flex-col justify-center items-center md:items-start text-center md:text-left px-6 md:px-10 py-10 md:py-0 h-[50vh] md:h-auto snap-start"
       >
         <svg
           class="absolute inset-0 w-full h-full pointer-events-none"
@@ -103,14 +103,14 @@ onUnmounted(() => {
           <h2
             v-else
             :ref="reveal"
-            class="text-3xl md:text-4xl max-w-sm md:max-w-none !leading-normal reveal block !m-0 !pb-0 text-stone-900"
+            class="text-3xl md:!text-4xl md:max-w-none !leading-normal reveal block !m-0 !pb-0 text-stone-900 max-w-[28ch] break-keep whitespace-normal"
           >
-            <span class="font-bold">Imaging</span> is our commodity,
+            <span class="font-bold text-4xl">Imaging</span> is our commodity,
           </h2>
           <h2
             v-if="!isMobile"
             :ref="reveal"
-            class="text-3xl md:text-4xl max-w-sm md:max-w-none !leading-normal reveal reveal-delay-200 block !m-0 !pb-0 text-stone-900"
+            class="text-3xl md:!text-4xl max-w-sm md:max-w-none !leading-normal reveal reveal-delay-200 block !m-0 !pb-0 text-stone-900 !max-w-[28ch] break-keep whitespace-normal"
           >
             envisioned from thoughtful scripts that celebrate the human experience.
           </h2>
