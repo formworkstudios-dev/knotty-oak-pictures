@@ -183,7 +183,7 @@ onUnmounted(() => {
 
     <!-- Desktop lines -->
     <div
-      class="w-full max-w-3xl hidden md:flex flex-col items-center justify-end pb-0 pt-0 relative z-10 md:absolute md:left-1/2 md:-translate-x-1/2 md:bottom-32"
+      class="w-full max-w-3xl hidden md:flex flex-col items-center justify-end pb-0 pt-0 relative z-10 md:absolute md:left-1/2 md:-translate-x-1/2 md:bottom-36"
       :style="{ opacity: textOpacity }"
     >
       <div
@@ -217,7 +217,7 @@ onUnmounted(() => {
 
     <!-- Mobile: centered text with no manual line breaks -->
     <div
-      class="md:hidden absolute inset-0 z-10 flex items-end justify-center px-6 pb-24 text-center"
+      class="md:hidden absolute inset-0 z-10 flex items-end justify-center px-6 pb-28 text-center"
       :style="{ opacity: textOpacity }"
     >
       <div class="w-full max-w-sm">

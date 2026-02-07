@@ -57,7 +57,7 @@ onUnmounted(() => {
             :ref="reveal"
             class="!text-4xl md:!text-5xl max-w-sm md:max-w-none !leading-normal reveal block !m-0 text-stone-900"
           >
-            This collaboration enriches our films with 40 years of <span class="font-bold">telling stories
+            This collaboration enriches our films with 40 years of <span class="font-medium">telling stories
               cinematically</span>.
           </h2>
           <h2
@@ -72,7 +72,7 @@ onUnmounted(() => {
             :ref="reveal"
             class="text-3xl md:!text-4xl max-w-lg md:max-w-none !leading-normal reveal reveal-delay-200 block !m-0 text-stone-900 break-keep whitespace-normal"
           >
-            <span class="font-bold text-4xl">telling stories cinematically</span>.
+            <span class="font-medium text-4xl">telling stories cinematically</span>.
           </h2>
         </div>
         <svg

@@ -97,7 +97,7 @@ onUnmounted(() => {
             :ref="reveal"
             class="!text-4xl md:text-4xl max-w-sm md:max-w-none !leading-normal reveal block !m-0 !pb-0 text-stone-900"
           >
-            <span class="font-bold">Imaging</span> is our commodity,
+            <span class="font-medium">Imaging</span> is our commodity,
             envisioned from thoughtful scripts that celebrate the human experience.
           </h2>
           <h2
@@ -105,7 +105,7 @@ onUnmounted(() => {
             :ref="reveal"
             class="text-3xl md:!text-4xl md:max-w-none !leading-normal reveal block !m-0 !pb-0 text-stone-900 max-w-[28ch] break-keep whitespace-normal"
           >
-            <span class="font-bold text-4xl">Imaging</span> is our commodity,
+            <span class="font-medium text-4xl">Imaging</span> is our commodity,
           </h2>
           <h2
             v-if="!isMobile"
