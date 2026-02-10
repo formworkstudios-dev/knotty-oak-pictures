@@ -466,7 +466,7 @@ onUnmounted(() => {
                 ></div>
                 <div
                   v-if="item.lastLine"
-                  class="distributionho text-base md:text-md text-white/90 mx-auto px-4"
+                  class="distribution text-base md:text-md text-white/90 mx-auto px-4"
                 >
                   {{ item.lastLine }}
                 </div>
