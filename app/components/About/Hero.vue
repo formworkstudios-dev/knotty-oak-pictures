@@ -189,7 +189,8 @@ onUnmounted(() => {
         >
           <template v-if="isMobile">
             <!-- mobile: line-based reveal -->
-            <span class="block reveal-instant">Knotty Oak Pictures is rooted in a lifetime friendship and shared love of
+            <span :class="['block', 'hero-mobile-anim', animateEntrance ? 'hero-mobile-in' : '']">Knotty Oak Pictures is
+              rooted in a lifetime friendship and shared love of
               and for filmmaking.</span>
           </template>
           <template v-else>
@@ -274,15 +275,16 @@ onUnmounted(() => {
 }
 
 /* mobile reveal lines: render gradient-clipped text on the span (not the parent) */
-.reveal-instant,
-.reveal-instant-delayed-1,
-.reveal-instant-delayed-2 {
-  background: linear-gradient(45deg, #FFFBEB 0%, #d6ad60 var(--gc), #FFFBEB 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  /* fallback color for browsers without text-fill */
-  color: #fff;
-  -webkit-text-fill-color: transparent;
+.hero-mobile-anim {
+  display: inline;
+  opacity: 0;
+  filter: blur(8px);
+  will-change: opacity, filter;
+  color: #FFFBEB;
+}
+
+.hero-mobile-in {
+  animation: letterFadeIn 0.9s cubic-bezier(.77, .2, .32, 1) forwards;
 }
 
 /* per-letter entrance */
@@ -291,17 +293,11 @@ onUnmounted(() => {
   transform: none;
   opacity: 0;
   filter: blur(8px);
-  /* gradient on each letter to satisfy Chrome */
-  background: linear-gradient(45deg, #FFFBEB 0%, #d6ad60 var(--gc), #FFFBEB 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  /* fallback and Chrome gradient text */
-  color: #fff;
-  -webkit-text-fill-color: transparent;
+  color: #FFFBEB;
 }
 
 .hero-letter-in {
-  animation: letterFadeIn 0.5s cubic-bezier(.77, .2, .32, 1) forwards;
+  animation: letterFadeIn 1.3s cubic-bezier(.77, .2, .32, 1) forwards;
 }
 
 @keyframes letterFadeIn {

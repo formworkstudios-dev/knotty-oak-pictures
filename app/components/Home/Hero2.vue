@@ -383,11 +383,7 @@ onUnmounted(() => {
   text-align: center;
   overflow: visible;
   white-space: nowrap;
-  /* apply the warm gradient across the entire line (one gradient spanning all letters) */
-  background: linear-gradient(45deg, #FFFBEB 0%, #d6ad60 50%, #FFFBEB 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #FFFBEB;
   margin-bottom: 0.5rem;
 }
 
@@ -406,12 +402,7 @@ onUnmounted(() => {
     opacity: 0;
     filter: blur(8px);
     will-change: opacity, filter;
-    background: linear-gradient(45deg, #FFFBEB 0%, #d6ad60 50%, #FFFBEB 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    /* Fallback color for browsers that don't support background-clip/text-fill */
-    color: #fff;
+    color: #FFFBEB;
   }
 
   .hero-mobile-visible {
