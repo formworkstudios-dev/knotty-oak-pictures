@@ -38,7 +38,8 @@ onUnmounted(() => {
   <div>
     <div class="sticky-card">
       <div class="relative z-10">
-        <HomeHero2 :text-opacity="textOpacity" />
+        <!-- <HomeHero2 :text-opacity="textOpacity" /> -->
+        <HomeHero3 />
       </div>
       <!-- This overlay will fade in as the user scrolls down -->
       <div

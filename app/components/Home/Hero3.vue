@@ -1,7 +1,4 @@
-<script
-  setup
-  lang="ts"
->
+<script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 
 defineProps({
@@ -11,129 +8,119 @@ defineProps({
   }
 })
 
-const letterDelays = [200, 250, 300, 350, 400, 450, 500, 600]
-
-function getStaggeredSpans(text: string) {
-  return text.split('').map((char, i) => ({
-    char: char === ' ' ? '\u00A0' : char,
-    delay: letterDelays[i % letterDelays.length], // Deterministic delay
-    i
-  }));
-}
-
-function shouldBold(slideIdx: number, lineIdx: number): boolean {
-  try {
-    const text = slides[slideIdx]?.lines?.[lineIdx] ?? ''
-    return /\bhuman\b/i.test(text)
-  } catch {
-    return false
-  }
-}
-
 const slides = [
   {
-    lines: [
-      'Knotty Oak grew from two creative minds',
-      'chasing one cinematic vision:',
-    ],
     bg: 'bg-stone-950',
     img: {
       desktop: '/fixed/tg2-wide-o.webp',
       mobile: '/fixed/tg2-cropped-o.webp'
+    },
+    text: {
+      desktop: [
+        'Knotty Oak grew from two creative minds',
+        'chasing one cinematic vision:'
+      ],
+      mobile: 'Knotty Oak grew from two creative minds chasing one cinematic vision:'
     }
   },
   {
-    lines: [
-      'to make films that remind us',
-      'what it means to be human.'
-    ],
     bg: 'bg-amber-950',
     img: {
       desktop: '/fixed/matt-o.webp',
       mobile: '/fixed/matt-o.webp'
+    },
+    text: {
+      desktop: [
+        'to make films that remind us',
+        'what it means to be human.'
+      ],
+      mobile: 'to make films that remind us what it means to be human.'
     }
   },
   {
-    lines: [
-
-      'Authenticity is our original thought.'
-    ],
     bg: 'bg-red-950',
     img: {
       desktop: '/fixed/baseball-o.webp',
       mobile: '/fixed/baseball-o.webp'
+    },
+    text: {
+      desktop: [
+        'Authenticity is our original thought.'
+      ],
+      mobile: 'Authenticity is our original thought.'
     }
   }
 ]
 
+const letterDelays = [200, 250, 300, 350, 400, 450, 500, 600]
+const lettersInAnimationMs = 1300
+const lettersOutAnimationMs = 1200
+const lettersVisibleMs = 1600
+// Match image fade speed to text fade for a smoother, unified feel.
+const bgFadeMs = 1300
+// Desktop: small equal lead-in/out around text.
+const bgLeadInMs = 200
+const bgLeadOutMs = 200
+const bgLeadInFirstMs = 200
+// Mobile: delay text start by +0.2s and reduce post-text gap by 0.2s.
+const mobileBgLeadInMs = 400
+const mobileBgLeadOutMs = 0
+
+const maxLetterDelayMs = Math.max(...letterDelays)
+const lettersInMs = maxLetterDelayMs + lettersInAnimationMs + 100
+const lettersOutMs = maxLetterDelayMs + lettersOutAnimationMs + 100
+
 const currentSlide = ref(0)
 const slideState = ref<'fading-in' | 'letters-in' | 'letters-visible' | 'letters-out' | 'fading-out'>('fading-in')
 let cycleTimeout: number | null = null
+let isFirstRun = true
 const isMobile = ref(false)
 let resizeHandler: (() => void) | null = null
 
+function getStaggeredSpans(text: string) {
+  return text.split('').map((char, i) => ({
+    char: char === ' ' ? '\u00A0' : char,
+    delay: letterDelays[i % letterDelays.length],
+    i
+  }))
+}
 
-// Timings (ms)
-// Background crossfade duration. Keeping this shorter reduces the "gap" before/after text.
-const bgFadeMs = 1600;
-// Lead-in/out are the intentional "no text" gaps around a background change.
-// Set to 0 to eliminate deadspace around the words.
-const bgLeadInMs = 0;
-const bgLeadOutMs = 0;
-// First run: show initial text sooner.
-const bgLeadInFirstMs = 0;
-let isFirstRun = true
-const lettersInAnimationMs = 1300
-// With bg lead-in/out set to 0, this sets the per-slide cycle to ~7s total.
-const lettersVisibleMs = 1600; // time letters are fully visible before fading out
-const lettersOutAnimationMs = 1200
-// Mobile text animates as a single span (no per-letter delay), so timings should match its CSS durations.
-const mobileLettersInAnimationMs = 900
-const mobileLettersOutAnimationMs = 900
+function shouldBold(line: string): boolean {
+  return /\bhuman\b/i.test(line)
+}
 
-const maxLetterDelayMs = Math.max(...letterDelays)
-// Phase duration must cover delay + animation, otherwise the class is removed mid-animation.
-const lettersInMs = maxLetterDelayMs + lettersInAnimationMs + 100
-const lettersOutMs = maxLetterDelayMs + lettersOutAnimationMs + 100
+function runSlideCycle() {
+  // Step 1: background has just switched; allow it to settle before text
+  slideState.value = 'fading-in'
+  const fadeInMs = isFirstRun
+    ? (isMobile.value ? mobileBgLeadInMs : bgLeadInFirstMs)
+    : (isMobile.value ? mobileBgLeadInMs : bgLeadInMs)
+  cycleTimeout = window.setTimeout(() => {
+    // Step 2: text fades in (desktop per-letter, mobile single span)
+    slideState.value = 'letters-in'
+    isFirstRun = false
+    cycleTimeout = window.setTimeout(() => {
+      // Step 3: text fully visible, holding
+      slideState.value = 'letters-visible'
+      cycleTimeout = window.setTimeout(() => {
+        // Step 4: text fades out
+        slideState.value = 'letters-out'
+        cycleTimeout = window.setTimeout(() => {
+          // Step 5: small post-text gap before image transition
+          slideState.value = 'fading-out'
+          cycleTimeout = window.setTimeout(() => {
+            currentSlide.value = (currentSlide.value + 1) % slides.length
+            runSlideCycle()
+          }, isMobile.value ? mobileBgLeadOutMs : bgLeadOutMs)
+        }, lettersOutMs)
+      }, lettersVisibleMs)
+    }, lettersInMs)
+  }, fadeInMs)
+}
 
 function updateIsMobile() {
   if (typeof window === 'undefined') return
   isMobile.value = window.innerWidth <= 640
-}
-
-function runSlideCycle() {
-  // 1. Fade in background (no letters)
-  slideState.value = 'fading-in';
-  const fadeInMs = isFirstRun ? bgLeadInFirstMs : bgLeadInMs
-  cycleTimeout = window.setTimeout(() => {
-    // 2. Letters fade in
-    slideState.value = 'letters-in';
-    isFirstRun = false
-    cycleTimeout = window.setTimeout(() => {
-      // 3. Letters fully visible (no animation, just visible)
-      slideState.value = 'letters-visible';
-      cycleTimeout = window.setTimeout(() => {
-        // 4. Letters fade out
-        slideState.value = 'letters-out';
-        const outMs = isMobile.value ? mobileLettersOutAnimationMs : lettersOutMs
-        cycleTimeout = window.setTimeout(() => {
-          // 5. Fade out background (no letters)
-          slideState.value = 'fading-out';
-          cycleTimeout = window.setTimeout(() => {
-            currentSlide.value = (currentSlide.value + 1) % slides.length;
-            runSlideCycle();
-          }, bgLeadOutMs);
-        }, outMs);
-      }, lettersVisibleMs);
-    }, isMobile.value ? mobileLettersInAnimationMs : lettersInMs);
-  }, fadeInMs);
-}
-
-function ensureAnimationStarts() {
-  if (slideState.value !== 'fading-in' && slideState.value !== 'letters-in' && slideState.value !== 'letters-out' && slideState.value !== 'fading-out') {
-    slideState.value = 'fading-in';
-    runSlideCycle();
-  }
 }
 
 onMounted(() => {
@@ -141,7 +128,6 @@ onMounted(() => {
   resizeHandler = () => updateIsMobile()
   window.addEventListener('resize', resizeHandler)
   runSlideCycle()
-  ensureAnimationStarts();
 })
 
 onUnmounted(() => {
@@ -167,7 +153,6 @@ onUnmounted(() => {
         :key="`bg-${idx}`"
         class="absolute inset-0"
       >
-        <!-- Desktop Image -->
         <div
           class="hero-bg-image hidden md:block"
           :style="{
@@ -177,13 +162,11 @@ onUnmounted(() => {
             zIndex: 0
           }"
         ></div>
-        <!-- Mobile Image -->
         <div
           class="hero-bg-image md:hidden"
           :style="{
             backgroundImage: `linear-gradient(rgba(30,30,30,0.55), rgba(30,30,30,0.55)), url('${slide.img.mobile}')`,
             backgroundPosition: 'center center',
-
             backgroundRepeat: 'no-repeat',
             zIndex: 0
           }"
@@ -191,33 +174,31 @@ onUnmounted(() => {
       </div>
     </transition-group>
 
-    <!-- Overlay -->
     <div
       class="hero-conical-overlay"
       aria-hidden="true"
     ></div>
 
-    <!-- Desktop lines -->
+    <!-- Desktop lines (per-letter animation) -->
     <div
       class="w-full max-w-3xl hidden md:flex flex-col items-center justify-end pb-0 pt-0 relative z-10 md:absolute md:left-1/2 md:-translate-x-1/2 md:bottom-36"
       :style="{ opacity: textOpacity }"
     >
       <div
-        v-for="(line, lineIdx) in (slides[currentSlide]?.lines?.length ?? 0)"
-        :key="lineIdx"
+        v-for="(line, lineIdx) in (slides[currentSlide]?.text?.desktop ?? [])"
+        :key="`line-${lineIdx}`"
         class="hero-line-container"
       >
         <div class="hero-line hero-fixed-line hero-absolute">
           <span
-            v-for="letter in getStaggeredSpans(slides[currentSlide]?.lines?.[lineIdx] ?? '')"
-            :key="`${currentSlide}-${lineIdx}-${letter.i}`"
+            v-for="letter in getStaggeredSpans(line)"
+            :key="`letter-${currentSlide}-${lineIdx}-${letter.i}`"
             :class="[
               'hero-letter',
               slideState === 'letters-in' && 'hero-letter-in',
               slideState === 'letters-visible' && 'is-visible',
               slideState === 'letters-out' && 'hero-letter-out',
-              shouldBold(currentSlide, lineIdx) ? 'font-semibold' : '!font-thin',
-              'hero'
+              shouldBold(line) ? 'font-semibold' : '!font-thin'
             ]"
             :style="slideState === 'letters-in'
               ? `animation-delay: ${letter.delay}ms; animation-duration: 1.3s;`
@@ -231,7 +212,7 @@ onUnmounted(() => {
       </div>
     </div>
 
-    <!-- Mobile: centered text with no manual line breaks -->
+    <!-- Mobile text (single span, no per-letter animation) -->
     <div
       class="md:hidden absolute inset-0 z-10 flex items-end justify-center px-6 pb-28 text-center"
       :style="{ opacity: textOpacity }"
@@ -244,7 +225,7 @@ onUnmounted(() => {
             slideState === 'letters-visible' && 'hero-mobile-visible',
             slideState === 'letters-out' && 'hero-mobile-out'
           ]">
-            {{ (slides[currentSlide]?.lines ?? []).join(' ') }}
+            {{ slides[currentSlide]?.text?.mobile ?? '' }}
           </span>
         </div>
       </div>
@@ -255,10 +236,9 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
-/* Background fade */
 .bg-fade-enter-active,
 .bg-fade-leave-active {
-  transition: opacity 1.6s cubic-bezier(.77, .2, .32, 1);
+  transition: opacity 1.3s cubic-bezier(.77, .2, .32, 1);
 }
 
 .bg-fade-enter-from,
@@ -277,18 +257,15 @@ onUnmounted(() => {
   width: 100%;
   height: 100dvh;
   pointer-events: none;
-  /* Default: fit full image width; letterbox vertically if needed */
   background-size: 100% auto;
 }
 
 @media (max-width: 640px) {
   .hero-bg-image {
-    /* Mobile: fill the viewport */
     background-size: cover;
   }
 }
 
-/* Overlays */
 .hero-conical-overlay {
   position: absolute;
   inset: 0;
@@ -306,18 +283,12 @@ onUnmounted(() => {
   pointer-events: none;
 }
 
-/* noise overlay removed */
-
-/* Letter animations */
-
 .hero-letter {
   display: inline-block;
   transform: none;
-  /* do not set the gradient per-letter; let the line container provide a single gradient across the whole line */
   opacity: 0;
   filter: blur(8px);
   will-change: opacity, filter;
-  /* Chrome fallback to avoid transparent text when parent uses -webkit-text-fill-color: transparent */
   color: #fff;
   -webkit-text-fill-color: initial;
 }
@@ -361,12 +332,6 @@ onUnmounted(() => {
   }
 }
 
-/* ensure outgoing layer appears above incoming during fade */
-.hero-outgoing {
-  z-index: 20;
-}
-
-/* Lines */
 .hero-line-container {
   position: relative;
   height: 3.5rem;
@@ -427,22 +392,11 @@ onUnmounted(() => {
   }
 
   .hero-mobile-in {
-    animation: letterFadeIn 0.9s cubic-bezier(.77, .2, .32, 1) forwards;
+    animation: letterFadeIn 1.3s cubic-bezier(.77, .2, .32, 1) forwards;
   }
 
   .hero-mobile-out {
-    animation: letterFadeOut 0.9s cubic-bezier(.77, .2, .32, 1) forwards;
-  }
-
-  .hero-letter {
-    font-size: 1.35rem;
-    /* Fallback color for browsers that don't support background-clip/text-fill */
-    color: #fff;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-    white-space: normal;
-    word-break: break-word;
+    animation: letterFadeOut 1.2s cubic-bezier(.77, .2, .32, 1) forwards;
   }
 }
 </style>
