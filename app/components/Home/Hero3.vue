@@ -69,6 +69,9 @@ const mobileBgLeadOutMs = 0
 const maxLetterDelayMs = Math.max(...letterDelays)
 const lettersInMs = maxLetterDelayMs + lettersInAnimationMs + 100
 const lettersOutMs = maxLetterDelayMs + lettersOutAnimationMs + 100
+// Mobile uses a single span (no per-letter delay), so don't include maxLetterDelayMs.
+const mobileLettersInMs = lettersInAnimationMs + 100
+const mobileLettersOutMs = lettersOutAnimationMs + 100
 
 const currentSlide = ref(0)
 const slideState = ref<'fading-in' | 'letters-in' | 'letters-visible' | 'letters-out' | 'fading-out'>('fading-in')
@@ -112,9 +115,9 @@ function runSlideCycle() {
             currentSlide.value = (currentSlide.value + 1) % slides.length
             runSlideCycle()
           }, isMobile.value ? mobileBgLeadOutMs : bgLeadOutMs)
-        }, lettersOutMs)
+        }, isMobile.value ? mobileLettersOutMs : lettersOutMs)
       }, lettersVisibleMs)
-    }, lettersInMs)
+    }, isMobile.value ? mobileLettersInMs : lettersInMs)
   }, fadeInMs)
 }
 
