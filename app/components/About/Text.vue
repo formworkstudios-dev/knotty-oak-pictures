@@ -111,7 +111,7 @@ onUnmounted(() => {
       <div class="w-full md:w-1/2 h-[50vh] md:h-screen sticky top-0 snap-start">
         <div class="relative h-full w-full overflow-hidden">
           <img
-            src="/about-2a.png"
+            src="/tom-desk.webp"
             alt=""
             class="absolute top-0 left-0 h-full w-auto min-w-full object-cover will-change-transform"
             style="transform: translateX(-0%);"
