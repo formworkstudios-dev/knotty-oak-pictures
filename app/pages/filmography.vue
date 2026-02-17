@@ -267,6 +267,19 @@ const filmography = [
           </table>
         </div>
       </div>
+
+      <NuxtLink
+        to="/company-reel"
+        class="mt-16 flex justify-center"
+      >
+        <div class="text-xl text-stone-900 flex items-center gap-2 group">
+          See Our Company Reel
+          <UIcon
+            name="i-mdi-chevron-right"
+            class="transition-transform duration-300 group-hover:translate-x-2"
+          />
+        </div>
+      </NuxtLink>
     </div>
   </div>
 </template>

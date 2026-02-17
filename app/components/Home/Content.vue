@@ -22,7 +22,7 @@ const items = [
     image: '/fixed/ubaldo-o-cropped.webp',
     desc: '<strong>Shot on location in Italy</strong>. A cinematic rendition of the nearly millennium-old epic Italian cultural festival “La Festa Dei Ceri”, and its recreation in a small town in the United States. Produced by WVIA Public Media. Nationally distributed on PBS.',
     length: '57 minutes',
-    lastLine: 'Nationally distributed.'
+    lastLine: ''
   },
   {
     id: 3,
@@ -66,7 +66,7 @@ const items = [
     title: 'Stories From The Mines',
     year: 2001,
     image: '/fixed/mines-o-cropped.webp',
-    desc: 'Feature-length <strong>Emmy-nominated</strong> dramatized documentary narrated by Academy Award winner Jason Miller that presents the epic struggle between early 20th century immigrant coal miners and American industrialists. Produced by WVIA Public Media. Nationally distributed on PBS.',
+    desc: 'Feature-length <strong>Emmy-nominated</strong> dramatized documentary narrated by Academy Award winner Jason Miller that presents the epic struggle between early 20th century immigrant coal miners and American industrialists. Nationally distributed on PBS.',
     length: '143 minutes',
     lastLine: ''
   },
@@ -77,7 +77,7 @@ const items = [
     image: '/fixed/harvest-o-cropped.webp',
     desc: '<strong>Feature-length</strong> visual tone poem that blends the story of agricultural heritage with contemporary issues that challenge farmers. Produced by WVIA Public Media. Broadcast throughout Pennsylvania on the Pennsylvania Public Television Network.',
     length: '86 minutes',
-    lastLine: 'Public Television network.'
+    lastLine: ''
   },
   {
     id: 9,

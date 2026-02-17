@@ -64,19 +64,6 @@ onUnmounted(() => {
         playsinline
         controls
       ></video>
-
-      <Nuxt-Link
-        to="/filmography"
-        class="absolute left-0 right-0 bottom-16 flex justify-center z-10"
-      >
-        <div class="text-xl text-stone-50 flex items-center gap-2 group">
-          See Our Filmography
-          <UIcon
-            name="i-mdi-chevron-right"
-            class="transition-transform duration-300 group-hover:translate-x-2"
-          />
-        </div>
-      </Nuxt-Link>
     </div>
   </div>
 </template>

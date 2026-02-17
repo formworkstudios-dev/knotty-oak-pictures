@@ -149,18 +149,6 @@ onUnmounted(() => {
           </NuxtLink>
 
           <NuxtLink
-            to="/company-reel"
-            @click="closeMenu"
-            class="text-white"
-          >
-            <span
-              class="inline-block text-4xl md:text-5xl font-light md:hover:font-normal transition-all cursor-pointer relative pl-0 md:pl-4 before:hidden md:before:block before:content-[''] before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-2 before:h-2 before:rounded-full before:bg-[#FFFBEB] before:opacity-0 before:transition-all md:hover:before:opacity-100 md:hover:before:-translate-x-2"
-            >
-              Company Reel
-            </span>
-          </NuxtLink>
-
-          <NuxtLink
             to="/filmography"
             @click="closeMenu"
             class="text-white"
@@ -169,6 +157,18 @@ onUnmounted(() => {
               class="inline-block text-4xl md:text-5xl font-light md:hover:font-normal transition-all cursor-pointer relative pl-0 md:pl-4 before:hidden md:before:block before:content-[''] before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-2 before:h-2 before:rounded-full before:bg-[#FFFBEB] before:opacity-0 before:transition-all md:hover:before:opacity-100 md:hover:before:-translate-x-2"
             >
               Filmography
+            </span>
+          </NuxtLink>
+
+          <NuxtLink
+            to="/company-reel"
+            @click="closeMenu"
+            class="text-white"
+          >
+            <span
+              class="inline-block text-4xl md:text-5xl font-light md:hover:font-normal transition-all cursor-pointer relative pl-0 md:pl-4 before:hidden md:before:block before:content-[''] before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-2 before:h-2 before:rounded-full before:bg-[#FFFBEB] before:opacity-0 before:transition-all md:hover:before:opacity-100 md:hover:before:-translate-x-2"
+            >
+              Company Reel
             </span>
           </NuxtLink>
         </nav>
