@@ -11,8 +11,8 @@ const items = [
     title: 'Expedition Chesapeake',
     year: '',
     image: '/fixed/ship-o-cropped.webp',
-    desc: 'Expedition Chesapeake is a giant-screen journey of discovery that follows Emmy-Award winning wildlife biologist and conservationist Jeff Corwin as he navigates on, above and below the bay’s astonishingly diverse environment and celebrates the human history that has imbued this body of water with a soul. <strong>Distributed to IMAX theaters internationally.</strong>',
-    length: '',
+    desc: '<em>Expedition Chesapeake</em> is a giant-screen journey of discovery that follows Emmy Award-winning wildlife biologist and conservationist Jeff Corwin as he navigates on, above and below the bay’s astonishingly diverse environment and celebrates the human history that has imbued this body of water with a soul. <strong>Distributed to IMAX theaters internationally.</strong>',
+    length: '44 minutes',
     lastLine: ''
   },
   {
@@ -20,7 +20,7 @@ const items = [
     title: 'Ubaldo',
     year: '',
     image: '/fixed/ubaldo-o-cropped.webp',
-    desc: 'Shot on location in Italy. A cinematic rendition of the nearly millennium-old epic Italian cultural festival “La Festa Dei Ceri”, and its recreation in a small town in the United States.',
+    desc: '<strong>Shot on location in Italy</strong>. A cinematic rendition of the nearly millennium-old epic Italian cultural festival “La Festa Dei Ceri”, and its recreation in a small town in the United States. Produced by WVIA Public Media. Nationally distributed on PBS.',
     length: '57 minutes',
     lastLine: 'Nationally distributed.'
   },
@@ -29,7 +29,7 @@ const items = [
     title: 'Remembering The Sirens',
     year: '',
     image: '/fixed/sirens-o-cropped.webp',
-    desc: '<strong>Emmy Award winning</strong> and <strong>nationally distributed</strong> film narrated by Leon Redbone that explores the early history of Jazz legends Tommy and Jimmy Dorsey and how their musical vision catalyzed Jazz from its improvisational roots into the Big Band sound.',
+    desc: '<strong>Emmy Award-winning</strong> film narrated by Leon Redbone that explores the early history of Jazz legends Tommy and Jimmy Dorsey and how their musical vision catalyzed Jazz from its improvisational roots into the Big Band sound. Produced by WVIA Public Media. Nationally distributed on PBS.',
     length: '57 minutes',
     lastLine: ''
   },
@@ -38,7 +38,7 @@ const items = [
     title: 'Little League: A History',
     year: '',
     image: '/fixed/baseball2-o-cropped.webp',
-    desc: '<strong>Nationally distributed</strong> and presented on ESPN during the Little League World Series broadcast. Narrated by Vin Scully, this documentary is the authorized cinematic biography of one of America’s iconic institutions. Shot on location in Japan.',
+    desc: '<strong>Presented on ESPN</strong> during the national broadcast of the Little League World Series. Narrated by Vin Scully, this documentary is the authorized cinematic biography of one of America’s iconic institutions. Shot on location in Japan. Produced by WVIA Public Media. Nationally distributed on PBS.',
     length: '57 minutes',
     lastLine: ''
   },
@@ -48,7 +48,7 @@ const items = [
     title: 'Frank Schoonover: The Authentic Artist',
     year: '',
     image: '/fixed/frank-o-cropped.webp',
-    desc: 'A <strong>Cine Golden Eagle Award winner</strong> that recounts the creative adventures of the master American illustrator. Shot in the wilderness environs of northern Quebec Province and Wyoming’s Bighorn Mountains.',
+    desc: 'A <strong>Cine Golden Eagle winner</strong> that recounts the creative adventures of the master American illustrator. Shot in the wilderness environs of northern Quebec Province and Wyoming’s Bighorn Mountains. Produced by WVIA Public Media.',
     length: '57 minutes',
     lastLine: ''
   },
@@ -57,7 +57,7 @@ const items = [
     title: 'An Empty Place At The Table',
     year: '',
     image: '/fixed/table-o-cropped.webp',
-    desc: 'Susan Sarandon narrates this New York Film and Video Festival winner for <strong>Best Social Documentary</strong> about an art exhibit that memorializes women and children murdered in acts of domestic violence. <strong>Nationally distributed</strong>.',
+    desc: 'Susan Sarandon narrates this New York Film and Video Festival winner for <strong>Best Social Documentary</strong> about an art exhibit that memorializes women and children murdered in acts of domestic violence. Nationally distributed.',
     length: '28 minutes',
     lastLine: ''
   },
@@ -66,7 +66,7 @@ const items = [
     title: 'Stories From The Mines',
     year: 2001,
     image: '/fixed/mines-o-cropped.webp',
-    desc: '<strong>Nationally distributed</strong>, 2001 feature-length <strong>Emmy-nominated</strong> dramatized documentary narrated by Academy Award nominee Jason Miller that presents the epic struggle between early 20th century immigrant coal miners and American industrialists.',
+    desc: 'Feature-length <strong>Emmy-nominated</strong> dramatized documentary narrated by Academy Award winner Jason Miller that presents the epic struggle between early 20th century immigrant coal miners and American industrialists. Produced by WVIA Public Media. Nationally distributed on PBS.',
     length: '143 minutes',
     lastLine: ''
   },
@@ -75,7 +75,7 @@ const items = [
     title: 'Hearth & Harvest',
     year: '',
     image: '/fixed/harvest-o-cropped.webp',
-    desc: '<strong>Feature-length</strong> visual tone poem that blends the story of agricultural heritage with contemporary issues that challenge farmers. Broadcast throughout Pennsylvania on the Pennsylvania',
+    desc: '<strong>Feature-length</strong> visual tone poem that blends the story of agricultural heritage with contemporary issues that challenge farmers. Produced by WVIA Public Media. Broadcast throughout Pennsylvania on the Pennsylvania Public Television Network.',
     length: '86 minutes',
     lastLine: 'Public Television network.'
   },
@@ -84,7 +84,7 @@ const items = [
     title: 'Spirit & Speed',
     year: '',
     image: '/fixed/spirit-o-cropped.webp',
-    desc: 'A behind-the-scenes look at the sport, art, industry and controversies of thoroughbred horse racing. Broadcast throughout Pennsylvania on the Pennsylvania Public Television network.',
+    desc: 'A behind-the-scenes look at the sport, art, industry and controversies of thoroughbred horse racing. Produced by WVIA Public Media. Broadcast throughout Pennsylvania on the <strong>Pennsylvania Public Television Network</strong>.',
     length: '57 minutes',
     lastLine: ''
   },
@@ -93,7 +93,7 @@ const items = [
     title: 'The Healing Hero',
     year: '',
     image: '/fixed/healing-o-cropped.webp',
-    desc: '<strong>Docudrama</strong> that reenacts Medal of Honor recipient Gino Merli’s amazing story of one night during World War II when he killed 51 German soldiers.',
+    desc: '<strong>Docudrama</strong> that reenacts Medal of Honor recipient Gino Merli’s amazing story of one night during World War II when he killed 51 German soldiers. Produced by WVIA Public Media.',
     length: '28 minutes',
     lastLine: ''
   },
@@ -102,8 +102,8 @@ const items = [
     title: 'Fit Club',
     year: '',
     image: '/fixed/fit-o-cropped.webp',
-    desc: 'Short film about the competitive martial artist and wrestling coach Matt Marcinek, who was born with cerebral palsy but has defined his life by a commitment to excellence.',
-    length: '',
+    desc: '<strong>Short film</strong> about the competitive martial artist and wrestling coach Matt Marcinek, who was born with cerebral palsy but has defined his life by a commitment to excellence. Produced by WVIA Public Media.',
+    length: '10 minutes',
     lastLine: ''
   },
 
