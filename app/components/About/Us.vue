@@ -84,7 +84,7 @@ const team = [
           class="flex justify-center"
         >
           <div class="text-xl text-stone-950 flex items-center justify-center gap-2 group">
-            Check Out Our Company Reel
+            View Our Company Reel
             <UIcon
               name="i-mdi-chevron-right"
               class="transition-transform duration-300 group-hover:translate-x-2"

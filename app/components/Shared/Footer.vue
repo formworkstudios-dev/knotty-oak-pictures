@@ -41,7 +41,7 @@ onBeforeUnmount(() => {
   <div
     ref="root"
     :class="{ 'footer--visible': visible }"
-    class="footer-anim bg-amber-50 border-t border-stone-200 px-3 pt-2 pb-1 md:py-2 text-xs md:text-sm text-stone-700 flex flex-col md:flex-row items-center justify-center w-full gap-1 md:gap-4 leading-none"
+    class="!mb-0 footer-anim bg-amber-50 border-t border-stone-200 px-3 pt-2 !pb-1 md:py-2 text-xs md:text-sm text-stone-700 flex flex-col md:flex-row items-center justify-center w-full gap-1 md:gap-4 leading-none max-h-min"
   >
     <span class="text-stone-700 leading-none">&copy; Knotty Oak Pictures {{ new Date().getFullYear() }}</span>
     <span class="hidden md:inline-block">|</span>

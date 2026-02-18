@@ -273,7 +273,7 @@ const filmography = [
         class="mt-16 flex justify-center"
       >
         <div class="text-xl text-stone-900 flex items-center gap-2 group">
-          See Our Company Reel
+          View Our Company Reel
           <UIcon
             name="i-mdi-chevron-right"
             class="transition-transform duration-300 group-hover:translate-x-2"
