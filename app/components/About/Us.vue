@@ -80,11 +80,11 @@ const team = [
         </div>
 
         <Nuxt-Link
-          to="/company-reel"
+          to="/filmography"
           class="flex justify-center"
         >
           <div class="text-xl text-stone-950 flex items-center justify-center gap-2 group">
-            View Our Company Reel
+            View Our Filmography
             <UIcon
               name="i-mdi-chevron-right"
               class="transition-transform duration-300 group-hover:translate-x-2"
