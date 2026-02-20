@@ -65,7 +65,8 @@ onUnmounted(() => {
   /* For Safari */
   position: sticky;
   top: 0;
-  height: 100dvh;
+  height: 100vh;
+  height: 100svh;
   width: 100%;
 }
 </style>

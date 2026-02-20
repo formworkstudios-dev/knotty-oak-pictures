@@ -145,8 +145,8 @@ onUnmounted(() => {
 <template>
   <div
     id="home-hero-bg"
-    :class="`min-h-screen flex flex-col items-center justify-center gap-6 w-full overflow-x-hidden transition-colors duration-700 ${slides[currentSlide]?.bg ?? 'bg-stone-950'}`"
-    style="position: relative; min-height: 100dvh;"
+    :class="`home-hero-root min-h-screen flex flex-col items-center justify-center gap-6 w-full overflow-x-hidden transition-colors duration-700 ${slides[currentSlide]?.bg ?? 'bg-stone-950'}`"
+    style="position: relative;"
   >
     <!-- Background images -->
     <transition-group
@@ -242,6 +242,11 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
+.home-hero-root {
+  min-height: 100vh;
+  min-height: 100svh;
+}
+
 .bg-fade-enter-active,
 .bg-fade-leave-active {
   transition: opacity 1.3s cubic-bezier(.77, .2, .32, 1);
@@ -261,7 +266,8 @@ onUnmounted(() => {
   position: absolute;
   inset: 0;
   width: 100%;
-  height: 100dvh;
+  height: 100vh;
+  height: 100svh;
   pointer-events: none;
   background-size: 100% auto;
 }

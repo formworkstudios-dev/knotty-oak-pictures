@@ -52,7 +52,7 @@ onUnmounted(() => {
       <div class="w-full md:w-1/2 h-[50vh] md:h-screen sticky top-0 snap-start">
         <div class="relative h-full w-full overflow-hidden">
           <img
-            src="/red-0.png"
+            src="/red.webp"
             alt=""
             class="absolute top-0 h-full w-full object-cover object-right"
           />

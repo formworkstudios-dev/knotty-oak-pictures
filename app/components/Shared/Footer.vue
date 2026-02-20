@@ -40,21 +40,25 @@ onBeforeUnmount(() => {
 <template>
   <div
     ref="root"
-    :class="{ 'footer--visible': visible }"
-    class="!mb-0 footer-anim bg-amber-50 border-t border-stone-200 px-3 pt-2 !pb-1 md:py-2 text-xs md:text-sm text-stone-700 flex flex-col md:flex-row items-center justify-center w-full gap-1 md:gap-4 leading-none max-h-min"
+    class="!mb-0 relative z-50 bg-amber-50 border-t border-stone-200 px-3 pt-2 !pb-1 md:py-2 text-xs md:text-sm text-stone-700 w-full overflow-hidden"
   >
-    <span class="text-stone-700 leading-none">&copy; Knotty Oak Pictures {{ new Date().getFullYear() }}</span>
-    <span class="hidden md:inline-block">|</span>
-    <div class="flex flex-row items-center justify-center gap-2 md:gap-3 leading-none">
-      <NuxtLink
-        to="/privacy"
-        class="text-stone-700 hover:text-stone-900 transition-colors"
-      >Privacy</NuxtLink>
-      <span class="text-xs md:text-sm">|</span>
-      <NuxtLink
-        to="/tos"
-        class="text-stone-700 hover:text-stone-900 transition-colors"
-      >Terms</NuxtLink>
+    <div
+      :class="{ 'footer--visible': visible }"
+      class="footer-anim flex flex-col md:flex-row items-center justify-center gap-1 md:gap-4 leading-none max-h-min"
+    >
+      <span class="text-stone-700 leading-none">&copy; Knotty Oak Pictures {{ new Date().getFullYear() }}</span>
+      <span class="hidden md:inline-block">|</span>
+      <div class="flex flex-row items-center justify-center gap-2 md:gap-3 leading-none">
+        <NuxtLink
+          to="/privacy"
+          class="text-stone-700 hover:text-stone-900 transition-colors"
+        >Privacy</NuxtLink>
+        <span class="text-xs md:text-sm">|</span>
+        <NuxtLink
+          to="/tos"
+          class="text-stone-700 hover:text-stone-900 transition-colors"
+        >Terms</NuxtLink>
+      </div>
     </div>
   </div>
 </template>
